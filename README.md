@@ -1,2 +1,2 @@
 # Watan
-University themed Catan implementation.
+University-themed Catan implementation.
