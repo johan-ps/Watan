@@ -1,5 +1,6 @@
 #include <string>
 
-class Resources {
+class Resource {
     std::string name;
+    ~Resource() = 0;
 }
