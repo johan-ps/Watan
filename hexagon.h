@@ -15,11 +15,7 @@ class Hexagon {
     int temp = 0;
     // space = {"0 spaces", "1 space", "2 space", "3 spaces", "4 spaces", "5 spaces", "6 spaces", "7 spaces",
     //          "8 spaces", "9 spaces", "10 spaces", "11 spaces"}
-<<<<<<< HEAD
     std::string space[12] = {"", " ", "  ", "   ", "    ", "     ", "      ", "       ", "        ", "         ", "          ", "           "};
-=======
-    std::string space[5] = {"", " ", "  ", "   ", "    ", "     ", "      ", "       ", "        ", "         ", "          ", "           "};
->>>>>>> e8ca1e7f8272f9c901f3fc56f033fc81660135a0
 
     //calculate the remaining spaces after resources is printed
     std::string resource = "CAFFEINE";
@@ -40,15 +36,9 @@ class Hexagon {
     };
 
     std::string hex[3] = {
-<<<<<<< HEAD
         space[6] + format(temp) + space[5], //just location
         space[5] + resource + resourceSpace, //just resource
         space[7] + format(temp) + space[7], //just value
-=======
-        space[3] + format(temp) + space[2], //just location
-        space[2] + resource + resourceSpace, //just resource
-        space[4] + format(temp) + space[4], //just value
->>>>>>> e8ca1e7f8272f9c901f3fc56f033fc81660135a0
     };
 
     public:
