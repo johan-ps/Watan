@@ -8,3 +8,7 @@ Assignment::Assignment(int location):
 // void Assignment::improve() {}
 
 // void Assignment::distributeResources() {}
+
+int Assignment::getCriterionType(){
+    return 1;
+}

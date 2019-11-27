@@ -2,5 +2,5 @@
 
 class Resource {
     std::string name;
-    ~Resource() = 0;
+    virtual ~Resource() = 0;
 }
