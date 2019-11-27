@@ -12,4 +12,4 @@ ${EXEC}: ${OBJECTS}
 .PHONY: clean
 
 clean:
-	rm ${OBJECTS} ${DEPENDS} ${EXEC}
+	del ${DEPENDS} ${OBJECTS} ${EXEC}
