@@ -1,3 +1,6 @@
+#ifndef BOARD_H
+#define BOARD_H
+
 #include "tile.h"
 #include "textDisplay.h"
 #include "./assets/developments/criteria/assignment.h"
@@ -9,10 +12,12 @@
 class Board {
     std::vector<Tile *> tiles;
     std::vector<std::vector<Criterion *>> criteria;
-    TextDisplay td = nullptr;
+    TextDisplay *td = nullptr;
     int tileCount;
 
 public:
     void init(int boardSize);
     void drawBoard();
 };
+
+#endif

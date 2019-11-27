@@ -1,3 +1,6 @@
+#ifndef MIDTERM_H
+#define MIDTERM_H
+
 #include "criterion.h"
 
 class Midterm : public Criterion {
@@ -7,3 +10,5 @@ class Midterm : public Criterion {
 
     Midterm();
 }
+
+#endif

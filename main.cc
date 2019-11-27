@@ -11,8 +11,8 @@
 #include "gameManager.h"
 
 int main() {
-    GameManager mng {19};
-    mng.getGameBoard().drawBoard();
+    // GameManager mng {19};
+    // mng.getGameBoard().drawBoard();
     TextDisplay *td = new TextDisplay();
     td->drawBoard();
 }

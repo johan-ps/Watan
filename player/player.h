@@ -1,3 +1,6 @@
+#ifndef PLAYER_H
+#define PLAYER_H
+
 #include <map>
 
 class Player {
@@ -14,3 +17,5 @@ class Player {
     virtual void steal(Player) = 0;
     virtual void printStatus() = 0;
 }
+
+#endif
