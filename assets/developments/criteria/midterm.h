@@ -1,3 +1,5 @@
+#ifndef __MIDTERM_H__
+#define __MIDETERM_H__
 #include "criterion.h"
 
 class Midterm : public Criterion {
@@ -6,4 +8,5 @@ class Midterm : public Criterion {
     void distributeResources() override;
 
     Midterm();
-}
+};
+#endif
