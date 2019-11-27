@@ -9,7 +9,7 @@
 class Board {
     std::vector<Tile *> tiles;
     std::vector<std::vector<Criterion *>> criteria;
-    TextDisplay td = nullptr;
+    TextDisplay *td = nullptr;
     int tileCount;
 
 public:

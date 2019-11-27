@@ -6,7 +6,7 @@
 //class Resource;
 //class Player;
 
-class Development : public Observer {
+class Development {
     //std::map<Resource><int> cost;
     //Player player;
     public:

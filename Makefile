@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -std=c++14 -Wall -MMD -g -Werror=vla
-OBJECTS = main.o textDisplay.o board.o tile.o gameManager.o ./assets/developments/criteria/assignment.o ./assets/developments/development.o
+OBJECTS = main.o hexagon.o textDisplay.o board.o tile.o gameManager.o ./assets/developments/criteria/assignment.o ./assets/developments/development.o
 DEPENDS = ${OBJECTS:.o=.d}
 EXEC = watan
 
@@ -12,4 +12,4 @@ ${EXEC}: ${OBJECTS}
 .PHONY: clean
 
 clean:
-	rm ${OBJECTS} ${DEPENDS} ${EXEC}
+	del ${DEPENDS} ${OBJECTS} ${EXEC}
