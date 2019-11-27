@@ -1,7 +1,7 @@
 #include "student.h"
 #include "../assets/resources/resource.h"
 
-#include <stdio>
+#include <iostream>
 
 using namespace std;
 
