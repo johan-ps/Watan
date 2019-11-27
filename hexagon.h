@@ -4,12 +4,8 @@
 #include <string>
 
 class Hexagon {
-<<<<<<< HEAD
     int iteratorC = 0;
     int iteratorG = 0;
-=======
-    int iterator = 0;
->>>>>>> e8ca1e7f8272f9c901f3fc56f033fc81660135a0
     int countC = 0;
     int countG = 0;
     int temp = 0;
