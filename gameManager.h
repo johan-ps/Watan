@@ -1,3 +1,6 @@
+#ifndef GAMEMANAGER_H
+#define GAMEMANAGER_H
+
 #include <string>
 
 class Board;
@@ -22,3 +25,5 @@ class GameManager {
     Board getGameBoard();
     GameManager(int boardSize);
 };
+
+#endif

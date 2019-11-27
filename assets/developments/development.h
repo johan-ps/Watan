@@ -1,10 +1,16 @@
-#include <map>
+#ifndef DEVELOPMENT_H
+#define DEVELOPMENT_H
 
-class Resource;
-class Player;
+//#include <map>
 
-class Development {
-    std::map<Resource><int> cost;
-    Player player;
-    virtual ~Developer() = 0;
-}
+//class Resource;
+//class Player;
+
+class Development : public Observer {
+    //std::map<Resource><int> cost;
+    //Player player;
+    public:
+    virtual ~Development() = 0;
+};
+
+#endif
