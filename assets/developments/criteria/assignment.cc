@@ -1,10 +1,10 @@
 #include "assignment.h"
 
 Assignment::Assignment(int location):
-    location{location} {}
+    location{location}{}
 
-// void Assignment::complete() {}
+void Assignment::complete() {}
 
-// void Assignment::improve() {}
+void Assignment::improve() {}
 
-// void Assignment::distributeResources() {}
+void Assignment::distributeResources() {}

@@ -1,3 +1,5 @@
+#ifndef __RESOURCE_H__
+#define __RESOURCE_H__
 #include <string>
 
 class Resource {
@@ -5,3 +7,4 @@ class Resource {
     //std::string name;
     ~Resource();
 };
+#endif
