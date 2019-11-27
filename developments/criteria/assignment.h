@@ -2,7 +2,8 @@
 #define ASSIGNMENT_H
 
 #include "criterion.h"
-#include "../../../tile.h"
+#include "../../tile.h"
+#include "../../player/player.h"
 #include <vector>
 
 class Assignment : public Criterion {
@@ -12,8 +13,8 @@ class Assignment : public Criterion {
     // std::vector<Tile*> tiles;
     //std::vector<Goal*> goals;
     public:
-    // void complete(Player&) override;
-    // void improve() override;
+    void complete(Player&);
+    void improve() override;
     // void distributeResources() override;
     int getCriterionType() override;
     

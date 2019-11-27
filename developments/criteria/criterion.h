@@ -4,9 +4,10 @@
 
 class Criterion : public Development {
     public:
-    // virtual void improve() = 0;
+    virtual void improve() = 0;
     // virtual void distributeResources() = 0;
-    int getCriterionType();
+    virtual int getCriterionType() = 0;
+    virtual ~Criterion();
 };
 
 #endif

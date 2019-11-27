@@ -3,7 +3,7 @@
 
 #include "tile.h"
 #include "textDisplay.h"
-#include "./assets/developments/criteria/assignment.h"
+#include "./developments/criteria/assignment.h"
 #include <vector>
 
 //class Tile;

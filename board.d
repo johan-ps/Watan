@@ -1,5 +1,6 @@
-board.o: board.cc board.h tile.h assets/developments/criteria/criterion.h \
- assets/developments/criteria/../development.h textDisplay.h \
- assets/developments/criteria/assignment.h \
- assets/developments/criteria/criterion.h \
- assets/developments/criteria/../../../tile.h
+board.o: board.cc board.h tile.h developments/criteria/criterion.h \
+ developments/criteria/../development.h textDisplay.h \
+ developments/criteria/assignment.h developments/criteria/criterion.h \
+ developments/criteria/../../tile.h \
+ developments/criteria/../../player/player.h \
+ developments/criteria/../../player/../resource.h

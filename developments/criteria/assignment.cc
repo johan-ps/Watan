@@ -3,7 +3,7 @@
 Assignment::Assignment(int location):
     location{location}{}
 
-void Assignment::complete() {}
+void Assignment::complete(Player &player) {}
 
 void Assignment::improve() {}
 

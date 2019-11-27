@@ -3,10 +3,11 @@
 
 // #include "resource.h"
 // #include "goal.h"
-#include "./assets/developments/criteria/criterion.h"
+#include "./developments/criteria/criterion.h"
 // #include "geese.h"
 #include <vector>
 #include <string>
+#include <map>
 
 //class Goal;
 //class Criterion;
@@ -19,7 +20,8 @@ class Tile {
     std::string resource;
     //Resource resource;
     //std::vector<Goal> goals;
-    std::vector<Criterion> criteria;
+    std::map<std::string, Criterion*> criteria;
+    std::map<std::string, Tile*> neighbours;
     //Geese geese;
     //bool isOverrun;
     public:

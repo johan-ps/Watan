@@ -1,2 +1,2 @@
-tile.o: tile.cc tile.h assets/developments/criteria/criterion.h \
- assets/developments/criteria/../development.h
+tile.o: tile.cc tile.h developments/criteria/criterion.h \
+ developments/criteria/../development.h
