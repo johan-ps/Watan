@@ -1,3 +1,6 @@
+#ifndef BOARD_H
+#define BOARD_H
+
 #include "tile.h"
 #include "textDisplay.h"
 #include "./assets/developments/criteria/assignment.h"
@@ -16,3 +19,5 @@ public:
     void init(int boardSize);
     void drawBoard();
 };
+
+#endif
