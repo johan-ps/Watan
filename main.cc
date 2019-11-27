@@ -10,7 +10,7 @@
 #include "textDisplay.h"
 #include "gameManager.h"
 
-int main() {
+int main(int argc, char *argv) {
     // GameManager mng {19};
     // mng.getGameBoard().drawBoard();
     TextDisplay *td = new TextDisplay();
