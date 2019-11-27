@@ -9,7 +9,9 @@
 class Development {
     //std::map<Resource><int> cost;
     //Player player;
+    int locationVal;
     public:
+    int getLocationVal();
     virtual ~Development() = 0;
 };
 

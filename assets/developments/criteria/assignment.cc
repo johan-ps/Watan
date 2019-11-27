@@ -7,4 +7,8 @@ void Assignment::complete() {}
 
 void Assignment::improve() {}
 
-void Assignment::distributeResources() {}
+// void Assignment::distributeResources() {}
+
+int Assignment::getCriterionType(){
+    return 1;
+}

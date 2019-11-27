@@ -1,3 +1,7 @@
 #include "development.h"
 
-Development::~Development() {}
+int Development::getLocationVal() {
+    return locationVal;
+}
+
+    Development::~Development(){}

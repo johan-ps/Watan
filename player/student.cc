@@ -7,13 +7,13 @@ using namespace std;
 
 
 // Trade a resource with otherPlayer
-void trade(Player otherPlayer, Resource resource) {
+void trade(Player *otherPlayer, Resource resource) {
 
 }
 
 // Steal a random resource from a victim
 // Note: Should be called by a player who currently has a Geese
-void steal(Player victim) {
+void steal(Player *victim) {
 
 }
 
@@ -27,12 +27,11 @@ void printStatus() {
     cout << 99 << " tutorials" << endl;
 }
 
-// ADD IN TO UML?
 void printCompletions(){
     cout << colour << " has completed:" << endl;
 
     for (auto criterion: criteria){
-        cout << criterion-> << endl;
+        cout << criterion->getLocationVal << " " << criterion->getCriterionType << endl;
     }
     
 }
