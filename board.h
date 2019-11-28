@@ -10,7 +10,8 @@
 //class TextDisplay;
 
 class Board {
-    std::vector<Tile *> tiles;
+    //std::vector<std::vector<Tile *>> tiles;
+    std::vector<Tile*> tiles;
     std::vector<std::vector<Criterion *>> criteria;
     TextDisplay *td = nullptr;
     int tileCount;
@@ -18,6 +19,7 @@ class Board {
 public:
     void init(int boardSize);
     void drawBoard();
+    int findTile(int col, int row);
 };
 
 #endif

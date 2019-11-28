@@ -13,10 +13,9 @@
 
 int main(int argc, char *argv[]) {
     GameManager mng;
-    //mng.getGameBoard().drawBoard();
-    Board b;
-    b.init(19);
+    mng.startGame();
+    mng.getGameBoard().drawBoard();
     //b.drawBoard();
-    TextDisplay *td = new TextDisplay();
-    td->drawBoard();
+    // TextDisplay *td = new TextDisplay();
+    // td->drawBoard();
 }

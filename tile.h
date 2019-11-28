@@ -14,10 +14,20 @@
 //class Geese;
 //class Resource;
 
+struct TileInfo {
+    int location;
+    int value;
+    int col;
+    int row;
+    std::string resource;
+};
+
 class Tile {
     int location;
     int value;
     std::string resource;
+    int col;
+    int row;
     //Resource resource;
     //std::vector<Goal> goals;
     std::map<std::string, Criterion*> criteria;
@@ -25,8 +35,10 @@ class Tile {
     //Geese geese;
     //bool isOverrun;
     public:
-    Tile(int location, int value, std::string resource);
+    Tile(int location, int value, std::string resource, int col, int row);
     void printTile();
+    void addNeighbour(Tile *tile, std::string dir);
+    TileInfo getInfo();
 };
 
 #endif
