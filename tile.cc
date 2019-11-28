@@ -8,9 +8,18 @@ void Tile::printTile() {
     std::string dir[6] = {"N", "NE", "SE", "S", "SW", "NW"};
     std::cout << "Tile " << value << ":\n\tLocation: " << location << std::endl; //<< "\n\tValue: " << value << "\n\tResouce: " << resource;
     //std::cout << "\n\t(Col, Row): (" << col << ", " << row << ")" << std::endl;
+    // for (int i = 0; i < 6; i++) {
+    //     try {
+    //         std::cout << "\tNeighbour <" << dir[i] << "> : " << neighbours.at(dir[i])->getInfo().location << std::endl;
+    //     } catch (std::out_of_range) {
+    //         //do nothing
+    //     }
+    //     std::cout << std::endl;
+    // }
+    std::string dir2[6] = {"NW", "NE", "E", "SE", "SW", "W"};
     for (int i = 0; i < 6; i++) {
         try {
-            std::cout << "\tNeighbour <" << dir[i] << "> : " << neighbours.at(dir[i])->getInfo().location << std::endl;
+            std::cout << "\tCriteria <" << dir2[i] << "> : " << criteria.at(dir2[i])->getLocationVal() << std::endl;
         } catch (std::out_of_range) {
             //do nothing
         }
@@ -20,8 +29,12 @@ void Tile::printTile() {
 }
 
 void Tile::addNeighbour(Tile *tile, std::string dir) {
-    std::cout << "Called with dir: " << dir << " and Loc" << tile->getInfo().location << std::endl;
+    //std::cout << "Called with dir: " << dir << " and Loc" << tile->getInfo().location << std::endl;
     neighbours[dir] = tile;
+}
+
+void Tile::addCriterion(Criterion *criterion, std::string dir) {
+    criteria[dir] = criterion;
 }
 
 TileInfo Tile::getInfo() {

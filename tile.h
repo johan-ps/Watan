@@ -38,6 +38,7 @@ class Tile {
     Tile(int location, int value, std::string resource, int col, int row);
     void printTile();
     void addNeighbour(Tile *tile, std::string dir);
+    void addCriterion(Criterion *criterion, std::string dir);
     TileInfo getInfo();
 };
 

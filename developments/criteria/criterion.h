@@ -4,6 +4,7 @@
 
 class Criterion : public Development {
     public:
+    Criterion(int locationVal);
     virtual void improve() = 0;
     // virtual void distributeResources() = 0;
     virtual int getCriterionType() = 0;

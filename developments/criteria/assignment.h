@@ -9,7 +9,7 @@
 class Assignment : public Criterion {
     // int cost;
     // Player player;
-    int location;
+    //int location;
     // std::vector<Tile*> tiles;
     //std::vector<Goal*> goals;
     public:

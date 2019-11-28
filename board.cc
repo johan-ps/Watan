@@ -87,6 +87,20 @@ void Board::init(int boardSize) {
     for (int i = 0; i < 54; i++) {
         criteria.emplace_back(new Assignment {i});
     }
+    int count = 0;
+    std::string dir[6] = {"NW", "NE", "E", "SE", "SW", "W"};
+    for (int i = 0; i < 6; i++) {
+        for (int j = 0; j < 2; j++) {
+            tiles.at(i)->addCriterion(criteria.at(count), dir[j]);
+            count++;
+        }
+    }
+    // for (int i = 3; i < 6; i++) {
+    //     for (int j = 0; j < 2; j++) {
+    //         tiles.at(i)->addCriterion(criteria.at(count), dir[j]);
+    //         count++;
+    //     }
+    // }
     
     //td = new TextDisplay();
     // for (int i = 0; i < 9; i++) {
@@ -100,7 +114,7 @@ void Board::init(int boardSize) {
 }
 
 void Board::drawBoard() {
-    for (int i = 0; i < 19; i++) {
+    for (int i = 0; i < 6; i++) {
         tiles.at(i)->printTile();
     }
 }

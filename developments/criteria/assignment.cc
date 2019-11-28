@@ -1,7 +1,7 @@
 #include "assignment.h"
 
-Assignment::Assignment(int location):
-    location{location}{}
+Assignment::Assignment(int locationVal):
+    Criterion{locationVal}{}
 
 void Assignment::complete(Player &player) {}
 

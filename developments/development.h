@@ -11,6 +11,7 @@ class Development {
     //Player player;
     int locationVal;
     public:
+    Development(int locationVal);
     int getLocationVal();
     virtual ~Development() = 0;
 };
