@@ -10,9 +10,9 @@
 //class TextDisplay;
 
 class Board {
-    //std::vector<std::vector<Tile *>> tiles;
     std::vector<Tile*> tiles;
-    std::vector<std::vector<Criterion *>> criteria;
+    std::vector<Criterion*> criteria;
+    //std::vector<std::vector<Criterion *>> criteria;
     TextDisplay *td = nullptr;
     int tileCount;
 

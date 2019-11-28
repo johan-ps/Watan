@@ -34,6 +34,7 @@ std::string findDir(int colA, int rowA, int colB, int rowB) {
             return "SE";
         }
     }
+    return "N";
 }
 
 
@@ -83,13 +84,10 @@ void Board::init(int boardSize) {
     // SW: Tile(col + 1, row - 1)
     // NW: Tile(col - 1, row - 1)
 
-
-    // for (int i = 0; i < boardSize; i++) {
-    //     tiles.emplace_back(new Tile(i, values[i], std::string("CAFFEINE"), col, row));
-    // }
-    // for (int i = 0; i < boardSize; i++) {
-    //     tiles.at(i)->setNeighbours();
-    // }
+    for (int i = 0; i < 54; i++) {
+        criteria.emplace_back(new Assignment {i});
+    }
+    
     //td = new TextDisplay();
     // for (int i = 0; i < 9; i++) {
     //     std::vector<Criterion *> temp;
