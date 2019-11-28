@@ -22,7 +22,7 @@ void Student::steal(Player *victim) {
 
 // Print the player's resources and owned criteria
 // Should be called by either TextDisplay or main.cc (depending on implementation)
-void Student::printStatus() {
+void Student::printStatus() { // TODO 
     cout << colour << " has " << 99 << "course criteria, " << endl;
     cout << 99 << " labs" << endl;
     cout << 99 << " lectures" << endl;
@@ -30,7 +30,8 @@ void Student::printStatus() {
     cout << 99 << " tutorials" << endl;
 }
 
-// void printCompletions(){
+// Print the player's completed criterions
+// void Student::printCompletions(){
 //     cout << colour << " has completed:" << endl;
 
 //     for (auto criterion: criteria){
