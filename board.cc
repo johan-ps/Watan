@@ -84,19 +84,50 @@ void Board::init(int boardSize) {
     // SW: Tile(col + 1, row - 1)
     // NW: Tile(col - 1, row - 1)
 
+    //create 54 criterion objects
     for (int i = 0; i < 54; i++) {
         criteria.emplace_back(new Assignment {i});
     }
+
+    //init first 3 rows
     int count = 0;
-    std::string dir[6] = {"NW", "NE", "E", "SE", "SW", "W"};
+    std::string dir[6] = {"NW", "NE", "E", "W", "SW", "SE"};
     for (int i = 0; i < 6; i++) {
         for (int j = 0; j < 2; j++) {
             tiles.at(i)->addCriterion(criteria.at(count), dir[j]);
             count++;
         }
     }
+
+    //init rows 4 - 9
+    int tileC = 3;
+    for (int i = 0; i < 3; i++) {
+        // std::cout << "TileC: " << tileC << std::endl;
+        for (int j = 0; j < 2; j++) {
+            for (int k = tileC; k < tileC + 3; k++) {
+                for (int l = 2; l < 4; l++) {
+                    //std::cout << "TileC: " << tileC << std::endl;
+                    tiles.at(k)->addCriterion(criteria.at(count), dir[l + j*2]);
+                    count++;
+                }
+            }
+        }
+        tileC += 5;
+    }
+    tileC -= 2;
+
+    //init rows 10 - 11
+    for (int i = tileC; i < tileC + 3; i++) {
+        for (int j = 4; j < 6; j++) {
+            tiles.at(i)->addCriterion(criteria.at(count), dir[j]);
+            count++;
+        }
+    }
+
+    //assign to neighbours
+
     // for (int i = 3; i < 6; i++) {
-    //     for (int j = 0; j < 2; j++) {
+    //     for (int j = 4; j < 6; j++) {
     //         tiles.at(i)->addCriterion(criteria.at(count), dir[j]);
     //         count++;
     //     }
@@ -114,7 +145,7 @@ void Board::init(int boardSize) {
 }
 
 void Board::drawBoard() {
-    for (int i = 0; i < 6; i++) {
+    for (int i = 0; i < 19; i++) {
         tiles.at(i)->printTile();
     }
 }

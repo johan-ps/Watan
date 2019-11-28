@@ -34,6 +34,7 @@ void Tile::addNeighbour(Tile *tile, std::string dir) {
 }
 
 void Tile::addCriterion(Criterion *criterion, std::string dir) {
+    //std::cout << "Called with dir: " << dir << " and Loc" << criterion->getLocationVal() << std::endl;
     criteria[dir] = criterion;
 }
 
