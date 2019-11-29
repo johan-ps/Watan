@@ -7,13 +7,9 @@
 #include <vector>
 
 class Assignment : public Criterion {
-    // int cost;
-    // Player player;
-    //int location;
-    // std::vector<Tile*> tiles;
-    //std::vector<Goal*> goals;
+    int location;
     public:
-    void complete(Player&);
+    void complete(Player *);
     void improve() override;
     // void distributeResources() override;
     int getCriterionType() override;

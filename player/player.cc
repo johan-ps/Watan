@@ -20,4 +20,9 @@ std::string Player::getColour(){
 //     return {resources, criteria, colour};
 // }
 
+void Player::addGoal(Goal * new_goal){
+    goals.emplace_back(new_goal);
+
+}
+
 Player::~Player() {}

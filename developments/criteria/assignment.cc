@@ -3,7 +3,7 @@
 Assignment::Assignment(int locationVal):
     Criterion{locationVal}{}
 
-void Assignment::complete(Player &player) {}
+void Assignment::complete(Player *player) {}
 
 void Assignment::improve() {}
 
