@@ -7,15 +7,27 @@
 #include "../resource.h"
 #include "../developments/criteria/criterion.h"
 
+// struct PlayerInfo {
+//     std::vector<int> resources;
+//     std::vector<Criterion*> criteria;
+//     std::string colour;
+// };
+
+
 class Player {
     std::vector<int> resources;
     //std::vector<Goal> goals;
     std::vector<Criterion*> criteria;
     //Dice* dice;
-    int resourceCount;
+    //int resourceCount;
+    std::string colour;
 
     protected:
-        std::string colour;
+        std::vector<int> getResources();
+        int getCriteriaSize();
+        std::string getColour();
+        //PlayerInfo getInfo();
+
 
     public:
         Player(std::string colour);

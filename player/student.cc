@@ -22,12 +22,26 @@ void Student::steal(Player *victim) {
 
 // Print the player's resources and owned criteria
 // Should be called by either TextDisplay or main.cc (depending on implementation)
-void Student::printStatus() { // TODO 
-    cout << colour << " has " << 99 << "course criteria, " << endl;
-    cout << 99 << " labs" << endl;
-    cout << 99 << " lectures" << endl;
-    cout << 99 << " studies" << endl;
-    cout << 99 << " tutorials" << endl;
+void Student::printStatus() {
+
+    vector<int> resources = getResources();
+
+    cout << getColour() << " has " << getCriteriaSize() << "course criteria, " << endl;
+    // cout << resources.at(Resource::caffeine) << " caffeines" << endl;
+    // cout << resources.at(Resource::lab) << " labs" << endl;
+    // cout << resources.at(Resource::lecture) << " lectures" << endl;
+    // cout << resources.at(Resource::study) << " studies" << endl;
+    // cout << resources.at(Resource::tutorial) << " tutorials" << endl;
+
+    cout << resources.at(0) << " caffeines" << endl;
+    cout << resources.at(1) << " labs" << endl;
+    cout << resources.at(2) << " lectures" << endl;
+    cout << resources.at(3) << " studies" << endl;
+    cout << resources.at(4) << " tutorials" << endl;
+
+    //for (auto resource: Resource::resourceType){
+    //
+    //}
 }
 
 // Print the player's completed criterions
