@@ -3,23 +3,20 @@
 
 #include "criterion.h"
 #include "../../tile.h"
-#include "../player/player.h"
+#include "../../player/player.h"
 #include <vector>
 
 class Assignment : public Criterion {
-    int cost;
     int location;
-    Player& player;
-    //std::vector<Tile*> tiles;
-    //std::vector<Goal*> goals;
+    const std::vector<int> cost = { 1, 1, 1, 0, 1};
 
     public:
-    void complete(Player& player);
-    void improve() override;
-    void distributeResources() override;
-    int getCriterionType() override;
+        Assignment(int location);
+        void complete(Player*);
+        void improve() override;
+        void distributeResources() override;
+        int getCriterionType() override;
 
-    Assignment(int location);
 };
 
 #endif
