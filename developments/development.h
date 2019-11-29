@@ -8,7 +8,7 @@
 
 class Development {
     //std::map<Resource><int> cost;
-    //Player player;
+    //Player owner;
     int locationVal;
     public:
     Development(int locationVal);
