@@ -40,7 +40,7 @@ class Player {
         // Accessors
 
         // Setters/Mutators
-        void addGoal(Goal *);
+        //void addGoal(Goal *);
 
         virtual ~Player();
 };
