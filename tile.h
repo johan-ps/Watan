@@ -14,12 +14,16 @@
 //class Geese;
 //class Resource;
 
+class Tile;
+
 struct TileInfo {
     int location;
     int value;
     int col;
     int row;
     std::string resource;
+    std::map<std::string, Criterion*> criteria;
+    std::map<std::string, Tile*> neighbours;
 };
 
 class Tile {

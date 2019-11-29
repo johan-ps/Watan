@@ -16,7 +16,7 @@
 
 class Player {
     std::vector<int> resources;
-    //std::vector<Goal> goals;
+    //std::vector<Goal*> goals;
     std::vector<Criterion*> criteria;
     //Dice* dice;
     //int resourceCount;
@@ -31,9 +31,16 @@ class Player {
 
     public:
         Player(std::string colour);
+
+        // Public Methods
         virtual void trade(Player *, Resource) = 0;
         virtual void steal(Player *) = 0;
         virtual void printStatus() = 0;
+
+        // Accessors
+
+        // Setters/Mutators
+        //void addGoal(Goal *);
 
         virtual ~Player();
 };
