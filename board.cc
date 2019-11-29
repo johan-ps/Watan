@@ -91,7 +91,7 @@ void Board::init(int boardSize) {
 
     //init first 3 rows
     int count = 0;
-    std::string dir[6] = {"NW", "NE", "E", "W", "SW", "SE"};
+    std::string dir[6] = {"NW", "NE", "W", "E", "SW", "SE"};
     for (int i = 0; i < 6; i++) {
         for (int j = 0; j < 2; j++) {
             tiles.at(i)->addCriterion(criteria.at(count), dir[j]);
@@ -125,6 +125,33 @@ void Board::init(int boardSize) {
     }
 
     //assign to neighbours
+    for (int i = 0; i < 19; i++) {
+        for (int j = 0; j < 6; j++) {
+            std::string direction;
+            Criterion *criteriaTemp;
+            try {
+                direction = dir[j]; //direction of the criterion from the current tile
+                criteriaTemp = tiles.at(i)->getInfo().criteria.at(direction); //pointer to the criteria at direction <direction>
+                std::string *tileDir = findNeighbourByCriteria(direction); //array of possible neighbour tiles to add criteriaTemp to
+                for (int k = 0; k < 2; k++) {
+                    try {
+                        Tile *tileTemp = tiles.at(i)->getInfo().neighbours.at(tileDir[k]); //possible neighbour tile
+                        std::map<std::string, Criterion*> criteriaMap = tileTemp->getInfo().criteria;
+                        std::string oppositeDir = getOppositeDirection(tileDir[k], direction);
+                        std::map<std::string, Criterion*>::iterator it;
+                        it = criteriaMap.find(oppositeDir);
+                        if (it == criteriaMap.end()) {
+                            tileTemp->addCriterion(criteriaTemp, oppositeDir);
+                        }
+                    } catch (std::out_of_range) {
+                        //do nothing
+                    }
+                }
+            } catch (std::out_of_range) {
+                //do nothing
+            }
+        }
+    }
 
     // for (int i = 3; i < 6; i++) {
     //     for (int j = 4; j < 6; j++) {
@@ -142,6 +169,71 @@ void Board::init(int boardSize) {
     //     }
     //     criteria.emplace_back(temp);
     // }
+}
+
+std::string Board::getOppositeDirection(std::string dirTile, std::string dirCriterion) {
+    if (dirTile == "N") {
+        if (dirCriterion == "NE") {
+            return "SE";
+        } else {
+            return "SW";
+        }
+    } else if (dirTile == "NE") {
+        if (dirCriterion == "NE") {
+            return "W";
+        } else {
+            return "SW";
+        }
+    } else if (dirTile == "SE") {
+        if (dirCriterion == "SE") {
+            return "W";
+        } else {
+            return "NW";
+        }
+    } else if (dirTile == "S") {
+        if (dirCriterion == "SE") {
+            return "NE";
+        } else {
+            return "NW";
+        }
+    } else if (dirTile == "SW") {
+        if (dirCriterion == "SW") {
+            return "E";
+        } else {
+            return "NE";
+        }
+    } else {
+        if (dirCriterion == "NW") {
+            return "E";
+        } else {
+            return "SE";
+        }
+    }
+}
+
+std::string *Board::findNeighbourByCriteria(std::string criterionDir) {
+    //std::string dir[6] = {"NW", "NE", "E", "W", "SW", "SE"};
+    std::string *tileDir = new std::string[2];
+    if (criterionDir == "NW") {
+        tileDir[0] = "N";
+        tileDir[1] = "NW";
+    } else if (criterionDir == "NE") {
+        tileDir[0] = "N";
+        tileDir[1] = "NE";
+    } else if (criterionDir == "E") {
+        tileDir[0] = "NE";
+        tileDir[1] = "SE";
+    } else if (criterionDir == "W") {
+        tileDir[0] = "NW";
+        tileDir[1] = "SW";
+    } else if (criterionDir == "SW") {
+        tileDir[0] = "S";
+        tileDir[1] = "SW";
+    } else {
+        tileDir[0] = "S";
+        tileDir[1] = "SE";
+    }
+    return tileDir;
 }
 
 void Board::drawBoard() {

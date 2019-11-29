@@ -20,6 +20,8 @@ public:
     void init(int boardSize);
     void drawBoard();
     int findTile(int col, int row);
+    std::string *findNeighbourByCriteria(std::string criterionDir);
+    std::string getOppositeDirection(std::string dirTile, std::string dirCriterion);
 };
 
 #endif
