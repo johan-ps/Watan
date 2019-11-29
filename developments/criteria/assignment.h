@@ -3,17 +3,19 @@
 
 #include "criterion.h"
 #include "../../tile.h"
-#include "../../player/player.h"
+#include "../player/player.h"
 #include <vector>
 
 class Assignment : public Criterion {
+<<<<<<< HEAD
     int location;
+
     public:
-    void complete(Player *);
+    void complete(Player* player);
     void improve() override;
-    // void distributeResources() override;
+    void distributeResources() override;
     int getCriterionType() override;
-    
+
     Assignment(int location);
 };
 
