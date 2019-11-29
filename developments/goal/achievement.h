@@ -5,7 +5,7 @@
 
 class Achievement : public Goal {
     public:
-    void achieve() override;
+    void achieve(Player *) override;
 };
 
 #endif

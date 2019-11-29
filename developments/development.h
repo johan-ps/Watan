@@ -3,17 +3,24 @@
 
 //#include <map>
 
+//#include "../player/player.h"
+
+class Player;
 //class Resource;
-//class Player;
+
 
 class Development {
     //std::map<Resource><int> cost;
-    //Player owner;
+    Player *player;
     int locationVal;
+
+    protected:
+        void setOwner(Player *);
+
     public:
-    Development(int locationVal);
-    int getLocationVal();
-    virtual ~Development() = 0;
+        Development(int locationVal);
+        int getLocationVal();
+        virtual ~Development() = 0;
 };
 
 #endif
