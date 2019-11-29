@@ -27,6 +27,7 @@
 *.lib
 
 # Executables
+player_exec
 *.exe
 *.out
 *.app
