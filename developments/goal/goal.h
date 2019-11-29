@@ -5,7 +5,7 @@
 
 class Goal : public Development {
     public:
-    void achieve() override;
+    virtual void achieve() = 0;
 };
 
 #endif
