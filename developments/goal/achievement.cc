@@ -1,5 +1,8 @@
 #include "achievement.h"
 
+Achievement::Achievement(int locationVal):
+    Goal{locationVal} {}
+
 void Achievement::achieve(Player * owner){
     if ("playerHasEnough"){
         setOwner(owner);

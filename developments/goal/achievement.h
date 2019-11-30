@@ -5,6 +5,7 @@
 
 class Achievement : public Goal {
     public:
+    Achievement(int locationVal);
     void achieve(Player *) override;
 };
 

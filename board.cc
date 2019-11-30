@@ -46,10 +46,7 @@ void Board::notify(int diceVal) {
     }
 }
 
-
-//initialize board
-void Board::init(int boardSize) {
-    tileCount = boardSize;
+void Board::initTiles() {
     int values[19] = {3, 10, 5, 4, 0, 10, 11, 3, 8, 2, 6, 8, 12, 5, 11, 4, 6, 9, 9};
     int counter = 0, width[9] = {1, 2, 3, 2, 3, 2, 3, 2, 1};
 
@@ -85,20 +82,15 @@ void Board::init(int boardSize) {
             }
         }
     }
+}
 
-    // N: Tile(col - 2, row)
-    // NE: Tile(col - 1, row + 1)
-    // SE: Tile(col + 1, row + 1)
-    // S: Tile(col + 2, row)
-    // SW: Tile(col + 1, row - 1)
-    // NW: Tile(col - 1, row - 1)
-
+void Board::initCriteria() {
     //create 54 criterion objects
     for (int i = 0; i < 54; i++) {
-        criteria.emplace_back(new Assignment {i});
+        criteria.emplace_back(new Assignment{i});
     }
 
-    //init first 3 rows
+    //init first 3 rows of criteria
     int count = 0;
     std::string dir[6] = {"NW", "NE", "W", "E", "SW", "SE"};
     for (int i = 0; i < 6; i++) {
@@ -108,7 +100,7 @@ void Board::init(int boardSize) {
         }
     }
 
-    //init rows 4 - 9
+    //init rows 4 - 9 of criteria
     int tileC = 3;
     for (int i = 0; i < 3; i++) {
         // std::cout << "TileC: " << tileC << std::endl;
@@ -125,7 +117,7 @@ void Board::init(int boardSize) {
     }
     tileC -= 2;
 
-    //init rows 10 - 11
+    //init rows 10 - 11 of criteria
     for (int i = tileC; i < tileC + 3; i++) {
         for (int j = 4; j < 6; j++) {
             tiles.at(i)->addCriterion(criteria.at(count), dir[j]);
@@ -161,23 +153,24 @@ void Board::init(int boardSize) {
             }
         }
     }
+}
 
-    // for (int i = 3; i < 6; i++) {
-    //     for (int j = 4; j < 6; j++) {
-    //         tiles.at(i)->addCriterion(criteria.at(count), dir[j]);
-    //         count++;
-    //     }
-    // }
+void Board::initGoals() {
+    for (int i = 0; i < 72; i++) {
+        goals.emplace_back(new Achievement{i});
+    }
+}
+
+
+//initialize board
+void Board::init(int boardSize) {
+    tileCount = boardSize;
+
+    initTiles();
+    initCriteria();
+    initGoals();
     
     td = new TextDisplay();
-    // for (int i = 0; i < 9; i++) {
-    //     std::vector<Criterion *> temp;
-    //     for (int j = 0; j < width[i]; j++) {
-    //         temp.emplace_back(new Assignment(counter));
-    //         counter++;
-    //     }
-    //     criteria.emplace_back(temp);
-    // }
 }
 
 std::string Board::getOppositeDirection(std::string dirTile, std::string dirCriterion) {

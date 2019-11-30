@@ -4,6 +4,7 @@
 #include "tile.h"
 #include "textDisplay.h"
 #include "./developments/criteria/assignment.h"
+#include "./developments/goal/achievement.h"
 #include <vector>
 #include "observer.h"
 
@@ -13,9 +14,15 @@
 class Board : public Subject, public Observer {
     std::vector<Tile*> tiles;
     std::vector<Criterion*> criteria;
+    std::vector<Goal*> goals;
     //std::vector<std::vector<Criterion *>> criteria;
     TextDisplay *td = nullptr;
     int tileCount;
+
+    //private methods
+    void initTiles();
+    void initCriteria();
+    void initGoals();
 
 public:
     void notify(int diceVal);// override;
