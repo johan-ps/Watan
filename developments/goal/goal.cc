@@ -1,4 +1,4 @@
 #include "goal.h"
 
-Goal::Goal(int locationVal):
-    Development{locationVal} {}
+Goal::Goal(int locationVal, const std::vector<int> cost):
+    Development{locationVal, cost} {}

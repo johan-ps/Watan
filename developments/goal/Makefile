@@ -1,8 +1,8 @@
 CXX = g++
 CXXFLAGS = -std=c++14 -Wall -MMD -g -Werror=vla
-OBJECTS = goal.o achievement.o
+OBJECTS = fake_main.o goal.o achievement.o ../development.o
 DEPENDS = ${OBJECTS:.o=.d}
-EXEC = player_exec
+EXEC = goal_exec
 
 ${EXEC}: ${OBJECTS}
 	${CXX} ${CXXFLAGS} ${OBJECTS} -o ${EXEC}
