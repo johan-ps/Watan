@@ -12,6 +12,7 @@ class Assignment : public Criterion {
 
     public:
         Assignment(int location);
+        void notify() override;
         void complete(Player*);
         void improve() override;
         void distributeResources() override;

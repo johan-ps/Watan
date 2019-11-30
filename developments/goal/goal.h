@@ -5,6 +5,7 @@
 
 class Goal : public Development {
     public:
+    Goal(int locationVal);
         virtual void achieve(Player *) = 0;
 };
 

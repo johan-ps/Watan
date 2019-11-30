@@ -28,6 +28,7 @@
 
 # Executables
 player_exec
+watan
 *.exe
 *.out
 *.app

@@ -4,6 +4,8 @@
 // #include "resource.h"
 // #include "goal.h"
 #include "./developments/criteria/criterion.h"
+#include "observer.h"
+#include "subject.h"
 // #include "geese.h"
 #include <vector>
 #include <string>
@@ -26,7 +28,7 @@ struct TileInfo {
     std::map<std::string, Tile*> neighbours;
 };
 
-class Tile {
+class Tile : public Subject, public Observer {
     int location;
     int value;
     std::string resource;
@@ -40,6 +42,7 @@ class Tile {
     //bool isOverrun;
     public:
     Tile(int location, int value, std::string resource, int col, int row);
+    void notify();// override;
     void printTile();
     void addNeighbour(Tile *tile, std::string dir);
     void addCriterion(Criterion *criterion, std::string dir);
