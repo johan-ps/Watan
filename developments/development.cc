@@ -1,10 +1,10 @@
 #include "development.h"
 
-void Development::setDevelopment(Player *owner){
+void Development::setDevelopment(Player *owner) {
     setOwner(owner);
 }
 
-void Development::setOwner(Player * owner){
+void Development::setOwner(Player *owner) {
     player = owner;
 }
 
@@ -15,11 +15,12 @@ int Development::getLocationVal() {
     return locationVal;
 }
 
-bool Development::isSet(){
+bool Development::isSet() {
     if (player){
         return true;
     }
-    else{ return false;
+    else{ 
+        return false;
     }
 
     // return player;
