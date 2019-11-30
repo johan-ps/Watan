@@ -23,14 +23,14 @@ class Board : public Subject, public Observer {
     void initTiles();
     void initCriteria();
     void initGoals();
+    int findTile(int col, int row);
+    std::string *findNeighbourByCriteria(std::string criterionDir);
+    std::string getOppositeDirection(std::string dirTile, std::string dirCriterion);
 
 public:
     void notify(int diceVal);// override;
     void init(int boardSize);
     void drawBoard();
-    int findTile(int col, int row);
-    std::string *findNeighbourByCriteria(std::string criterionDir);
-    std::string getOppositeDirection(std::string dirTile, std::string dirCriterion);
 };
 
 #endif

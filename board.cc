@@ -159,6 +159,8 @@ void Board::initGoals() {
     for (int i = 0; i < 72; i++) {
         goals.emplace_back(new Achievement{i});
     }
+
+    
 }
 
 
