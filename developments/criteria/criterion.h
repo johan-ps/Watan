@@ -5,7 +5,7 @@
 
 class Criterion : public Development, public Observer {
     public:
-        Criterion(int locationVal);
+        Criterion(int locationVal, const std::vector<int> costs);
         virtual ~Criterion();
         virtual void notify() = 0;
         virtual void improve() = 0;
