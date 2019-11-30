@@ -4,9 +4,8 @@
 #include "goal.h"
 
 class Achievement : public Goal {
-
     public:
-        Achievement(int locationVal, const std::vector<int> cost);
+        Achievement(int locationVal, const std::vector<int> cost = {1, 0, 0, 0, 0, 0});
         void achieve(Player *) override;
 };
 
