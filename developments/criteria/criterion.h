@@ -1,9 +1,9 @@
 #ifndef __CRITERIA_H__
 #define __CRITERIA_H__
 #include "../development.h"
-//#include "../../observer.h"
+#include "../../observer.h"
 
-class Criterion : public Development {
+class Criterion : public Development, public Observer {
     public:
         Criterion(int locationVal);
         virtual ~Criterion();
