@@ -8,7 +8,7 @@
 
 class Assignment : public Criterion {
     int location;
-    const std::vector<int> cost = { 1, 1, 1, 0, 1};
+    const std::vector<int> cost = { 1, 1, 1, 0, 1, 0};
 
     public:
         Assignment(int location);
@@ -17,7 +17,6 @@ class Assignment : public Criterion {
         void improve() override;
         void distributeResources() override;
         int getCriterionType() override;
-
 };
 
 #endif

@@ -1,5 +1,6 @@
 #ifndef DEVELOPMENT_H
 #define DEVELOPMENT_H
+#include "../observer.h"
 
 //#include <map>
 
@@ -9,7 +10,7 @@ class Player;
 //class Resource;
 
 
-class Development {
+class Development : public Observer {
     //std::map<Resource><int> cost;
     Player *player;
     int locationVal;
