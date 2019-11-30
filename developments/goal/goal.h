@@ -2,10 +2,11 @@
 #define GOAL_H
 
 #include "../development.h"
+#include <vector>
 
 class Goal : public Development {
     public:
-    Goal(int locationVal);
+        Goal(int locationVal, const std::vector<int> cost);
         virtual void achieve(Player *) = 0;
 };
 
