@@ -37,6 +37,15 @@ std::string findDir(int colA, int rowA, int colB, int rowB) {
     return "N";
 }
 
+//notify appropriate tiles with the given dice value
+void Board::notify(int diceVal) {
+    for (auto &n : tiles) {
+        if (n->getInfo().value == diceVal) {
+
+        }
+    }
+}
+
 
 //initialize board
 void Board::init(int boardSize) {
@@ -160,7 +169,7 @@ void Board::init(int boardSize) {
     //     }
     // }
     
-    //td = new TextDisplay();
+    td = new TextDisplay();
     // for (int i = 0; i < 9; i++) {
     //     std::vector<Criterion *> temp;
     //     for (int j = 0; j < width[i]; j++) {
@@ -237,7 +246,8 @@ std::string *Board::findNeighbourByCriteria(std::string criterionDir) {
 }
 
 void Board::drawBoard() {
-    for (int i = 0; i < 19; i++) {
-        tiles.at(i)->printTile();
-    }
+    // for (int i = 0; i < 19; i++) {
+    //     tiles.at(i)->printTile();
+    // }
+    td->drawBoard();
 }

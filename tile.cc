@@ -4,6 +4,12 @@
 Tile::Tile(int location, int value, std::string resource, int col, int row):
     location{location}, value{value}, resource{resource}, col{col}, row{row} {}
 
+void Tile::notify() {
+    for (auto &n : criteria) {
+        n.second->notify();
+    }
+}
+
 void Tile::printTile() {
     std::string dir[6] = {"N", "NE", "SE", "S", "SW", "NW"};
     std::cout << "Tile " << value << ":\n\tLocation: " << location << std::endl; //<< "\n\tValue: " << value << "\n\tResouce: " << resource;

@@ -5,11 +5,12 @@
 #include "textDisplay.h"
 #include "./developments/criteria/assignment.h"
 #include <vector>
+#include "observer.h"
 
 //class Tile;
 //class TextDisplay;
 
-class Board {
+class Board : public Subject, public Observer {
     std::vector<Tile*> tiles;
     std::vector<Criterion*> criteria;
     //std::vector<std::vector<Criterion *>> criteria;
@@ -17,6 +18,7 @@ class Board {
     int tileCount;
 
 public:
+    void notify(int diceVal);// override;
     void init(int boardSize);
     void drawBoard();
     int findTile(int col, int row);

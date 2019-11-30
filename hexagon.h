@@ -19,28 +19,13 @@ class Hexagon {
     
     //tab = {"0 spaces", "15 spaces", "30 spaces"}
     std::string tab[3] = {"", "               ", "                              "};
-    std::string hexagon[9] = {
-        "|" + format(countC) + "|--" + format(countG) + "--|" + format(countC + 1) + "|",
-        "/            \\",
-        format(countG) + space[3] + format(temp) + space[2] + format(countG + 1),
-        "/" + space[2] + resource + resourceSpace + "\\",
-        "|" + format(countC) + "|" + space[4] + format(temp) + space[4] + "|" + format(countC + 1) + "|",
-        "\\                /",
-        format(countG) + space[4] + space[3] + format(countG),
-        "\\            /",
-        "|" + format(countC) + "|--" + format(countG) + "--|" + format(countC + 1) + "|"
-    };
-
-    std::string hex[3] = {
-        space[6] + format(temp) + space[5], //just location
-        space[5] + resource + resourceSpace, //just resource
-        space[7] + format(temp) + space[7], //just value
-    };
+    std::string hexagon[10];
+    std::string hex[3];
 
     public:
     Hexagon(std::string resource);
-    std::string *getTab();
-    std::string *getSpace();
+    std::string getTab(int index);
+    std::string getSpace(int index);
     std::string format(int x);
     void setHexagon(int c, int g);
     void setHex(int c, int g);
