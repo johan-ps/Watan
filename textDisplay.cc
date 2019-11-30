@@ -10,28 +10,7 @@ TextDisplay::TextDisplay() {
 }
 
 void TextDisplay::drawBoard() {
-    Hexagon hexa {"CAFFEINE"};
-
-    int width[9] = {1, 2, 3, 2, 3, 2, 3, 2, 1};
-    int loc[19];
-    for (int i = 0; i < 19; i++) {
-        loc[i] = i;
-    }
-    // std::string criteria[54];
-    // for (int i = 0; i < 54; i++) {
-    //     if (i < 10) {
-    //         criteria[i] = " " + std::to_string(i);
-    //     } else {
-    //         criteria[i] = std::to_string(i);
-    //     }
-    // }
-
-    int count = 0;
-    // while(count < 10) {
-    //     std::cout << hexa.getHexagon()[0] << std::endl;
-    //     count += 2;
-    //     hexa.setHexagon(count);
-    // }
+    Hexagon hexa {"CAFFEINE", criteria};
 
     std::cout << hexa.getTab(2) << hexa.getSpace(5) << hexa.getHexagon(0) << std::endl;
     std::cout << hexa.getTab(2) << hexa.getSpace(5) << hexa.getHexagon(1) << std::endl;
@@ -42,8 +21,6 @@ void TextDisplay::drawBoard() {
     std::cout << hexa.getTab(1) << hexa.getSpace(5) << hexa.getHexagon(1) << hexa.getSpace(11) << hexa.getSpace(5) << hexa.getHexagon(1) << std::endl;
     std::cout << hexa.getTab(1) << hexa.getSpace(3) << hexa.getHexagon(2) << hexa.getSpace(10) << hexa.getSpace(3) << hexa.getHexagon(2) << std::endl;
     std::cout << hexa.getTab(1) << hexa.getSpace(3) << hexa.getHexagon(3) << hexa.getSpace(9) << hexa.getSpace(3) << hexa.getHexagon(3) << std::endl;
-
-    // std::string hexagonTopRight = hexagon[0] + space[4] + temp + "  ";
 
     for (int i = 0; i < 3; i++) {
         std::cout << hexa.getTab(0) << hexa.getSpace(5) << hexa.getHexagon(0) << hexa.getHex(2)[2] << hexa.getHexagon(0) << hexa.getHex(2)[2] << hexa.getHexagon(0) << std::endl;
@@ -67,14 +44,6 @@ void TextDisplay::drawBoard() {
     std::cout << hexa.getTab(2) << hexa.getSpace(3) << hexa.getHexagon(6) << std::endl;
     std::cout << hexa.getTab(2) << hexa.getSpace(5) << hexa.getHexagon(7) << std::endl;
     std::cout << hexa.getTab(2) << hexa.getSpace(5) << hexa.getHexagon(8) << std::endl;
-
-    // std::cout << tab[2] << hexagon[5] << std::endl;
-    // std::cout << tab[2] << hexagon[6] << std::endl;
-    // std::cout << tab[2] << hexagon[7] << std::endl;
-    // std::cout << tab[2] << hexagon[8] << std::endl;
-
-
-
 }
 
 void TextDisplay::notify(int location, char type, std::string player) {

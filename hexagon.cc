@@ -1,20 +1,22 @@
 #include "hexagon.h"
+#include <iostream>
 
-Hexagon::Hexagon(std::string resource) {
+Hexagon::Hexagon(std::string resource, std::vector<std::string> criteria) {
     resource = resource;
+    this->criteria = criteria;
     int diff = 11 - resource.length();
     for (int i = 0; i < diff; i++) {
         resourceSpace += " ";
     }
-    hexagon[0] = "|" + format(countC) + "|--" + format(countG) + "--|" + format(countC + 1) + "|";
+    hexagon[0] = "|" + criteria.at(countC) + "|--" + format(countG) + "--|" + format(countC + 1) + "|";
     hexagon[1] = "/            \\";
     hexagon[2] = format(countG) + space[6] + format(temp) + space[5] + format(countG + 1);
     hexagon[3] = "/" + space[5] + resource + resourceSpace + "\\";
-    hexagon[4] = "|" + format(countC) + "|" + space[7] + format(temp) + space[7] + "|" + format(countC + 1) + "|";
+    hexagon[4] = "|" + criteria.at(countC) + "|" + space[7] + format(temp) + space[7] + "|" + format(countC + 1) + "|";
     hexagon[5] = "\\                /";
     hexagon[6] = format(countG) + space[7] + space[6] + format(countG + 1);
     hexagon[7] = "\\            /";
-    hexagon[8] = "|" + format(countC) + "|--" + format(countG) + "--|" + format(countC + 1) + "|";
+    hexagon[8] = "|" + criteria.at(countC) + "|--" + format(countG) + "--|" + format(countC + 1) + "|";
     hexagon[9] = "--" + format(countG) + "--";
 
     hex[0] = space[6] + format(temp) + space[5]; //just location
@@ -33,13 +35,17 @@ std::string Hexagon::format(int x) {
 void Hexagon::setHexagon(int c, int g) {
     countC += c;
     countG += g;
+    
+    if (countC + 1 > criteria.size()) {
+        return;
+    }
 
-    hexagon[0] = "|" + format(countC) + "|--" + format(countG) + "--|" + format(countC + 1) + "|";
+    hexagon[0] = "|" + criteria.at(countC) + "|--" + format(countG) + "--|" + format(countC + 1) + "|";
     hexagon[2] = format(countG) + space[6] + format(temp) + space[5] + format(countG + 1);
     hexagon[3] = "/" + space[5] + resource + resourceSpace + "\\";
-    hexagon[4] = "|" + format(countC) + "|" + space[7] + format(temp) + space[7] + "|" + format(countC + 1) + "|";
+    hexagon[4] = "|" + criteria.at(countC) + "|" + space[7] + format(temp) + space[7] + "|" + format(countC + 1) + "|";
     hexagon[6] = format(countG) + space[7] + space[6] + format(countG + 1);
-    hexagon[8] = "|" + format(countC) + "|--" + format(countG) + "--|" + format(countC + 1) + "|";
+    hexagon[8] = "|" + criteria.at(countC) + "|--" + format(countG) + "--|" + format(countC + 1) + "|";
     hexagon[9] = "--" + format(countG) + "--";
 }
 
