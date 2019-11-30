@@ -160,7 +160,9 @@ void Board::initGoals() {
         goals.emplace_back(new Achievement{i});
     }
 
-    
+    for (int i = 0; i < 1; i++) {
+        
+    }
 }
 
 
@@ -241,8 +243,8 @@ std::string *Board::findNeighbourByCriteria(std::string criterionDir) {
 }
 
 void Board::drawBoard() {
-    // for (int i = 0; i < 19; i++) {
-    //     tiles.at(i)->printTile();
-    // }
-    td->drawBoard();
+    for (int i = 0; i < 1; i++) {
+        tiles.at(i)->printTile();
+    }
+    //td->drawBoard();
 }
