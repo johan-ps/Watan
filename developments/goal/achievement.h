@@ -5,7 +5,7 @@
 
 class Achievement : public Goal {
     public:
-        Achievement(int locationVal, const std::vector<int> cost = {1, 0, 0, 0, 0, 0});
+        Achievement(int locationVal, std::vector<int> cost = {1, 0, 0, 0, 0, 0});
         void achieve(Player *) override;
 };
 

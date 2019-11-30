@@ -1,6 +1,6 @@
 #include "achievement.h"
 
-Achievement::Achievement(int locationVal, const std::vector<int> cost):
+Achievement::Achievement(int locationVal, std::vector<int> cost):
     Goal{locationVal, cost} {}
 
 void Achievement::achieve(Player * owner){
