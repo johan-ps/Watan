@@ -1,6 +1,8 @@
 #include "gameManager.h"
 #include "board.h"
 
+#include "iostream"
+#include "string"
 Board GameManager::getGameBoard() {
     return *gameBoard;
 }
@@ -10,8 +12,12 @@ void GameManager::startGame() {
     createPlayers(1);
 }
 
-void GameManager::gameOver() {
+void GameManager::gameOver() { // MAYBE PASS IN " Player *winner " as parameter?
     //end game
+    std::string response = "";
+    std::cout << "Would you like to play again?" << std::endl;
+    std::cin >> response;
+    //return response;
 }
 
 void GameManager::createBoard(int boardSize) {
