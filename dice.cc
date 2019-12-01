@@ -1,17 +1,26 @@
 #include "dice.h"
 
-Dice::Dice():
-    isRandom{false}, rollVal{6} {} 
+Dice::Dice(Board *board):
+    isRandom{true}, board{board} {}
 
-int Dice::roll() {
-    // if (isRandom){
-    //     rollVal = 6;
-    // }
-    return(rollVal);
+void Dice::roll() {
+    if (isRandom){
+        srand(time(0));
+        rollVal = rand() % 6 + 1;
+    }
+    board->notify(rollVal);
 }
 
-void Dice::setDice(int rollChoice) {
+void Dice::setLoadVal(int rollChoice) {
     rollVal = rollChoice;
+}
+
+void Dice::setDice(bool isRand) {
+    isRandom = isRand;
+}
+
+void Dice::setSeed(int seed) {
+    srand(seed);
 }
 
 Dice::~Dice() {}

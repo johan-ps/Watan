@@ -5,9 +5,10 @@
 #include <vector>
 #include <memory>
 #include "./player/student.h"
-#include "turn.h"
 #include "dice.h"
+#include "turn.h"
 
+class Turn;
 class Board;
 
 class GameManager {
@@ -31,6 +32,8 @@ class GameManager {
     void startTurns();
     // void saveGame();
     Board getGameBoard();
+    friend class Turn;
 };
+
 
 #endif

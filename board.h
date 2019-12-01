@@ -1,14 +1,15 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-#include "tile.h"
+//#include "tile.h"
 #include "textDisplay.h"
 #include "./developments/criteria/assignment.h"
 #include "./developments/goal/achievement.h"
 #include <vector>
 #include "observer.h"
+#include "subject.h"
 
-//class Tile;
+class Tile;
 //class TextDisplay;
 
 class Board : public Subject, public Observer {

@@ -23,8 +23,8 @@ void GameManager::startGame() {
         std::cin >> loc;
         gameBoard->completeCriteria(loc, it->get(), true);
     }
-    dice = new Dice{};
-    curTurn = new Turn{dice};
+    dice = new Dice{gameBoard.get()};
+    curTurn = new Turn{this};
     startTurns();
 }
 
@@ -55,3 +55,4 @@ void GameManager::createPlayers(int num) {
         players.emplace_back(new Student{playerColours[i]});
     }
 }
+

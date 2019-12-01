@@ -4,25 +4,23 @@
 #include "player/player.h"
 #include "dice.h"
 #include <memory>
-
+#include "gameManager.h"
 #include <string>
 #include <iostream>
 
-class Turn{
+class GameManager;
+
+class Turn {
     Player *whoseTurn;
-    Dice *dice;
+    GameManager *gm;
 
     public:
-        Turn(Dice *dice);
-
+        Turn(GameManager *gm);
         void startTurn(Player *playerTurn);
         void endTurn();
         Player *getCurStudent();
         //void nextTurn(Player *);
         void help();
-
-
-
 };
 
 #endif
