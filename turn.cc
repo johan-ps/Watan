@@ -8,7 +8,7 @@ void Turn::startTurn(Player *playerTurn){
     whoseTurn = playerTurn;
 
     std::cout << "Student " << whoseTurn->getColour() << "'s turn." << std::endl;
-    //whoseTurn->printStatus();
+    whoseTurn->printStatus();
     std::string input;
 
     while(true) {
@@ -53,7 +53,9 @@ void Turn::endTurn() {
                 gm->gameBoard->drawBoard();
             } else if (input == "status") {
                 //print status of all students
-
+                for (auto &n : gm->players) {
+                    n->printStatus();
+                }
             } else if (input == "criteria") {
                 //prints the criteria the current student has completed
             } else if (input == "achieve") {

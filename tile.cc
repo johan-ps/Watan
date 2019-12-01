@@ -5,8 +5,10 @@ Tile::Tile(int location, int value, std::string resource, int col, int row):
     location{location}, value{value}, resource{resource}, col{col}, row{row} {}
 
 void Tile::notify() {
+    std::cout << "Notify tile" << std::endl;
     for (auto &n : criteria) {
-        n.second->notify();
+        std::cout << "Notify xxxxx " << std::endl;
+        n.second->distributeResources(resource);
     }
 }
 

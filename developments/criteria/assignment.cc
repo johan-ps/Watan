@@ -1,5 +1,6 @@
 #include "assignment.h"
 #include "../../resource.h"
+#include <iostream>
 
 Assignment::Assignment(int locationVal, std::vector<int> cost):
     Criterion{locationVal, cost} {}
@@ -22,11 +23,12 @@ void Assignment::complete(Player *player, bool init) {
 void Assignment::notify() {}
 
 void Assignment::distributeResources(std::string resource) {
+    std::cout << "Distribute resources" << std::endl;
     Player * owner = getOwner();
-    if(owner) {
-        int resourceNum = getResourceNum(resource);
-        owner->recieve(resourceNum, getCriteriaVal());
-    }
+    // if(owner) {
+    //     int resourceNum = getResourceNum(resource);
+    //     owner->recieve(resourceNum, getCriteriaVal());
+    // }
 }
 
 
