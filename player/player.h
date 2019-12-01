@@ -16,14 +16,15 @@ class Player {
 
     protected:
         int criteriaCompleted;
-        std::vector<int> resources;
         std::vector<Criterion*> criteria;
         std::vector<Goal*> goals;
+        std::vector<int> resources;
 
         int getCriteriaSize();
 
     public:
-        Player(std::string colour);
+        Player(std::string colour, std::vector<int>);
+        Player(std::string colour, std::vector<Criterion*>, std::vector<Goal*>, std::vector<int>);
 
         // Public Methods
         virtual void steal(Player *) = 0;
@@ -35,7 +36,7 @@ class Player {
         //Should possibly change to development pointer or add a purchaseGoal method
         virtual bool purchaseCriteria(std::vector<int>, Criterion *) = 0;
         virtual bool purchaseGoal(std::vector<int>, Goal *) = 0;
-
+        
         // Accessors
         std::string getColour();
 
