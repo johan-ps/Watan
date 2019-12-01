@@ -13,7 +13,7 @@
 class Development {
     int locationVal;
     const std::vector<int> cost;
-    Player *player;
+    Player::Player *player;
     //bool isSet;
 
     protected:
