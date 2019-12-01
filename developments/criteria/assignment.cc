@@ -29,8 +29,6 @@ void Assignment::distributeResources(std::string resource) {
     }
 }
 
-//Criterion type should be a field in criterion class?
-
 
 //Exam and Midterm should be decorator classes when implemented
 void Assignment::improve() {}
