@@ -10,6 +10,9 @@ Board GameManager::getGameBoard() {
 void GameManager::startGame() {
     createBoard(19);
     createPlayers(1);
+    for (auto n : players) {
+        //std::cout << "Student" << n->
+    }
 }
 
 void GameManager::gameOver() { // MAYBE PASS IN " Player *winner " as parameter?
@@ -21,8 +24,7 @@ void GameManager::gameOver() { // MAYBE PASS IN " Player *winner " as parameter?
 }
 
 void GameManager::createBoard(int boardSize) {
-    gameBoard = std::unique_ptr<Board> { new Board {} };
-    //gameBoard = std::make_unique<Board> {new Board{} };
+    gameBoard = std::make_unique<Board>();
     gameBoard->init(boardSize);
 }
 
