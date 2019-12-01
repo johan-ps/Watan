@@ -4,6 +4,7 @@
 // #include "resource.h"
 // #include "goal.h"
 #include "./developments/criteria/criterion.h"
+#include "./developments/goal/achievement.h"
 #include "observer.h"
 #include "subject.h"
 // #include "geese.h"
@@ -25,6 +26,7 @@ struct TileInfo {
     int row;
     std::string resource;
     std::map<std::string, Criterion*> criteria;
+    std::map<std::string, Goal*> goals;
     std::map<std::string, Tile*> neighbours;
 };
 
@@ -38,17 +40,19 @@ class Tile : public Subject, public Observer {
     //Resource resource;
     //std::vector<Goal> goals;
     std::map<std::string, Criterion*> criteria;
+    std::map<std::string, Goal*> goals;
     std::map<std::string, Tile*> neighbours;
     //Geese geese;
     //bool isOverrun;
 
     public:
-        Tile(int location, int value, std::string resource, int col, int row);
-        void notify();// override;
-        void printTile();
-        void addNeighbour(Tile *tile, std::string dir);
-        void addCriterion(Criterion *criterion, std::string dir);
-        TileInfo getInfo();
+    Tile(int location, int value, std::string resource, int col, int row);
+    void notify();// override;
+    void printTile();
+    void addNeighbour(Tile *tile, std::string dir);
+    void addCriterion(Criterion *criterion, std::string dir);
+    void addGoal(Goal *goal, std::string dir);
+    TileInfo getInfo();
 };
 
 #endif

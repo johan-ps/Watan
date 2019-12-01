@@ -25,6 +25,7 @@ class Board : public Subject, public Observer {
     void initGoals();
     int findTile(int col, int row);
     std::string *findNeighbourByCriteria(std::string criterionDir);
+    std::string findNeighbourByGoal(std::string goalDir);
     std::string getOppositeDirection(std::string dirTile, std::string dirCriterion);
 
 public:

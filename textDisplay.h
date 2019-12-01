@@ -9,7 +9,7 @@
 class TextDisplay : public Observer {
     //std::vector<std::vector<char>> display;
     std::vector<std::string> criteria;
-    std::vector<char> goals;
+    std::vector<std::string> goals;
     public:
     TextDisplay();
     void notify(int location, char type, std::string player);// override;
