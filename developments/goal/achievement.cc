@@ -9,8 +9,8 @@ void Achievement::achieve(Player *player){
 
     if(!isSet() /*AND IF THERE IS NO ADJACENT*/){
         
-        if(player->purchase(getCost(), this)) {
-            setDevelopment(player);
+        if(player->purchaseGoal(getCost(), this)) {
+            setDevelopment(player, 0);
             //alert text display of new owner/criteria type somehow
         } else {
             throw "InsufficientResourcesException";
