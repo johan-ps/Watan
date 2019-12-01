@@ -8,6 +8,7 @@
 #include <vector>
 #include "observer.h"
 #include "subject.h"
+#include <stdlib.h>
 
 class Tile;
 //class TextDisplay;

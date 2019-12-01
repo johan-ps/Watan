@@ -5,6 +5,9 @@
 #include <fstream>
 
 #include "./player/student.h"
+#include "./developments/goal/achievement.h"
+#include "./developments/criteria/assignment.h"
+#include "board.h"
 
 class FileManager {
     //std::string fileName;
