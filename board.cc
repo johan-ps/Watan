@@ -401,3 +401,9 @@ void Board::drawBoard() {
     // }
     td->drawBoard();
 }
+
+void Board::completeCriteria(int loc) {
+    if (!criteria.at(loc)->isSet()) {
+        criteria.at(loc)->
+    }
+}
