@@ -1,7 +1,8 @@
 #include "turn.h"
+#include <iostream>
 
-Turn::Turn(Dice* dice): 
-    dice{dice} {}
+Turn::Turn(GameManager *gm):
+    gm{gm} {}
 
 void Turn::startTurn(Player *playerTurn){
     whoseTurn = playerTurn;
@@ -14,15 +15,21 @@ void Turn::startTurn(Player *playerTurn){
         std::cout << "> ";
         if (std::cin >> input) {
             if (input == "load") {
-                //set dice to loaded
+                int val;
+                std::cin >> val;
+                gm->dice->setDice(false);
+                gm->dice->setLoadVal(val);
             } else if (input == "fair") {
                 //set dice to fair
+                gm->dice->setDice(true);
             } else if (input == "roll") {
                 //roll dice
+                gm->dice->roll();
                 endTurn();
                 return;
             } else {
                 //print error msg
+                std::cout << "Invalid command" << std::endl;
             }
         } else {
             if (std::cin.eof()) {
@@ -43,14 +50,18 @@ void Turn::endTurn() {
         if (std::cin >> input) {
             if (input == "board") {
                 //print board
+                gm->gameBoard->drawBoard();
             } else if (input == "status") {
                 //print status of all students
+
             } else if (input == "criteria") {
                 //prints the criteria the current student has completed
             } else if (input == "achieve") {
-
+                
             } else if (input == "complete") {
-
+                int loc;
+                std::cin >> loc;
+                gm->gameBoard->completeCriteria(loc, whoseTurn, true);
             } else if (input == "improve") {
 
             } else if (input == "trade") {
@@ -63,6 +74,7 @@ void Turn::endTurn() {
                 help();
             } else {
                 //print error msg
+                std::cout << "Invalid command" << std::endl;
             }
         } else {
             if (std::cin.eof()) {
@@ -75,7 +87,7 @@ void Turn::endTurn() {
     }
 }
 
-Player *Turn::getCurStudent(){
+Player *Turn::getCurStudent() {
     return whoseTurn;
 }
 
@@ -83,16 +95,16 @@ Player *Turn::getCurStudent(){
 //     whoseTurn = nextPlayer;
 // }
 
-void Turn::help(){
+void Turn::help() {
     std::cout << "Valid commands:" << std::endl;
-    // std::cout << "board" << std::endl;
-    // std::cout << "status" << std::endl;
-    // std::cout << "criteria" << std::endl;
-    // std::cout << "acheive <goal>" << std::endl;
-    // std::cout << "complete <criterion>" << std::endl;
-    // std::cout << "improve <criterion>" << std::endl;
-    // std::cout << "trade <colour> <give> <take>" << std::endl;
-    // std::cout << "next" << std::endl;
-    // std::cout << "save <file>" << std::endl;
-    // std::cout << "help" << std::endl;
+    std::cout << "board" << std::endl;
+    std::cout << "status" << std::endl;
+    std::cout << "criteria" << std::endl;
+    std::cout << "acheive <goal>" << std::endl;
+    std::cout << "complete <criterion>" << std::endl;
+    std::cout << "improve <criterion>" << std::endl;
+    std::cout << "trade <colour> <give> <take>" << std::endl;
+    std::cout << "next" << std::endl;
+    std::cout << "save <file>" << std::endl;
+    std::cout << "help" << std::endl;
 }

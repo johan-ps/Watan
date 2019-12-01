@@ -39,11 +39,12 @@ std::string findDir(int colA, int rowA, int colB, int rowB) {
 
 //notify appropriate tiles with the given dice value
 void Board::notify(int diceVal) {
-    for (auto &n : tiles) {
-        if (n->getInfo().value == diceVal) {
+    std::cout << "Notify board with dice value " << diceVal << std::endl;
+    // for (auto &n : tiles) {
+    //     if (n->getInfo().value == diceVal) {
 
-        }
-    }
+    //     }
+    // }
 }
 
 void Board::initTiles() {
