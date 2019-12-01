@@ -7,9 +7,9 @@ Assignment::Assignment(int locationVal, std::vector<int> cost):
 void Assignment::complete(Player *player, bool init) {
     if(!isSet() /*AND IF THERE IS NO ADJACENT*/){
         if (init) {
-            setDevelopment(player);
-        } else if(player->purchase(getCost(), this)) {
-            setDevelopment(player);
+            setDevelopment(player, 1);
+        } else if(player->purchaseCriteria(getCost(), this)) {
+            setDevelopment(player, 1);
             //alert text display of new owner/criteria type somehow
         } else {
             throw "InsufficientResourcesException";
@@ -26,9 +26,7 @@ void Assignment::distributeResources(std::string resource) {
 }
 
 //Criterion type should be a field in criterion class?
-int Assignment::getCriterionType() {
-    return 1;
-}
+
 
 //Exam and Midterm should be decorator classes when implemented
 void Assignment::improve() {}

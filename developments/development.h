@@ -11,18 +11,21 @@
 
 class Development {
     int locationVal;
+    int criteriaPoints;
     const std::vector<int> cost;
     Player *player;
-    void setOwner(Player *);
+
+    void setOwner(Player *, int);
 
     protected:
-        void setDevelopment(Player *);
+        void setDevelopment(Player *, int);
 
     public:
         Development(int locationVal, const std::vector<int> cost);
         virtual ~Development() = 0;
         const std::vector<int> getCost();
         int getLocationVal();
+        int getCriteriaPoints();
         bool isSet();
 };
 
