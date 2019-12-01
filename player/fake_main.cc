@@ -10,5 +10,7 @@ int main (int argc, char *argv[]){
 
     Player *pp = &s;
     
+    cout << s.getColour() << endl;
+    s.printStatus();
 
 }

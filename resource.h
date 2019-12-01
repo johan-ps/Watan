@@ -2,20 +2,11 @@
 #define __RESOURCE_H__
 #include <string>
 
-std::string resourceType [6]= {"caffeine", "lab", "lecture", "study", "tutorial", "netflix"};
+//enum class ResourceType = {caffeine, lab, lecture, study, tutorial, netflix};
+//sstd::string resourceNames [6];
 
-std::string getResourceName(int num) {
-    return resourceType[num];
-}
+std::string getResourceName(int num);
 
-int getResourceNum(std::string name){
-    name[0] = std::tolower(name[0]);
-    for(int i = 0; i < 6; ++i){
-        if(resourceType[i] == name) {
-            return i;
-        }
-    }
-    return 5;
-}
+int getResourceNum(std::string name);
 
 #endif

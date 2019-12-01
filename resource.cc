@@ -1,16 +1,18 @@
-// #include "resource.h"
-// #include <string>
+#include "resource.h"
 
-// std::string getName(int num) {
-//     return resourceType[num];
-// }
+std::string resourceNames [6] = {"caffeine", "lab", "lecture", "study", "tutorial", "netflix"};
 
-// int getNum(std::string name){
-//     name[0] = std::tolower(name[0]);
-//     for(int i = 0; i < 6; ++i){
-//         if(resourceType[i] == name) {
-//             return i;
-//         }
-//     }
-//     return 5;
-// }
+std::string getResourceName(int num) {
+    return resourceNames[num];
+    // MIGHT HAVE TO THROW AN EXCEPTION IF USED IMPROPERLY
+}
+
+int getResourceNum(std::string name){
+    name[0] = std::tolower(name[0]);
+    for(int i = 0; i < 6; ++i){
+        if(resourceNames[i] == name) {
+            return i;
+        }
+    
+    return -1; // THROW AN EXCEPTION
+}

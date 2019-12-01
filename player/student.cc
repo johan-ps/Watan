@@ -1,5 +1,5 @@
 #include "student.h"
-//#include "../resource.h"
+#include "../resource.h"
 #include <vector>
 #include <iostream>
 
@@ -31,21 +31,25 @@ void Student::printStatus() {
     //vector<int> resources = getResources();
 
     cout << getColour() << " has " << getCriteriaSize() << "course criteria, " << endl;
-    // cout << resources.at(Resource::caffeine) << " caffeines" << endl;
+    // cout << resources.at(resource::caffeine) << " " <<  resources."s" << endl;
     // cout << resources.at(Resource::lab) << " labs" << endl;
     // cout << resources.at(Resource::lecture) << " lectures" << endl;
     // cout << resources.at(Resource::study) << " studies" << endl;
     // cout << resources.at(Resource::tutorial) << " tutorials" << endl;
 
-    cout << resources.at(0) << " caffeines" << endl;
-    cout << resources.at(1) << " labs" << endl;
-    cout << resources.at(2) << " lectures" << endl;
-    cout << resources.at(3) << " studies" << endl;
-    cout << resources.at(4) << " tutorials" << endl;
+    // cout << resources.at(Resource) << " caffeines" << endl;
+    // cout << resources.at(1) << " labs" << endl;
+    // cout << resources.at(2) << " lectures" << endl;
+    // cout << resources.at(3) << " studies" << endl;
+    // cout << resources.at(4) << " tutorials" << endl;
 
-    //for (auto resource: Resource::resourceType){
-    //
-    //}
+    // for (auto resource: ResourceType){
+    //     cout << resources.at(resource) << " " << getResourceName(resource) << "s" << endl;
+    // }
+
+    for (int resource = 0; resource < 6; ++resource){
+        cout << resources.at(resource) << " " << getResourceName(resource) << "s" << endl;
+    }
 }
 
 bool Student::purchaseCriteria(std::vector<int> cost, Criterion * newCriterion) {
@@ -80,6 +84,8 @@ bool Student::purchaseGoal(std::vector<int> cost, Goal * newGoal) {
     goals.push_back(newGoal);
     return true;
 }
+
+
 
 // Print the player's completed criterions
 //void Student::printCompletions(){
