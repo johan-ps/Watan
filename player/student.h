@@ -10,7 +10,7 @@ class Student : public Player {
     Student(std::string colour);
     
     void steal(Player *) override;
-    void trade(Player *, std::string resource) override;
+    void trade(Player *, std::string, std::string) override;
     void recieve(int, int) override;
     void printStatus() override;
     void printCompletions() override;
