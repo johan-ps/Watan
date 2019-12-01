@@ -1,5 +1,5 @@
 #include "student.h"
-#include "../resource.h"
+//#include "../resource.h"
 #include <vector>
 #include <iostream>
 
@@ -10,7 +10,7 @@ Student::Student(std::string colour):
 
 
 // Trade a resource with otherPlayer
-void Student::trade(Player *otherPlayer, Resource resource) {
+void Student::trade(Player *otherPlayer, std::string resource) {
 
 }
 

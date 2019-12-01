@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 
-#include "../resource.h"
+//#include "../resource.h"
 //#include "../developments/criteria/criterion.h"
 
 // struct PlayerInfo {
@@ -34,7 +34,7 @@ class Player {
 
         // Public Methods
         virtual void steal(Player *) = 0;
-        virtual void trade(Player *, Resource) = 0;
+        virtual void trade(Player *, std::string resource) = 0;
         virtual void printStatus() = 0;
 
         //Should possibly change to development pointer or add a purchaseGoal method
