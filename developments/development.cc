@@ -1,7 +1,7 @@
 #include "development.h"
 
 Development::Development(int locationVal, const std::vector<int> cost):
-    locationVal {locationVal}, criteriaPoints{0}, cost{cost}, player{nullptr} {}
+    locationVal {locationVal}, criteriaVal{0}, cost{cost}, player{nullptr} {}
     
 void Development::setDevelopment(Player *owner, int developmentVal){
     setOwner(owner, developmentVal);
@@ -9,11 +9,11 @@ void Development::setDevelopment(Player *owner, int developmentVal){
 
 void Development::setOwner(Player * owner, int developmentVal){
     player = owner;
-    criteriaPoints = developmentVal;
+    criteriaVal = developmentVal;
 }
 
-int Development::getCriteriaPoints() {
-    return criteriaPoints;
+int Development::getCriteriaVal() {
+    return criteriaVal;
 }
 
 int Development::getLocationVal() {
@@ -32,6 +32,10 @@ bool Development::isSet(){
 
 const std::vector<int> Development::getCost(){
     return cost;
+}
+
+Player * Development::getOwner() {
+    return player;
 }
 
 Development::~Development() {}

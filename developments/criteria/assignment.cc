@@ -22,7 +22,11 @@ void Assignment::complete(Player *player, bool init) {
 void Assignment::notify() {}
 
 void Assignment::distributeResources(std::string resource) {
-    //int resourceNum = getNum(resource);
+    Player * owner = getOwner();
+    if(owner){
+        int resourceNum = getResourceNum(resource);
+        owner->recieve(resourceNum, getCriteriaVal())
+    }
 }
 
 //Criterion type should be a field in criterion class?
