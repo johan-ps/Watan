@@ -7,7 +7,7 @@
 class Criterion : public Development, public Observer {
 
     public:
-        Criterion(int locationVal, std::vector<int> cost = {1, 0, 0, 0, 0, 0});
+        Criterion(int locationVal, std::vector<int> cost);
         virtual void notify() = 0;
         virtual void complete(Player *player, bool init) = 0;
         virtual void improve() = 0;

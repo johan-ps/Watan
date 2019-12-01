@@ -54,12 +54,12 @@ void Student::printStatus() {
 
 bool Student::purchaseCriteria(std::vector<int> cost, Criterion * newCriterion) {
 
-    for(int i = 0; i < 6; ++i) {
+    for(int i = 0; i < 5; ++i) {
         if(cost[i] > resources[i]) {
             return false;
         }
     }
-    for(int j = 0; j < 6; ++j){
+    for(int j = 0; j < 5; ++j){
         resources[j] -= cost[j];
     }
 
@@ -73,12 +73,12 @@ bool Student::purchaseCriteria(std::vector<int> cost, Criterion * newCriterion) 
 
 bool Student::purchaseGoal(std::vector<int> cost, Goal * newGoal) {
 
-    for(int i = 0; i < 6; ++i) {
+    for(int i = 0; i < 5; ++i) {
         if(cost[i] > resources[i]) {
             return false;
         }
     }
-    for(int j = 0; j < 6; ++j){
+    for(int j = 0; j < 5; ++j){
         resources[j] -= cost[j];
     }
 
