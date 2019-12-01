@@ -11,7 +11,7 @@
 
 class Development {
     int locationVal;
-    int criteriaPoints;
+    int criteriaVal;
     const std::vector<int> cost;
     Player *player;
 
@@ -25,8 +25,9 @@ class Development {
         virtual ~Development() = 0;
         const std::vector<int> getCost();
         int getLocationVal();
-        int getCriteriaPoints();
+        int getCriteriaVal();
         bool isSet();
+        Player * getOwner();
 };
 
 #endif

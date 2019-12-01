@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 
-//#include "../resource.h"
+#include "../resource.h"
 //#include "../developments/criteria/criterion.h"
 
 // struct PlayerInfo {
@@ -18,13 +18,13 @@ class Goal;
 //class Development;
 
 class Player {
-    std::vector<int> resources;
     std::string colour;
     //Dice* dice;
 
     protected:
         int criteriaCompleted;
-        std::vector<int> getResources();
+        //std::vector<int> getResources();
+        std::vector<int> resources;
         std::vector<Criterion*> criteria;
         std::vector<Goal*> goals;
 
@@ -38,6 +38,7 @@ class Player {
         // Public Methods
         virtual void steal(Player *) = 0;
         virtual void trade(Player *, std::string resource) = 0;
+        virtual void recieve(int, int) = 0;
         virtual void printStatus() = 0;
         virtual void printCompletions() = 0;
 

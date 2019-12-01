@@ -8,8 +8,8 @@ class Midterm : public Criterion {
     
     public:
         void improve() override;
-        void distributeResources() override;
-        int getCriterionType() override;
+        //void distributeResources() override;
+        //int getCriterionType() override;
 
     Midterm();
 };
