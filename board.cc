@@ -401,3 +401,13 @@ void Board::drawBoard() {
     // }
     td->drawBoard();
 }
+
+void Board::completeCriteria(int loc, Player *player, bool init) {
+    try {
+        criteria.at(loc)->complete(player, init);
+    } catch (std::string) {
+        return;
+    }
+    std::string playerAssignment = player->getColour().substr(0, 1) + 'A';
+    td->notify(loc, 'c', playerAssignment);
+}

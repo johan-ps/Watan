@@ -11,10 +11,10 @@ class Assignment : public Criterion {
 
     public:
         Assignment(int location, std::vector<int> cost = {1, 0, 0, 0, 0, 0});
-        void complete(Player*) override;
+        void complete(Player* player, bool init) override;
         void notify() override;
         void improve() override;
-        void distributeResources() override;
+        void distributeResources(std::string) override;
         int getCriterionType() override;
 };
 

@@ -3,15 +3,15 @@
 Dice::Dice():
     isRandom{false}, rollVal{6} {} 
 
-int Dice::roll(){
+int Dice::roll() {
     // if (isRandom){
     //     rollVal = 6;
     // }
     return(rollVal);
 }
 
-void dice::setDice(int rollChoice){
+void Dice::setDice(int rollChoice) {
     rollVal = rollChoice;
 }
 
-dice::~dice(){}
+Dice::~Dice() {}

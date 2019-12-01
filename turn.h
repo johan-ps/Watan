@@ -3,21 +3,22 @@
 
 #include "player/player.h"
 #include "dice.h"
+#include <memory>
 
 #include <string>
+#include <iostream>
 
 class Turn{
-    Player* whoseTurn;
-    Dice* dice;
-    std::string phase;
+    Player *whoseTurn;
+    Dice *dice;
 
     public:
-        Turn(Player* whoseTurn, Dice* dice, std::string phase);
+        Turn(Dice *dice);
 
-        void startTurn();
-        Player* getCurStudent();
-        void nextTurn(Player *);
-
+        void startTurn(Player *playerTurn);
+        void endTurn();
+        Player *getCurStudent();
+        //void nextTurn(Player *);
         void help();
 
 

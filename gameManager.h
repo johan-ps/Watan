@@ -5,12 +5,15 @@
 #include <vector>
 #include <memory>
 #include "./player/student.h"
+#include "turn.h"
+#include "dice.h"
 
 class Board;
 
 class GameManager {
     // FileManager fileManager;
-    // Turn curTurn;
+    Dice *dice;
+    Turn *curTurn;
     // Geese geese;
     std::unique_ptr<Board> gameBoard;
     std::vector<std::unique_ptr<Player>> players;
@@ -25,7 +28,7 @@ class GameManager {
     // void createFileManager();
     // void moveGeese();
     // void printPlayerStatus();
-    // void startTurns();
+    void startTurns();
     // void saveGame();
     Board getGameBoard();
 };

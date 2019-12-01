@@ -18,8 +18,8 @@ int Development::getLocationVal() {
 bool Development::isSet(){
     if (player){
         return true;
-    }
-    else{ return false;
+    } else { 
+        return false;
     }
 
     // return player;

@@ -1,5 +1,5 @@
 #include "student.h"
-#include "../resource.h"
+//#include "../resource.h"
 #include <vector>
 #include <iostream>
 
@@ -10,7 +10,7 @@ Student::Student(std::string colour):
 
 
 // Trade a resource with otherPlayer
-void Student::trade(Player *otherPlayer, Resource resource) {
+void Student::trade(Player *otherPlayer, std::string resource) {
 
 }
 
@@ -44,11 +44,10 @@ void Student::printStatus() {
     //}
 }
 
-bool Student::purchase(std::vector<int> cost, Criterion * newCriteria) {
-    
+bool Student::purchase(std::vector<int> cost, Development * development) {
     vector<int> resources = getResources();
 
-    for(int i = 0; i < 6; ++i){
+    for(int i = 0; i < 6; ++i) {
         if(cost[i] > resources[i]) {
             return false;
         }
@@ -57,7 +56,7 @@ bool Student::purchase(std::vector<int> cost, Criterion * newCriteria) {
         resources[j] -= cost[j];
     }
 
-    criteria.push_back(newCriteria);
+    //criteria.push_back(development);
     return true;
 }
 

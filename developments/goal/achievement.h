@@ -2,6 +2,7 @@
 #define ACHIEVEMENT_H
 
 #include "goal.h"
+//#include "../../player/player.h"
 
 class Achievement : public Goal {
     public:
