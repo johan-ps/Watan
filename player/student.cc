@@ -20,11 +20,15 @@ void Student::steal(Player *victim) {
 
 }
 
+void Student::recieve(int resourceNum, int resourceAmount){
+    resources.at(resourceNum) += resourceAmount;
+}
+
 // Print the player's resources and owned criteria
 // Should be called by either TextDisplay or main.cc (depending on implementation)
 void Student::printStatus() {
 
-    vector<int> resources = getResources();
+    //vector<int> resources = getResources();
 
     cout << getColour() << " has " << getCriteriaSize() << "course criteria, " << endl;
     // cout << resources.at(resource::caffeine) << " " <<  resources."s" << endl;
@@ -49,7 +53,7 @@ void Student::printStatus() {
 }
 
 bool Student::purchaseCriteria(std::vector<int> cost, Criterion * newCriterion) {
-    vector<int> resources = getResources();
+    //vector<int> resources = getResources();
 
     for(int i = 0; i < 6; ++i) {
         if(cost[i] > resources[i]) {
@@ -66,7 +70,7 @@ bool Student::purchaseCriteria(std::vector<int> cost, Criterion * newCriterion) 
 }
 
 bool Student::purchaseGoal(std::vector<int> cost, Goal * newGoal) {
-    vector<int> resources = getResources();
+    //vector<int> resources = getResources();
 
     for(int i = 0; i < 6; ++i) {
         if(cost[i] > resources[i]) {
@@ -84,10 +88,11 @@ bool Student::purchaseGoal(std::vector<int> cost, Goal * newGoal) {
 
 
 // Print the player's completed criterions
-void Student::printCompletions(){
+//void Student::printCompletions(){
 //     cout << colour << " has completed:" << endl;
 
 //     for (auto criterion: criteria){
 //         cout << criterion->getLocationVal << " " << criterion->getCriterionType << endl;
 //     }
-}
+
+//}
