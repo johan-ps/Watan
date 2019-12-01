@@ -5,8 +5,7 @@
 
 class Midterm : public Criterion {
     int location;
-    const std::vector<int> cost = { 0, 0, 2, 0, 3, 0};
-
+    
     public:
         void improve() override;
         void distributeResources() override;

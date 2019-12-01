@@ -25,4 +25,8 @@ bool Development::isSet(){
     // return player;
 }
 
+const std::vector<int> Development::getCost(){
+    return cost;
+}
+
 Development::~Development() {}

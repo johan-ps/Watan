@@ -1,6 +1,6 @@
 #include "student.h"
 #include "../resource.h"
-
+#include <vector>
 #include <iostream>
 
 using namespace std;
@@ -43,6 +43,24 @@ void Student::printStatus() {
     //
     //}
 }
+
+bool Student::purchase(std::vector<int> cost, Criterion * newCriteria) {
+    
+    vector<int> resources = getResources();
+
+    for(int i = 0; i < 6; ++i){
+        if(cost[i] > resources[i]) {
+            return false;
+        }
+    }
+    for(int j = 0; j < 6; ++j){
+        resources[j] -= cost[j];
+    }
+
+    criteria.push_back(newCriteria);
+    return true;
+}
+
 
 // Print the player's completed criterions
 // void Student::printCompletions(){

@@ -1,12 +1,12 @@
 #ifndef DEVELOPMENT_H
 #define DEVELOPMENT_H
 
-//#include <map>
+#include "../player/player.h"
 #include <vector>
+//#include <map>
 
-//#include "../player/player.h"
 
-class Player;
+//class Player;
 //class Resource;
 
 
@@ -22,9 +22,10 @@ class Development {
 
     public:
         Development(int locationVal, const std::vector<int> cost);
+        virtual ~Development() = 0;
+        const std::vector<int> getCost();
         int getLocationVal();
         bool isSet();
-        virtual ~Development() = 0;
 };
 
 #endif
