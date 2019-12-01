@@ -37,7 +37,9 @@ class Player {
         virtual void steal(Player *) = 0;
         virtual void printStatus() = 0;
 
+
         // Accessors
+        string getColour();
 
         // Setters/Mutators
         //void addGoal(Goal *);
