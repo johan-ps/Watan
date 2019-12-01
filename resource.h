@@ -2,11 +2,8 @@
 #define __RESOURCE_H__
 #include <string>
 
-class Resource {
+std::string resourceType [6]= {"caffeine", "lab", "lecture", "study", "tutorial", "netflix"};
+std::string getName(int);
+int getNum(std::string);
 
-    public:
-        enum resourceType {caffeine, lab, lecture, study, tutorial, netflix};
-        std::string getName(int);
-
-};
 #endif

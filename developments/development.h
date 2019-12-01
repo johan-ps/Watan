@@ -9,16 +9,14 @@
 class Player;
 //class Resource;
 
-
 class Development {
     int locationVal;
     const std::vector<int> cost;
     Player *player;
-    //bool isSet;
+    void setOwner(Player *);
 
     protected:
         void setDevelopment(Player *);
-        void setOwner(Player *);
 
     public:
         Development(int locationVal, const std::vector<int> cost);

@@ -14,7 +14,7 @@ class Assignment : public Criterion {
         void complete(Player*);
         void notify() override;
         void improve() override;
-        void distributeResources() override;
+        void distributeResources(std::string) override;
         int getCriterionType() override;
 };
 

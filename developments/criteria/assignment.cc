@@ -1,4 +1,5 @@
 #include "assignment.h"
+#include "../../resource.h"
 
 Assignment::Assignment(int locationVal, std::vector<int> cost):
     Criterion{locationVal, cost} {}
@@ -6,7 +7,7 @@ Assignment::Assignment(int locationVal, std::vector<int> cost):
 void Assignment::complete(Player *player) {
     if(!isSet() /*AND IF THERE IS NO ADJACENT*/){
         if(player->purchase(getCost(), this)) {
-            setOwner(player);
+            setDevelopment(player);
             //alert text display of new owner/criteria type somehow
         } else {
             throw "InsufficientResourcesException";
@@ -18,7 +19,9 @@ void Assignment::complete(Player *player) {
 
 void Assignment::notify() {}
 
-void Assignment::distributeResources() {}
+void Assignment::distributeResources(std::string resource) {
+    int resourceNum = getNum(resource);
+}
 
 //Criterion type should be a field in criterion class?
 int Assignment::getCriterionType() {
