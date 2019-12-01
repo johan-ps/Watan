@@ -78,11 +78,11 @@ bool Student::purchaseGoal(std::vector<int> cost, Goal * newGoal) {
 }
 
 // Print the player's completed criterions
-// void Student::printCompletions(){
+void Student::printCompletions(){
 //     cout << colour << " has completed:" << endl;
 
 //     for (auto criterion: criteria){
 //         cout << criterion->getLocationVal << " " << criterion->getCriterionType << endl;
 //     }
-    
-// }
+
+}
