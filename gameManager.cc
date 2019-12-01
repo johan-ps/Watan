@@ -10,11 +10,11 @@ Board GameManager::getGameBoard() {
 void GameManager::startGame() {
     createBoard(19);
     createPlayers(1);
-    for (auto n : players) {
+    for (auto &n : players) {
         int loc;
         std::cout << "Student " << n->getColour() << ", where do you want to complete an Assignment?\n>";
-        std::in >> loc;
-        gameBoard->
+        std::cin >> loc;
+        gameBoard->completeCriteria(loc, n.get(), true);
     }
 }
 

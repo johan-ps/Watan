@@ -3,11 +3,12 @@
 Assignment::Assignment(int locationVal, std::vector<int> cost):
     Criterion{locationVal, cost} {}
 
-void Assignment::complete(Player *player) {
+void Assignment::complete(Player *player, bool init) {
     if(!isSet() /*AND IF THERE IS NO ADJACENT*/){
-        
-        if(player->purchase(getCost(), this)) {
-            setOwner(player);
+        if (init) {
+            setDevelopment(player);
+        } else if(player->purchase(getCost(), this)) {
+            setDevelopment(player);
             //alert text display of new owner/criteria type somehow
         } else {
             throw "InsufficientResourcesException";

@@ -5,6 +5,7 @@
 #include "dice.h"
 
 #include <string>
+#include <iostream>
 
 class Turn{
     Player* whoseTurn;

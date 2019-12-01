@@ -1,12 +1,12 @@
 #ifndef DEVELOPMENT_H
 #define DEVELOPMENT_H
 
-//#include "../player/player.h"
+#include "../player/player.h"
 #include <vector>
 //#include <map>
 
 
-class Player;
+//class Player;
 //class Resource;
 
 

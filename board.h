@@ -32,7 +32,7 @@ public:
     void notify(int diceVal);// override;
     void init(int boardSize);
     void drawBoard();
-    void completeCriteria(int loc);
+    void completeCriteria(int loc, Player *player, bool init);
 };
 
 #endif
