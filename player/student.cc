@@ -48,7 +48,7 @@ void Student::printStatus() {
     }
 }
 
-bool Student::purchase(std::vector<int> cost, Development * development) {
+bool Student::purchaseCriteria(std::vector<int> cost, Criterion * newCriterion) {
     vector<int> resources = getResources();
 
     for(int i = 0; i < 6; ++i) {
@@ -60,10 +60,26 @@ bool Student::purchase(std::vector<int> cost, Development * development) {
         resources[j] -= cost[j];
     }
 
-    //criteria.push_back(development);
+    criteria.push_back(newCriterion);
+    ++criteriaCompleted;
     return true;
 }
 
+bool Student::purchaseGoal(std::vector<int> cost, Goal * newGoal) {
+    vector<int> resources = getResources();
+
+    for(int i = 0; i < 6; ++i) {
+        if(cost[i] > resources[i]) {
+            return false;
+        }
+    }
+    for(int j = 0; j < 6; ++j){
+        resources[j] -= cost[j];
+    }
+
+    goals.push_back(newGoal);
+    return true;
+}
 
 // Print the player's completed criterions
 void Student::printCompletions(){

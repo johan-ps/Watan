@@ -1,7 +1,7 @@
 #include "player.h"
 
 Player::Player(std::string colour):
-    colour{colour} {}
+    colour{colour}, criteriaCompleted{0} {}
 
 std::vector<int> Player::getResources(){
     return resources;
