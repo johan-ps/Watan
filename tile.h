@@ -34,19 +34,21 @@ class Tile : public Subject, public Observer {
     std::string resource;
     int col;
     int row;
+    
     //Resource resource;
     //std::vector<Goal> goals;
     std::map<std::string, Criterion*> criteria;
     std::map<std::string, Tile*> neighbours;
     //Geese geese;
     //bool isOverrun;
+
     public:
-    Tile(int location, int value, std::string resource, int col, int row);
-    void notify();// override;
-    void printTile();
-    void addNeighbour(Tile *tile, std::string dir);
-    void addCriterion(Criterion *criterion, std::string dir);
-    TileInfo getInfo();
+        Tile(int location, int value, std::string resource, int col, int row);
+        void notify();// override;
+        void printTile();
+        void addNeighbour(Tile *tile, std::string dir);
+        void addCriterion(Criterion *criterion, std::string dir);
+        TileInfo getInfo();
 };
 
 #endif

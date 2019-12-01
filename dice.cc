@@ -1,11 +1,9 @@
 #include "dice.h"
 
+Dice::Dice():
+    isRandom{false}, rollVal{6} {} 
 
-dice::dice():
-    isRandom{false},
-    rollVal{6}{} 
-
-int dice::roll(){
+int Dice::roll(){
     // if (isRandom){
     //     rollVal = 6;
     // }
