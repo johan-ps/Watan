@@ -1,5 +1,5 @@
-#ifndef __CRITERIA_H__
-#define __CRITERIA_H__
+#ifndef __CRITERION_H__
+#define __CRITERION_H__
 #include "../development.h"
 #include "../../observer.h"
 

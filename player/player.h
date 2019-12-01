@@ -23,7 +23,7 @@ class Player {
     protected:
         std::vector<int> getResources();
         std::vector<Criterion*> criteria;
-        //int getCriteriaSize();
+        int getCriteriaSize();
         std::string getColour();
         //PlayerInfo getInfo();
 
