@@ -10,18 +10,29 @@ Board GameManager::getGameBoard() {
 void GameManager::startGame() {
     createBoard(19);
     createPlayers(4);
+    //initialize player criteria
     for (auto &n : players) {
         int loc;
         std::cout << "Student " << n->getColour() << ", where do you want to complete an Assignment?\n> ";
         std::cin >> loc;
         gameBoard->completeCriteria(loc, n.get(), true);
     }
-
     for (std::vector<std::unique_ptr<Player>>::reverse_iterator it = players.rbegin(); it != players.rend(); ++it) {
         int loc;
         std::cout << "Student " << it->get()->getColour() << ", where do you want to complete an Assignment?\n> ";
         std::cin >> loc;
         gameBoard->completeCriteria(loc, it->get(), true);
+    }
+    dice = new Dice{};
+    curTurn = new Turn{dice};
+    startTurns();
+}
+
+void GameManager::startTurns() {
+    while (true) {
+        for (auto &n : players) {
+            curTurn->startTurn(n.get());
+        }
     }
 }
 
