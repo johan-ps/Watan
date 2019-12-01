@@ -13,6 +13,7 @@
 //     std::string colour;
 // };
 
+//class Criterion;
 
 class Player {
     //std::vector<Goal*> goals;
