@@ -1,6 +1,6 @@
 CXX = g++
 CXXFLAGS = -std=c++14 -Wall -MMD -g -Werror=vla
-OBJECTS = main.o hexagon.o subject.o observer.o turn.o textDisplay.o board.o tile.o gameManager.o dice.o ./player/student.o ./player/player.o ./developments/goal/goal.o ./developments/goal/achievement.o ./developments/criteria/criterion.o ./developments/criteria/assignment.o ./developments/development.o
+OBJECTS = main.o hexagon.o fileManager.o subject.o observer.o turn.o textDisplay.o board.o tile.o gameManager.o dice.o ./player/student.o ./player/player.o ./developments/goal/goal.o ./developments/goal/achievement.o ./developments/criteria/criterion.o ./developments/criteria/assignment.o ./developments/development.o
 DEPENDS = ${OBJECTS:.o=.d}
 EXEC = watan
 

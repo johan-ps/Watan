@@ -12,7 +12,21 @@
 #include "gameManager.h"
 
 int main(int argc, char *argv[]) {
+
     GameManager mng;
+
+    for (int i = 1; i < argc; i += 2) {
+        if (std::string(argv[i]) == "-seed") {
+            mng.seed(std::stoi(argv[i + 1]));
+        } else if (std::string(argv[i]) == "-load") {
+            mng.load(std::string(argv[i + 1]));
+        } else if (std::string(argv[i]) == "-board") {
+            mng.board(std::string(argv[i + 1]));
+        } else {
+
+        }
+    }
+
     mng.startGame();
     mng.getGameBoard().drawBoard();
     //b.drawBoard();

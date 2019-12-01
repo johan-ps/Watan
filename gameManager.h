@@ -5,14 +5,21 @@
 #include <vector>
 #include <memory>
 #include "./player/student.h"
+#include "fileManager.h"
 #include "dice.h"
 #include "turn.h"
 
 class Turn;
 class Board;
 
+// struct GameState {
+//     Dice *dice;
+//     std::unique_ptr<Board> gameBoard;
+//     std::vector<std::unique_ptr<Player>> players;
+// }
+
 class GameManager {
-    // FileManager fileManager;
+    FileManager *fileManager;
     Dice *dice;
     Turn *curTurn;
     // Geese geese;
@@ -21,6 +28,7 @@ class GameManager {
 
 
     public:
+    GameManager();
     void startGame();
     void gameOver();
     void createPlayers(int num);
@@ -32,6 +40,9 @@ class GameManager {
     void startTurns();
     // void saveGame();
     Board getGameBoard();
+    void seed(int x);
+    void load(std::string x);
+    void board(std::string x);
     friend class Turn;
 };
 
