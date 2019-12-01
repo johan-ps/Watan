@@ -10,7 +10,7 @@ class Criterion : public Development, public Observer {
         virtual void notify() = 0;
         virtual void complete(Player *player, bool init) = 0;
         virtual void improve() = 0;
-        virtual void distributeResources() = 0;
+        virtual void distributeResources(std::string) = 0;
         virtual int getCriterionType() = 0;
 };
 
