@@ -5,8 +5,11 @@
 
 using namespace std;
 
-Student::Student(std::string colour):
-    Player{colour} {}
+Student::Student(std::string colour, std::vector<int> resources): Player{colour, resources} {}
+
+Student::Student(std::string colour, std::vector<Criterion*> criteria, 
+    std::vector<Goal*> goals, std::vector<int> resources):
+    Player{colour, criteria, goals, resources} {}
 
 
 // Trade a resource with otherPlayer
@@ -28,27 +31,23 @@ void Student::recieve(int resourceNum, int resourceAmount){
 // Should be called by either TextDisplay or main.cc (depending on implementation)
 void Student::printStatus() {
 
-    //vector<int> resources = getResources();
+    cout << getColour() << " has " << getCriteriaSize() << " course criteria, " << endl;
 
-    cout << getColour() << " has " << getCriteriaSize() << "course criteria, " << endl;
-    // cout << resources.at(resource::caffeine) << " " <<  resources."s" << endl;
-    // cout << resources.at(Resource::lab) << " labs" << endl;
-    // cout << resources.at(Resource::lecture) << " lectures" << endl;
-    // cout << resources.at(Resource::study) << " studies" << endl;
-    // cout << resources.at(Resource::tutorial) << " tutorials" << endl;
+    int last_resource = resources.size();
 
-    // cout << resources.at(Resource) << " caffeines" << endl;
-    // cout << resources.at(1) << " labs" << endl;
-    // cout << resources.at(2) << " lectures" << endl;
-    // cout << resources.at(3) << " studies" << endl;
-    // cout << resources.at(4) << " tutorials" << endl;
+    for (int i = 0; i < last_resource; ++i){
+        cout << resources.at(i) << " ";
 
-    // for (auto resource: ResourceType){
-    //     cout << resources.at(resource) << " " << getResourceName(resource) << "s" << endl;
-    // }
+        if ( i == 3){
+            cout << "studies," << endl;
+        }
+        else if (i < last_resource - 1){
+            cout << getResourceName(i) << "s, " << endl;
+        }
+        else{
+            cout << getResourceName(i) << "s." << endl;
+        }
 
-    for (int resource = 0; resource < 6; ++resource){
-        cout << resources.at(resource) << " " << getResourceName(resource) << "s" << endl;
     }
 }
 
@@ -88,11 +87,11 @@ bool Student::purchaseGoal(std::vector<int> cost, Goal * newGoal) {
 
 
 // Print the player's completed criterions
-//void Student::printCompletions(){
-//     cout << colour << " has completed:" << endl;
+void Student::printCompletions(){
+    cout << getColour() << " has completed:" << endl;
 
 //     for (auto criterion: criteria){
 //         cout << criterion->getLocationVal << " " << criterion->getCriterionType << endl;
 //     }
 
-//}
+}
