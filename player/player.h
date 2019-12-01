@@ -4,7 +4,7 @@
 #include <vector>
 #include <string>
 
-//#include "../resource.h"
+#include "../resource.h"
 //#include "../developments/criteria/criterion.h"
 
 // struct PlayerInfo {

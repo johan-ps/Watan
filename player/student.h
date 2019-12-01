@@ -12,6 +12,7 @@ class Student : public Player {
     void steal(Player *) override;
     void trade(Player *, std::string resource) override;
     void printStatus() override;
+    void printCompletions() override;
     bool purchaseCriteria(std::vector<int>, Criterion *) override;
     bool purchaseGoal(std::vector<int>, Goal *) override;
 };

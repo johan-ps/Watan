@@ -43,7 +43,7 @@ void Student::printStatus() {
     //     cout << resources.at(resource) << " " << getResourceName(resource) << "s" << endl;
     // }
 
-    for (int i = 0; i < 6; ++i){
+    for (int resource = 0; resource < 6; ++resource){
         cout << resources.at(resource) << " " << getResourceName(resource) << "s" << endl;
     }
 }
@@ -81,6 +81,8 @@ bool Student::purchaseGoal(std::vector<int> cost, Goal * newGoal) {
     return true;
 }
 
+
+
 // Print the player's completed criterions
 void Student::printCompletions(){
 //     cout << colour << " has completed:" << endl;
@@ -88,5 +90,4 @@ void Student::printCompletions(){
 //     for (auto criterion: criteria){
 //         cout << criterion->getLocationVal << " " << criterion->getCriterionType << endl;
 //     }
-
 }
