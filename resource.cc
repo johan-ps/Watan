@@ -13,6 +13,7 @@ int getResourceNum(std::string name){
         if(resourceNames[i] == name) {
             return i;
         }
+    }
     
     return -1; // THROW AN EXCEPTION
 }
