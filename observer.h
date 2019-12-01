@@ -4,7 +4,7 @@
 class Observer {
     public:
     //virtual void notify(int diceVal = 0) = 0;
-    virtual ~Observer();
+        virtual ~Observer() = 0;
 };
 
 #endif

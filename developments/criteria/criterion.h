@@ -1,5 +1,5 @@
-#ifndef __CRITERIA_H__
-#define __CRITERIA_H__
+#ifndef __CRITERION_H__
+#define __CRITERION_H__
 #include "../development.h"
 #include "../../observer.h"
 
@@ -10,7 +10,6 @@ class Criterion : public Development, public Observer {
         virtual void improve() = 0;
         virtual void distributeResources() = 0;
         virtual int getCriterionType() = 0;
-        virtual ~Criterion();
 };
 
 #endif

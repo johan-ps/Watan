@@ -36,6 +36,7 @@ class Tile : public Subject, public Observer {
     std::string resource;
     int col;
     int row;
+    
     //Resource resource;
     //std::vector<Goal> goals;
     std::map<std::string, Criterion*> criteria;
@@ -43,6 +44,7 @@ class Tile : public Subject, public Observer {
     std::map<std::string, Tile*> neighbours;
     //Geese geese;
     //bool isOverrun;
+
     public:
     Tile(int location, int value, std::string resource, int col, int row);
     void notify();// override;

@@ -13,17 +13,17 @@
 //     std::string colour;
 // };
 
+//class Criterion;
 
 class Player {
-    std::vector<int> resources;
     //std::vector<Goal*> goals;
-    std::vector<Criterion*> criteria;
+    std::vector<int> resources;
     //Dice* dice;
-    //int resourceCount;
     std::string colour;
 
     protected:
         std::vector<int> getResources();
+        std::vector<Criterion*> criteria;
         int getCriteriaSize();
         std::string getColour();
         //PlayerInfo getInfo();
@@ -33,9 +33,12 @@ class Player {
         Player(std::string colour);
 
         // Public Methods
-        virtual void trade(Player *, Resource) = 0;
         virtual void steal(Player *) = 0;
+        virtual void trade(Player *, Resource) = 0;
         virtual void printStatus() = 0;
+        //Should possibly change to devlopment pointer or add a purchaseGoal method
+        virtual bool purchase(std::vector<int>, Criterion *) = 0;
+
 
         // Accessors
 
