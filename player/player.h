@@ -36,7 +36,8 @@ class Player {
         virtual void steal(Player *) = 0;
         virtual void trade(Player *, Resource) = 0;
         virtual void printStatus() = 0;
-        //Should possibly change to devlopment pointer or add a purchaseGoal method
+
+        //Should possibly change to development pointer or add a purchaseGoal method
         virtual bool purchase(std::vector<int>, Criterion *) = 0;
 
 

@@ -5,6 +5,7 @@ Assignment::Assignment(int locationVal, std::vector<int> cost):
 
 void Assignment::complete(Player *player) {
     if(!isSet() /*AND IF THERE IS NO ADJACENT*/){
+        
         if(player->purchase(getCost(), this)) {
             setOwner(player);
             //alert text display of new owner/criteria type somehow
