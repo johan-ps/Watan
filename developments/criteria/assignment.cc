@@ -23,9 +23,9 @@ void Assignment::notify() {}
 
 void Assignment::distributeResources(std::string resource) {
     Player * owner = getOwner();
-    if(owner){
+    if(owner) {
         int resourceNum = getResourceNum(resource);
-        owner->recieve(resourceNum, getCriteriaVal())
+        owner->recieve(resourceNum, getCriteriaVal());
     }
 }
 
