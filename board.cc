@@ -156,15 +156,151 @@ void Board::initCriteria() {
 }
 
 void Board::initGoals() {
+    int width[9] = {1, 2, 3, 2, 3, 2, 3, 2, 1};
+    std::string dir[6] = {"N", "NW", "NE", "SW", "SE", "S"};
+    int tileCount = 0, goalCount = 0;
+
     for (int i = 0; i < 72; i++) {
         goals.emplace_back(new Achievement{i});
     }
 
-    for (int i = 0; i < 1; i++) {
-        
+    for (int i = 0; i < 3; i++) {
+        for (int j = 0; j < width[i]; j++) {
+            tiles.at(tileCount + j)->addGoal(goals.at(goalCount), dir[0]);
+            goalCount++;
+        }
+        for (int j = 0; j < width[i]; j++) {
+            tiles.at(tileCount + j)->addGoal(goals.at(goalCount), dir[1]);
+            goalCount++;
+            tiles.at(tileCount + j)->addGoal(goals.at(goalCount), dir[2]);
+            goalCount++;
+        }
+        tileCount += width[i];
     }
-}
+    tiles.at(tileCount)->addGoal(goals.at(goalCount++), dir[0]);
+    tiles.at(tileCount + 1)->addGoal(goals.at(goalCount++), dir[0]);
+    tileCount -= width[2];
+    for (int i = 2; i < 3; i++) {
+        for (int j = 0; j < width[i]; j++) {
+            tiles.at(tileCount + j)->addGoal(goals.at(goalCount), dir[3]);
+            goalCount++;
+            tiles.at(tileCount + j)->addGoal(goals.at(goalCount), dir[4]);
+            goalCount++;
+        }
+        for (int j = 0; j < width[i]; j++) {
+            tiles.at(tileCount + j)->addGoal(goals.at(goalCount), dir[5]);
+            goalCount++;
+        }
+        tileCount += width[i];
+    }
+    tileCount += 2;
+    for (int i = 4; i < 5; i++) {
+        for (int j = 0; j < width[i]; j++) {
+            tiles.at(tileCount + j)->addGoal(goals.at(goalCount), dir[1]);
+            goalCount++;
+            tiles.at(tileCount + j)->addGoal(goals.at(goalCount), dir[2]);
+            goalCount++;
+        }
+        tileCount += width[i];
+    }
+    tiles.at(tileCount)->addGoal(goals.at(goalCount++), dir[0]);
+    tiles.at(tileCount + 1)->addGoal(goals.at(goalCount++), dir[0]);
+    tileCount -= width[4];
+    for (int i = 4; i < 5; i++) {
+        for (int j = 0; j < width[i]; j++) {
+            tiles.at(tileCount + j)->addGoal(goals.at(goalCount), dir[3]);
+            goalCount++;
+            tiles.at(tileCount + j)->addGoal(goals.at(goalCount), dir[4]);
+            goalCount++;
+        }
+        for (int j = 0; j < width[i]; j++) {
+            tiles.at(tileCount + j)->addGoal(goals.at(goalCount), dir[5]);
+            goalCount++;
+        }
+        tileCount += width[i];
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////
+    tileCount += 2;
+    for (int i = 6; i < 7; i++) {
+        for (int j = 0; j < width[i]; j++) {
+            tiles.at(tileCount + j)->addGoal(goals.at(goalCount), dir[1]);
+            goalCount++;
+            tiles.at(tileCount + j)->addGoal(goals.at(goalCount), dir[2]);
+            goalCount++;
+        }
+        tileCount += width[i];
+    }
+    tiles.at(tileCount)->addGoal(goals.at(goalCount++), dir[0]);
+    tiles.at(tileCount + 1)->addGoal(goals.at(goalCount++), dir[0]);
+    tileCount -= width[4];
+    for (int i = 6; i < 7; i++) {
+        for (int j = 0; j < width[i]; j++) {
+            tiles.at(tileCount + j)->addGoal(goals.at(goalCount), dir[3]);
+            goalCount++;
+            tiles.at(tileCount + j)->addGoal(goals.at(goalCount), dir[4]);
+            goalCount++;
+        }
+        for (int j = 0; j < width[i]; j++) {
+            tiles.at(tileCount + j)->addGoal(goals.at(goalCount), dir[5]);
+            goalCount++;
+        }
+        tileCount += width[i];
+    }
+    ////////////////////////////////////////////////////////////////////////////////////
+    for (int i = 7; i < 8; i++) {
+        for (int j = 0; j < width[i]; j++) {
+            tiles.at(tileCount + j)->addGoal(goals.at(goalCount), dir[3]);
+            goalCount++;
+            tiles.at(tileCount + j)->addGoal(goals.at(goalCount), dir[4]);
+            goalCount++;
+        }
+        for (int j = 0; j < width[i]; j++) {
+            tiles.at(tileCount + j)->addGoal(goals.at(goalCount), dir[5]);
+            goalCount++;
+        }
+        tileCount += width[i];
+    }
+    for (int i = 8; i < 9; i++) {
+        for (int j = 0; j < width[i]; j++) {
+            tiles.at(tileCount + j)->addGoal(goals.at(goalCount), dir[3]);
+            goalCount++;
+            tiles.at(tileCount + j)->addGoal(goals.at(goalCount), dir[4]);
+            goalCount++;
+        }
+        for (int j = 0; j < width[i]; j++) {
+            tiles.at(tileCount + j)->addGoal(goals.at(goalCount), dir[5]);
+            goalCount++;
+        }
+        tileCount += width[i];
+    }
+    ////////////////////////////////////////////////////////////////////////////////////////
+    //assign to neighbours
+    for (int i = 0; i < 19; i++) {
+        for (int j = 0; j < 6; j++) {
+            std::string direction;
+            Goal *goalTemp;
+            try {
+                direction = dir[j]; //direction of the goal from the current tile
+                goalTemp = tiles.at(i)->getInfo().goals.at(direction); //pointer to the goal at direction <direction>
+                try {
+                    Tile *tileTemp = tiles.at(i)->getInfo().neighbours.at(direction); //possible neighbour tile
+                    std::map<std::string, Goal*> goalMap = tileTemp->getInfo().goals;
+                    std::string tileDir = findNeighbourByGoal(direction);
+                    std::map<std::string, Goal*>::iterator it;
+                    it = goalMap.find(tileDir);
+                    if (it == goalMap.end()) {
+                        tileTemp->addGoal(goalTemp, tileDir);
+                    }
+                } catch (std::out_of_range) {
+                    //do nothing
+                }
+            } catch (std::out_of_range) {
+                //do nothing
+            }
+        }
+    }
 
+}
 
 //initialize board
 void Board::init(int boardSize) {
@@ -242,9 +378,26 @@ std::string *Board::findNeighbourByCriteria(std::string criterionDir) {
     return tileDir;
 }
 
-void Board::drawBoard() {
-    for (int i = 0; i < 1; i++) {
-        tiles.at(i)->printTile();
+std::string Board::findNeighbourByGoal(std::string goalDir) {
+    //std::string dir[6] = {"N", "NW", "NE", "SW", "SE", "S"};
+    if (goalDir == "N") {
+        return "S";
+    } else if (goalDir == "NW") {
+        return "SE";
+    } else if (goalDir == "NE") {
+        return "SW";
+    } else if (goalDir == "SW") {
+        return "NE";
+    } else if (goalDir == "SE") {
+        return "NW";
+    } else {
+        return "N";
     }
-    //td->drawBoard();
+}
+
+void Board::drawBoard() {
+    // for (int i = 0; i < 19; i++) {
+    //     tiles.at(i)->printTile();
+    // }
+    td->drawBoard();
 }

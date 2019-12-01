@@ -14,6 +14,7 @@ class Hexagon {
     //          "8 spaces", "9 spaces", "10 spaces", "11 spaces"}
     std::string space[12] = {"", " ", "  ", "   ", "    ", "     ", "      ", "       ", "        ", "         ", "          ", "           "};
     std::vector<std::string> criteria;
+    std::vector<std::string> goals;
     //calculate the remaining spaces after resources is printed
     std::string resource = "CAFFEINE";
     std::string resourceSpace = "";
@@ -24,7 +25,7 @@ class Hexagon {
     std::string hex[3];
 
     public:
-    Hexagon(std::string resource, std::vector<std::string> criteria);
+    Hexagon(std::string resource, std::vector<std::string> criteria, std::vector<std::string> goals);
     std::string getTab(int index);
     std::string getSpace(int index);
     std::string format(int x);
