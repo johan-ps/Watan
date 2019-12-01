@@ -9,10 +9,10 @@ std::string getResourceName(int num) {
 
 int getResourceNum(std::string name){
     name[0] = std::tolower(name[0]);
-    // for(int i = 0; i < 6; ++i){
-    //     if(resourceNames[i] == name) {
-    //         return i;
-    //     }
+    for(int i = 0; i < 6; ++i){
+        if(resourceNames[i] == name) {
+            return i;
+        }
     
     return -1; // THROW AN EXCEPTION
 }
