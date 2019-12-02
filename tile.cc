@@ -35,6 +35,7 @@ void Tile::printTile() {
     //     }
     //     std::cout << std::endl;
     // }
+    
     std::string dir3[6] = {"N", "NW", "NE", "SW", "SE", "S"};
     for (int i = 0; i < 6; i++) {
         try {
@@ -62,6 +63,16 @@ void Tile::addCriterion(Criterion *criterion, std::string dir) {
 void Tile::addGoal(Goal *goal, std::string dir) {
     goals[dir] = goal;
 }
+
+void checkAdjCriteria(int locationVal){
+    for(int i = 0; i < 6; ++i){
+        if(locationVal == /* Location */){
+            int spot = i;
+            
+        }
+    }
+}
+
 
 TileInfo Tile::getInfo() {
     return {

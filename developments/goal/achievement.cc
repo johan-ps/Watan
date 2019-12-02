@@ -7,7 +7,7 @@ Achievement::Achievement(int locationVal, std::vector<int> cost):
 
 void Achievement::achieve(Player *player){
 
-    if(!isSet() /*AND IF THERE IS NO ADJACENT*/){
+    if(!isSet() /*AND IF THERE IS AN ADJACENT*/){
         
         if(player->purchaseGoal(getCost(), this)) {
             setDevelopment(player, 0);
