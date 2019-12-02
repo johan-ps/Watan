@@ -40,15 +40,22 @@ std::string findDir(int colA, int rowA, int colB, int rowB) {
 //notify appropriate tiles with the given dice value
 void Board::notify(int diceVal) {
     std::cout << "Notify board with dice value " << diceVal << std::endl;
-    // for (auto &n : tiles) {
-    //     if (n->getInfo().value == diceVal) {
-
-    //     }
-    // }
+    for (auto &n : tiles) {
+        if (n->getInfo().value == diceVal) {
+            n->notify();
+        }
+    }
 }
 
 void Board::initTiles() {
     int values[19] = {3, 10, 5, 4, 0, 10, 11, 3, 8, 2, 6, 8, 12, 5, 11, 4, 6, 9, 9};
+    // int values[19];
+    
+
+    // for (int i = 0; i < 19; i++) {
+    //     values[0] = std::rand() %
+    // }
+
     int counter = 0, width[9] = {1, 2, 3, 2, 3, 2, 3, 2, 1};
 
     //fill board with tiles

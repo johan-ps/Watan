@@ -94,8 +94,8 @@ bool Student::purchaseGoal(std::vector<int> cost, Goal * newGoal) {
 void Student::printCompletions(){
     cout << getColour() << " has completed:" << endl;
 
-//     for (auto criterion: criteria){
-//         cout << criterion->getLocationVal << " " << criterion->getCriterionType << endl;
-//     }
+    // for (auto criterion: criteria){
+    //     cout << criterion->getLocationVal << " " << criterion->getCriterionType << endl;
+    // }
 
 }

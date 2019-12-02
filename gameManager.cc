@@ -1,10 +1,28 @@
 #include "gameManager.h"
 #include "board.h"
 
-#include "iostream"
-#include "string"
+#include <iostream>
+
+GameManager::GameManager():
+    fileManager{new FileManager{}} {}
+
 Board GameManager::getGameBoard() {
     return *gameBoard;
+}
+
+void GameManager::seed(int x) {
+    //std::cout << "Set seed to " << x << std::endl;
+    dice->setSeed(x);
+}
+
+void GameManager::load(std::string x) {
+    //std::cout << "Load saved game from file: " << x << std::endl;
+    fileManager->readGameFromFile(x);
+}
+
+void GameManager::board(std::string x) {
+    //std::cout << "Load board from file: " << x << std::endl;
+    fileManager->readBoardFromFile(x);
 }
 
 void GameManager::startGame() {

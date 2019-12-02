@@ -6,7 +6,9 @@ Tile::Tile(int location, int value, std::string resource, int col, int row):
 
 void Tile::notify() {
     for (auto &n : criteria) {
-        n.second->notify();
+        if (n.second->getOwner()) {
+            n.second->distributeResources(resource);
+        }
     }
 }
 
