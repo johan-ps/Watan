@@ -51,18 +51,21 @@ void Student::printStatus() {
     }
 }
 
-bool Student::purchaseCriteria(std::vector<int> cost, Criterion * newCriterion) {
+bool Student::purchaseCriteria(std::vector<int> cost, Criterion * newCriterion, bool improving) {
 
-    for(int i = 0; i < 6; ++i) {
+    for(int i = 0; i < 5; ++i) {
         if(cost[i] > resources[i]) {
             return false;
         }
     }
-    for(int j = 0; j < 6; ++j){
+    for(int j = 0; j < 5; ++j){
         resources[j] -= cost[j];
     }
 
-    criteria.push_back(newCriterion);
+    if(!improving) {
+        criteria.push_back(newCriterion);
+    }
+
     ++criteriaCompleted;
     if(criteriaCompleted >= 10){
         //end the game somehow
@@ -72,12 +75,12 @@ bool Student::purchaseCriteria(std::vector<int> cost, Criterion * newCriterion) 
 
 bool Student::purchaseGoal(std::vector<int> cost, Goal * newGoal) {
 
-    for(int i = 0; i < 6; ++i) {
+    for(int i = 0; i < 5; ++i) {
         if(cost[i] > resources[i]) {
             return false;
         }
     }
-    for(int j = 0; j < 6; ++j){
+    for(int j = 0; j < 5; ++j){
         resources[j] -= cost[j];
     }
 

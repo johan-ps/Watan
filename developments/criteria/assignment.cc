@@ -9,7 +9,7 @@ void Assignment::complete(Player *player, bool init) {
     if(!isSet() /*AND IF THERE IS NO ADJACENT*/){
         if (init) {
             setDevelopment(player, 1);
-        } else if(player->purchaseCriteria(getCost(), this)) {
+        } else if(player->purchaseCriteria(getCost(), this, false)) {
             setDevelopment(player, 1);
             //alert text display of new owner/criteria type somehow
         } else {
@@ -31,5 +31,21 @@ void Assignment::distributeResources(std::string resource) {
 }
 
 
-//Exam and Midterm should be decorator classes when implemented
-void Assignment::improve() {}
+void Assignment::improve(Player* player) {
+    std::vector<int> upgradeCost;
+    int currentVal = getCriteriaVal();
+
+    if(currentVal == 1){
+        upgradeCost = { 0, 0, 2, 3, 0};
+    } else if (currentVal == 2){
+        upgradeCost = { 3, 2, 2, 2, 1};
+    } else {
+        throw "CriteriaCannotBeImprovedException";
+    }
+    setCriteriaVal(++currentVal);
+    if(player->purchaseCriteria(upgradeCost, this, true)){
+        setCriteriaVal(++currentVal);
+    } else {
+        throw "NotEnoughResourcesToImproveException";
+    }
+}

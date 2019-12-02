@@ -419,3 +419,19 @@ void Board::completeCriteria(int loc, Player *player, bool init) {
     std::string playerAssignment = player->getColour().substr(0, 1) + 'A';
     td->notify(loc, 'c', playerAssignment);
 }
+
+void Board::improveCriteria(int loc, Player *player) {
+    try {
+        criteria.at(loc)->improve(player);
+    } catch (std::string) {
+        return;
+    }
+    char criteriaType = 'A';
+    if (criteria.at(loc)->getCriteriaVal() == 2) {
+        criteriaType = 'M';
+    } else {
+        criteriaType = 'E';
+    }
+    std::string playerAssignment = player->getColour().substr(0, 1) + criteriaType;
+    td->notify(loc, 'c', playerAssignment);
+}

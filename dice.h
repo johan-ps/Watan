@@ -7,11 +7,13 @@
 
 class Dice {
     bool isRandom;
+    bool isSeed;
     Board *board;
     int rollVal;
 
     public:
-        Dice(Board *board);
+        Dice();
+        void setBoard(Board *board);
         void roll();
         void setLoadVal(int rollChoice);
         void setDice(bool isRand);

@@ -34,7 +34,7 @@ class Player {
         virtual void printCompletions() = 0;
 
         //Should possibly change to development pointer or add a purchaseGoal method
-        virtual bool purchaseCriteria(std::vector<int>, Criterion *) = 0;
+        virtual bool purchaseCriteria(std::vector<int>, Criterion *, bool) = 0;
         virtual bool purchaseGoal(std::vector<int>, Goal *) = 0;
         
         // Accessors
