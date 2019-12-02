@@ -3,6 +3,8 @@
 #include <sstream>
 #include <memory>
 
+class GameState;
+
 FileManager::FileManager() {
 
 }
@@ -11,7 +13,7 @@ void FileManager::writeToFile(std::string file) {
 
 }
 
-void FileManager::readBoardFromFile(std::string fileName) {
+void FileManager::readBoardFromFile(std::string fileName, GameState &gameState) {
     std::ifstream file {fileName};
     //std::cout << "Load board from file 2: " << file << std::endl;
 
@@ -55,11 +57,12 @@ void FileManager::readBoardFromFile(std::string fileName) {
             }
         }
     }
+    //
 
 }
 
 
-void FileManager::readGameFromFile(std::string fileName) {
+void FileManager::readGameFromFile(std::string fileName, GameState &gameState) {
     std::ifstream fin {fileName};
     //std::cout << "Load saved game from file 2: " << file << std::endl;
     int curTurn;
@@ -123,7 +126,7 @@ void FileManager::readGameFromFile(std::string fileName) {
             }
         }
 
-        players.emplace_back(new Student{colour[i]});
+        gameState.players.emplace_back(new Student{colour[i], criteria, goals, {numCaffeines, numLabs, numLectures, numStudies, numTutorials}});        
     }
 
     //Board *board;

@@ -19,13 +19,21 @@ struct GameState {
 
 }
 
+struct GameState {
+    int curTurn;
+    std::vector<std::unique_ptr<Player>> players;
+    std::vector<int> values;
+    std::vector<int> resourceTypes;
+}
+
 class GameManager {
+    GameState *gameState;
     FileManager *fileManager;
     Dice *dice;
-    Turn *curTurn;
+    Turn *turns;
     // Geese geese;
     std::unique_ptr<Board> gameBoard;
-    std::vector<std::unique_ptr<Player>> players;
+    //std::vector<std::unique_ptr<Player>> players;
 
 
     public:

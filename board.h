@@ -17,6 +17,7 @@ class Board : public Subject, public Observer {
     std::vector<Tile*> tiles;
     std::vector<Criterion*> criteria;
     std::vector<Goal*> goals;
+    std::vector<int> values;
     //std::vector<std::vector<Criterion *>> criteria;
     TextDisplay *td = nullptr;
     int tileCount;
@@ -36,6 +37,7 @@ public:
     void drawBoard();
     void completeCriteria(int loc, Player *player, bool init);
     void improveCriteria(int loc, Player *player, bool init);
+    void initValues();
 };
 
 #endif
