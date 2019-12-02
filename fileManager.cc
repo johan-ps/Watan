@@ -1,6 +1,7 @@
 #include "fileManager.h"
 #include <iostream>
 #include <sstream>
+#include <memory>
 
 FileManager::FileManager() {
 
@@ -10,13 +11,54 @@ void FileManager::writeToFile(std::string file) {
 
 }
 
-void FileManager::readBoardFromFile(std::string file) {
-    std::ifstream fileName {file};
+void FileManager::readBoardFromFile(std::string fileName) {
+    std::ifstream file {fileName};
     //std::cout << "Load board from file 2: " << file << std::endl;
+
+    std::string boardData;
+    getline(file, boardData);
+    std::istringstream sin {boardData};
+
+    int boardSize = 19;
+    Board *gameBoard = std::make_unique<Board>();
+
+    while (true){
+        int resourceType = -1;
+        if (sin >> resourceType) {
+            int tileValue = -1;
+
+            if (sin >> tileValue){
+                // Now we have the resourceType and tileValue for the next tile in board
+            }
+            else {
+                if (sin.eof()) {
+                    break;
+                }
+                else if (sin.fail()) {
+                    sin.clear();
+                    sin.ignore();
+                    break;
+                }
+            }
+
+        } 
+        else {
+            if (sin.eof()) {
+                break;
+            } 
+            else if (sin.fail()) {
+                sin.clear();
+                sin.ignore();
+                break;
+            }
+        }
+    }
+
 }
 
-void FileManager::readGameFromFile(std::string file) {
-    std::ifstream fin {file};
+
+void FileManager::readGameFromFile(std::string fileName) {
+    std::ifstream fin {fileName};
     //std::cout << "Load saved game from file 2: " << file << std::endl;
     int curTurn;
     fin >> curTurn;
@@ -84,11 +126,13 @@ void FileManager::readGameFromFile(std::string file) {
 
     //Board *board;
 
+    // read in geese
+
 // <curTurn>
 // <student0Data> : <numCaffeines> <numLabs> <numLectures> <numStudies> <numTutorials> g <goals> c <criteria>
 // <student1Data>
 // <student2Data>
 // <student3Data>
-// <board>
+// <board> : 0 3 1 10 3 5 1 4 5 7 3 10 2 11 0 3 3 8 0 2 0 6 1 8 4 12 1 5 4 11 2 4 4 6 2 9 2 9
 // <geese>
 }
