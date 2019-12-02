@@ -4,7 +4,7 @@
 #include <iostream>
 
 GameManager::GameManager():
-    fileManager{new FileManager{}} {}
+    fileManager{new FileManager{}}, dice{new Dice{}} {}
 
 Board GameManager::getGameBoard() {
     return *gameBoard;
@@ -41,7 +41,7 @@ void GameManager::startGame() {
         std::cin >> loc;
         gameBoard->completeCriteria(loc, it->get(), true);
     }
-    dice = new Dice{gameBoard.get()};
+    dice->setBoard(gameBoard.get());
     curTurn = new Turn{this};
     startTurns();
 }
@@ -52,6 +52,8 @@ void GameManager::startTurns() {
             curTurn->startTurn(n.get());
         }
     }
+    // players.at(1)->recieve(0, 1);
+    // players.at(1)->printStatus();
 }
 
 void GameManager::gameOver() { // MAYBE PASS IN " Player *winner " as parameter?
@@ -68,9 +70,10 @@ void GameManager::createBoard(int boardSize) {
 }
 
 void GameManager::createPlayers(int num) {
+    std::vector<int> resources = {2, 1, 0, 2, 1, 0};
     std::string playerColours[4] = {"Blue", "Red", "Orange", "Yellow"};
     for (int i = 0; i < num; i++) {
-        players.emplace_back(new Student{playerColours[i]});
+        players.emplace_back(new Student{playerColours[i], resources});
     }
 }
 

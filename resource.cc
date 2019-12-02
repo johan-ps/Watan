@@ -8,7 +8,9 @@ std::string getResourceName(int num) {
 }
 
 int getResourceNum(std::string name){
-    name[0] = std::tolower(name[0]);
+    for (unsigned int i = 0; i < name.length(); i++) {
+        name[i] = std::tolower(name[i]);
+    }
     for(int i = 0; i < 6; ++i){
         if(resourceNames[i] == name) {
             return i;
