@@ -39,6 +39,7 @@ class Player {
         
         // Accessors
         std::string getColour();
+        int getCompleted();
 
         // Setters/Mutators
 
