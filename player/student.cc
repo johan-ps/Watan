@@ -51,7 +51,7 @@ void Student::printStatus() {
     }
 }
 
-bool Student::purchaseCriteria(std::vector<int> cost, Criterion * newCriterion) {
+bool Student::purchaseCriteria(std::vector<int> cost, Criterion * newCriterion, bool improving) {
 
     for(int i = 0; i < 5; ++i) {
         if(cost[i] > resources[i]) {
@@ -62,7 +62,10 @@ bool Student::purchaseCriteria(std::vector<int> cost, Criterion * newCriterion) 
         resources[j] -= cost[j];
     }
 
-    criteria.push_back(newCriterion);
+    if(!improving) {
+        criteria.push_back(newCriterion);
+    }
+
     ++criteriaCompleted;
     if(criteriaCompleted >= 10){
         //end the game somehow

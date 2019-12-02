@@ -7,13 +7,12 @@
 #include <vector>
 
 class Assignment : public Criterion {
-    //const std::vector<int> cost = { 1, 1, 1, 0, 1};
 
     public:
         Assignment(int location, std::vector<int> cost = {1, 1, 1, 0, 1});
         void complete(Player* player, bool init) override;
         void notify() override;
-        void improve() override;
+        void improve(Player* player) override;
         void distributeResources(std::string) override;
 };
 

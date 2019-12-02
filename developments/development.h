@@ -15,7 +15,7 @@ class Development {
     const std::vector<int> cost;
     Player *player;
 
-    void setOwner(Player *, int);
+    void setOwner(Player *);
 
     protected:
         void setDevelopment(Player *, int);
@@ -26,6 +26,7 @@ class Development {
         const std::vector<int> getCost();
         int getLocationVal();
         int getCriteriaVal();
+        void setCriteriaVal(int);
         bool isSet();
         Player * getOwner();
 };
