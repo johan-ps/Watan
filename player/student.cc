@@ -3,6 +3,8 @@
 #include <vector>
 #include <iostream>
 
+#include "../developments/criteria/criterion.h"
+
 using namespace std;
 
 Student::Student(std::string colour, std::vector<int> resources): Player{colour, resources} {}
@@ -94,8 +96,8 @@ bool Student::purchaseGoal(std::vector<int> cost, Goal * newGoal) {
 void Student::printCompletions(){
     cout << getColour() << " has completed:" << endl;
 
-    // for (auto criterion: criteria){
-    //     cout << criterion->getLocationVal << " " << criterion->getCriterionType << endl;
-    // }
+    for (auto criterion: criteria){
+        cout << criterion->getLocationVal() << " " << criterion->getCriteriaVal() << endl;
+    }
 
 }
