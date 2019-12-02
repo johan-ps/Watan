@@ -65,10 +65,14 @@ std::string GameManager::startTurns() {
     while (true) {
         for (auto &player : gameState->players) {
             turns->startTurn(player.get());
+            std::cout << "DEBUG: Next Player's Turn" << std::endl;
 
             // CHANGE THIS (and anything else after in the call chain) 
             // TO WORK WITH AN EXCEPTION THAT WE THROW, IF APPLICABLE
-            if (player->getCompleted() == 10){ 
+
+            //std::cout << "DEBUG: RIGHT BEFORE IF STATEMENT" << std::endl;
+            if (player->getCompleted() >= 10){ 
+                //std::cout << "ENTERED IF STATEMENT" << std::endl;
                 std::string response = gameOver();
                 return response;
             }
@@ -82,7 +86,7 @@ std::string GameManager::startTurns() {
 std::string GameManager::gameOver() { // MAYBE PASS IN " Player *winner " as parameter?
     //end game
     std::string response;
-    std::cout << "Would you like to play again?" << std::endl;
+    std::cout << "Would you like to play again? \n>" << std::endl; // TODO - CHANGE "\n>"" TO SOMETHING BETTER
     std::cin >> response;
     return response;
 }
