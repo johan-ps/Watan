@@ -17,15 +17,16 @@ void GameManager::seed(int x) {
 
 void GameManager::load(std::string x) {
     //std::cout << "Load saved game from file: " << x << std::endl;
-    fileManager->readGameFromFile(x);
+    fileManager->readGameFromFile(x, gameState);
 }
 
 void GameManager::board(std::string x) {
     //std::cout << "Load board from file: " << x << std::endl;
-    fileManager->readBoardFromFile(x);
+    fileManager->readBoardFromFile(x, gameState);
 }
 
 void GameManager::startGame() {
+    gameBoard->initValues()
     createBoard(19);
     createPlayers(4);
     //initialize player criteria
@@ -42,14 +43,14 @@ void GameManager::startGame() {
         gameBoard->completeCriteria(loc, it->get(), true);
     }
     dice->setBoard(gameBoard.get());
-    curTurn = new Turn{this};
+    turns = new Turn{this};
     startTurns();
 }
 
 void GameManager::startTurns() {
     while (true) {
         for (auto &n : players) {
-            curTurn->startTurn(n.get());
+            turns->startTurn(n.get());
         }
     }
     // players.at(1)->recieve(0, 1);
