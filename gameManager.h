@@ -8,6 +8,7 @@
 #include "fileManager.h"
 #include "dice.h"
 #include "turn.h"
+#include "gameState.h"
 
 class Turn;
 class Board;
@@ -17,13 +18,6 @@ class Board;
 //     std::unique_ptr<Board> gameBoard;
 //     std::vector<std::unique_ptr<Player>> players;
 // }
-
-struct GameState {
-    int curTurn;
-    std::vector<std::unique_ptr<Player>> players;
-    std::vector<int> values;
-    std::vector<int> resourceTypes;
-}
 
 class GameManager {
     GameState *gameState;
