@@ -44,8 +44,8 @@ void GameManager::startGame() {
         gameBoard->completeCriteria(loc, it->get(), true);
     }
     dice->setBoard(gameBoard.get());
-    // turns = new Turn{this};
-    // startTurns();
+    turns = new Turn{this};
+    startTurns();
 }
 
 void GameManager::startTurns() {

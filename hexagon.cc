@@ -126,7 +126,6 @@ std::string Hexagon::getHex(int x) {
         if (locCount < 18) {
             locCount++;
         }
-        std::cerr << temp << " : " << locCount << std::endl;
         setHexagon(iteratorC, iteratorG);
         setHex(iteratorC, iteratorG);
     } else if (x == 1) {
