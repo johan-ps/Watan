@@ -27,6 +27,8 @@ void FileManager::readBoardFromFile(std::string fileName) {
         if (sin >> resourceType) {
             int tileValue = -1;
 
+            // Add in tileValue to next tile in GameState
+            
             if (sin >> tileValue){
                 // Now we have the resourceType and tileValue for the next tile in board
             }

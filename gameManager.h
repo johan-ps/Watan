@@ -12,11 +12,12 @@
 class Turn;
 class Board;
 
-// struct GameState {
-//     Dice *dice;
-//     std::unique_ptr<Board> gameBoard;
-//     std::vector<std::unique_ptr<Player>> players;
-// }
+struct GameState {
+    std::vector<std::unique_ptr<Player>> players;
+    std::vector<int> values;
+    std::vector<int> resourceTypes;
+
+}
 
 class GameManager {
     FileManager *fileManager;
