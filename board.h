@@ -33,11 +33,12 @@ class Board : public Subject, public Observer {
 
 public:
     void notify(int diceVal);// override;
+    void setValues(std::vector<int> values);
     void init(int boardSize);
     void drawBoard();
     void completeCriteria(int loc, Player *player, bool init);
-    void improveCriteria(int loc, Player *player, bool init);
-    void initValues();
+    void improveCriteria(int loc, Player *player);
+    void initValues(std::vector<int> values);
 };
 
 #endif
