@@ -14,6 +14,9 @@ std::string Player::getColour(){
     return colour;
 }
 
+int Player::getCompleted(){
+    return criteriaCompleted;
+}
 
 
 // PlayerInfo Player::getInfo(){

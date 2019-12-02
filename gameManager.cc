@@ -27,7 +27,7 @@ void GameManager::board(std::string x) {
     fileManager->readBoardFromFile(x, *gameState);
 }
 
-void GameManager::startGame() {
+bool GameManager::startGame() {
     createBoard(19);
     createPlayers(4);
     //initialize player criteria
@@ -45,25 +45,46 @@ void GameManager::startGame() {
     }
     dice->setBoard(gameBoard.get());
     turns = new Turn{this};
-    startTurns();
+
+    std::string response = startTurns();
+
+    if (response == "yes"){
+        return true;
+    }
+    else if (response == "no"){
+        return false;
+    }
+    else{
+        // MAYBE NEED TO HAVE THIS CHECK IN StartTurns()?
+        std::cout << "Good job man you gave the program an invalid command (should've done yes or no)" << std::endl;
+        return false;
+    }
 }
 
-void GameManager::startTurns() {
+std::string GameManager::startTurns() {
     while (true) {
-        for (auto &n : gameState->players) {
-            turns->startTurn(n.get());
+        for (auto &player : gameState->players) {
+            turns->startTurn(player.get());
+
+            // CHANGE THIS (and anything else after in the call chain) 
+            // TO WORK WITH AN EXCEPTION THAT WE THROW, IF APPLICABLE
+            if (player->getCompleted() == 10){ 
+                std::string response = gameOver();
+                return response;
+            }
+            //////////////////////////////////////////////////////////
         }
     }
     // players.at(1)->recieve(0, 1);
     // players.at(1)->printStatus();
 }
 
-void GameManager::gameOver() { // MAYBE PASS IN " Player *winner " as parameter?
+std::string GameManager::gameOver() { // MAYBE PASS IN " Player *winner " as parameter?
     //end game
-    std::string response = "";
+    std::string response;
     std::cout << "Would you like to play again?" << std::endl;
     std::cin >> response;
-    //return response;
+    return response;
 }
 
 void GameManager::createBoard(int boardSize) {

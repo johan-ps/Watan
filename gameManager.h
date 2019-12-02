@@ -25,15 +25,15 @@ class GameManager {
 
     public:
     GameManager();
-    void startGame();
-    void gameOver();
+    bool startGame();
+    std::string gameOver();
     void createPlayers(int num);
     // void createDice();
     void createBoard(int boardSize);
     // void createFileManager();
     // void moveGeese();
     // void printPlayerStatus();
-    void startTurns();
+    std::string startTurns();
     // void saveGame();
     Board getGameBoard();
     void seed(int x);

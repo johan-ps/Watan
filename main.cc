@@ -29,9 +29,17 @@ int main(int argc, char *argv[]) {
             // other situations
         }
     }
+    
+    bool restartGame = true;
 
-    mng.startGame();
-    mng.getGameBoard().drawBoard();
+    // END OF GAME NOT FULLY DONE; NEED TO PROB REFACTOR
+    while (restartGame){
+        restartGame = mng.startGame();
+
+        // NEED TO FREE MEMORY AND STUFF
+    }
+
+    //mng.getGameBoard().drawBoard();
     //b.drawBoard();
     // TextDisplay *td = new TextDisplay();
     // td->drawBoard();
