@@ -26,7 +26,7 @@ int main(int argc, char *argv[]) {
         } else if (std::string(argv[i]) == "-board") {
             mng.board(std::string(argv[i + 1]));
         } else {
-
+            // other situations
         }
     }
 
