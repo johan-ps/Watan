@@ -8,6 +8,7 @@
 #include "./developments/goal/achievement.h"
 #include "./developments/criteria/assignment.h"
 #include "board.h"
+#include "gameState.h"
 
 class FileManager {
     //std::string fileName;
@@ -15,8 +16,8 @@ class FileManager {
     public:
     FileManager();
     void writeToFile(std::string file);
-    void readGameFromFile(std::string file);
-    void readBoardFromFile(std::string file);
+    void readGameFromFile(std::string file, GameState &gameState);
+    void readBoardFromFile(std::string file, GameState &gameState);
 };
 
 #endif

@@ -16,11 +16,6 @@
 
 int main(int argc, char *argv[]) {
 
-    // Dice *dice = new Dice{};
-    // dice->setSeed(11);
-    // for (int i = 0; i < 10; i++) {
-    //     std::cout << dice->roll() << std::endl;
-    // }
     GameManager mng;
 
     for (int i = 1; i < argc; i += 2) {
@@ -31,7 +26,7 @@ int main(int argc, char *argv[]) {
         } else if (std::string(argv[i]) == "-board") {
             mng.board(std::string(argv[i + 1]));
         } else {
-
+            // other situations
         }
     }
 

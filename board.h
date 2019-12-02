@@ -17,6 +17,7 @@ class Board : public Subject, public Observer {
     std::vector<Tile*> tiles;
     std::vector<Criterion*> criteria;
     std::vector<Goal*> goals;
+    std::vector<int> values;
     //std::vector<std::vector<Criterion *>> criteria;
     TextDisplay *td = nullptr;
     int tileCount;
@@ -32,10 +33,12 @@ class Board : public Subject, public Observer {
 
 public:
     void notify(int diceVal);// override;
+    void setValues(std::vector<int> values);
     void init(int boardSize);
     void drawBoard();
     void completeCriteria(int loc, Player *player, bool init);
-    void improveCriteria(int loc, Player *player, bool init);
+    void improveCriteria(int loc, Player *player);
+    void initValues(std::vector<int> values);
 };
 
 #endif

@@ -11,7 +11,7 @@ void FileManager::writeToFile(std::string file) {
 
 }
 
-void FileManager::readBoardFromFile(std::string fileName) {
+void FileManager::readBoardFromFile(std::string fileName, GameState &gameState) {
     std::ifstream file {fileName};
     //std::cout << "Load board from file 2: " << file << std::endl;
 
@@ -19,16 +19,16 @@ void FileManager::readBoardFromFile(std::string fileName) {
     getline(file, boardData);
     std::istringstream sin {boardData};
 
-    int boardSize = 19;
-    Board *gameBoard = std::make_unique<Board>();
-
     while (true){
         int resourceType = -1;
         if (sin >> resourceType) {
-            int tileValue = -1;
+            // Add in resourceType to next tile in GameState
+            gameState.resourceTypes.emplace_back(resourceType);
 
+            int tileValue = -1;
             if (sin >> tileValue){
-                // Now we have the resourceType and tileValue for the next tile in board
+                // Add in tileValue to next tile in GameState
+                gameState.values.emplace_back(tileValue);
             }
             else {
                 if (sin.eof()) {
@@ -57,7 +57,7 @@ void FileManager::readBoardFromFile(std::string fileName) {
 }
 
 
-void FileManager::readGameFromFile(std::string fileName) {
+void FileManager::readGameFromFile(std::string fileName, GameState &gameState) {
     std::ifstream fin {fileName};
     //std::cout << "Load saved game from file 2: " << file << std::endl;
     int curTurn;
@@ -121,7 +121,7 @@ void FileManager::readGameFromFile(std::string fileName) {
             }
         }
 
-        players.emplace_back(new Student{colour[i]});
+        gameState.players.emplace_back(new Student{colour[i], criteria, goals, {numCaffeines, numLabs, numLectures, numStudies, numTutorials}});        
     }
 
     //Board *board;

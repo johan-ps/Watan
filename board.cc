@@ -47,11 +47,11 @@ void Board::notify(int diceVal) {
     }
 }
 
-void Board::initTiles() {
-    int values[19] = {3, 10, 5, 4, 0, 10, 11, 3, 8, 2, 6, 8, 12, 5, 11, 4, 6, 9, 9};
-    // int values[19];
-    
+void Board::initValues(std::vector<int> values) {
+    this->values = values;
+}
 
+void Board::initTiles() {
     // for (int i = 0; i < 19; i++) {
     //     values[0] = std::rand() %
     // }
@@ -62,7 +62,7 @@ void Board::initTiles() {
     int col = 0, row = 2;
     for (int i = 0; i < 9; i++) {
         for (int j = 0; j < width[i]; j++) {
-            tiles.emplace_back(new Tile(counter, values[counter], std::string("CAFFEINE"), col, row));
+            tiles.emplace_back(new Tile(counter, values.at(counter), std::string("CAFFEINE"), col, row));
             row += 2;
             counter++;
         }

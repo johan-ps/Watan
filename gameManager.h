@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <stdlib.h>
 #include "./player/student.h"
 #include "fileManager.h"
 #include "dice.h"
@@ -12,19 +13,14 @@
 class Turn;
 class Board;
 
-// struct GameState {
-//     Dice *dice;
-//     std::unique_ptr<Board> gameBoard;
-//     std::vector<std::unique_ptr<Player>> players;
-// }
-
 class GameManager {
+    GameState *gameState;
     FileManager *fileManager;
     Dice *dice;
-    Turn *curTurn;
+    Turn *turns;
     // Geese geese;
     std::unique_ptr<Board> gameBoard;
-    std::vector<std::unique_ptr<Player>> players;
+    //std::vector<std::unique_ptr<Player>> players;
 
 
     public:
