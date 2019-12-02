@@ -1,5 +1,6 @@
 #include "tile.h"
 #include <iostream>
+#include <cmath>
 
 Tile::Tile(int location, int value, std::string resource, int col, int row):
     location{location}, value{value}, resource{resource}, col{col}, row{row} {}
@@ -64,13 +65,25 @@ void Tile::addGoal(Goal *goal, std::string dir) {
     goals[dir] = goal;
 }
 
-void checkAdjCriteria(int locationVal){
+bool Tile::checkAdjCriteria(int locationVal){
+    std::string cardinal[6] = {"NW", "NE", "W", "E", "SW", "SE"};
+    std::string choice, adjOne, adjTwo;
+    double spot;
+
     for(int i = 0; i < 6; ++i){
-        if(locationVal == /* Location */){
-            int spot = i;
-            
+        choice = cardinal[i];
+
+        if(locationVal == criteria[choice]->getLocationVal()){
+            spot = i;
+            adjOne = cardinal[(int)(abs(i - 1.5) - 0.5)];
+            adjTwo = cardinal[(int)(-abs(i - 3.5) + 5.5)];
+
+            if(criteria[adjOne]->isSet() || criteria[adjTwo]->isSet()){
+                return false;
+            }
         }
     }
+    return true;
 }
 
 
