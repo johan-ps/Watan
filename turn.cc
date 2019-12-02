@@ -58,7 +58,7 @@ void Turn::endTurn() {
                 }
             } else if (input == "criteria") {
                 //prints the criteria the current student has completed
-                
+                whoseTurn->printCompletions();
             } else if (input == "achieve") {
                 
             } else if (input == "complete") {
@@ -105,11 +105,11 @@ void Turn::help() {
     std::cout << "board" << std::endl;
     std::cout << "status" << std::endl;
     std::cout << "criteria" << std::endl;
-    std::cout << "acheive <goal>" << std::endl;
+    //std::cout << "acheive <goal>" << std::endl;
     std::cout << "complete <criterion>" << std::endl;
     std::cout << "improve <criterion>" << std::endl;
-    std::cout << "trade <colour> <give> <take>" << std::endl;
+    //std::cout << "trade <colour> <give> <take>" << std::endl;
     std::cout << "next" << std::endl;
-    std::cout << "save <file>" << std::endl;
+    //std::cout << "save <file>" << std::endl;
     std::cout << "help" << std::endl;
 }

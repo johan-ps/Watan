@@ -317,8 +317,15 @@ void Board::init(int boardSize) {
     initTiles();
     initCriteria();
     initGoals();
+
+    std::vector<std::string> resources;
+    std::vector<std::string> tileValues;
+    for (int i = 0; i < boardSize; i++) {
+        resources.emplace_back(tiles.at(i)->getInfo().resource);
+        tileValues.emplace_back(values.at(i) < 10 ? " " + std::to_string(values.at(i)) : std::to_string(values.at(i)));
+    }
     
-    td = new TextDisplay();
+    td = new TextDisplay(resources, tileValues);
 }
 
 std::string Board::getOppositeDirection(std::string dirTile, std::string dirCriterion) {
