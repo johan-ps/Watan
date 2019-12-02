@@ -3,8 +3,6 @@
 #include <sstream>
 #include <memory>
 
-class GameState;
-
 FileManager::FileManager() {
 
 }
@@ -20,9 +18,6 @@ void FileManager::readBoardFromFile(std::string fileName, GameState &gameState) 
     std::string boardData;
     getline(file, boardData);
     std::istringstream sin {boardData};
-
-    int boardSize = 19;
-    Board *gameBoard = std::make_unique<Board>();
 
     while (true){
         int resourceType = -1;

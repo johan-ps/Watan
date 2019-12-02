@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <stdlib.h>
 #include "./player/student.h"
 #include "fileManager.h"
 #include "dice.h"
@@ -11,20 +12,6 @@
 
 class Turn;
 class Board;
-
-struct GameState {
-    std::vector<std::unique_ptr<Player>> players;
-    std::vector<int> values;
-    std::vector<int> resourceTypes;
-
-}
-
-struct GameState {
-    int curTurn;
-    std::vector<std::unique_ptr<Player>> players;
-    std::vector<int> values;
-    std::vector<int> resourceTypes;
-}
 
 class GameManager {
     GameState *gameState;

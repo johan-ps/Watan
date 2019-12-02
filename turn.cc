@@ -53,7 +53,7 @@ void Turn::endTurn() {
                 gm->gameBoard->drawBoard();
             } else if (input == "status") {
                 //print status of all students
-                for (auto &n : gm->players) {
+                for (auto &n : gm->gameState->players) {
                     n->printStatus();
                 }
             } else if (input == "criteria") {
