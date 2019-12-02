@@ -35,6 +35,7 @@ public:
     void init(int boardSize);
     void drawBoard();
     void completeCriteria(int loc, Player *player, bool init);
+    void improveCriteria(int loc, Player *player, bool init);
 };
 
 #endif

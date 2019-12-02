@@ -70,10 +70,10 @@ void GameManager::createBoard(int boardSize) {
 }
 
 void GameManager::createPlayers(int num) {
-    std::vector<int> resources = {2, 1, 0, 2, 1, 0};
+    //std::vector<int> resources = {2, 1, 0, 2, 1, 0};
     std::string playerColours[4] = {"Blue", "Red", "Orange", "Yellow"};
     for (int i = 0; i < num; i++) {
-        players.emplace_back(new Student{playerColours[i], resources});
+        players.emplace_back(new Student{playerColours[i]});
     }
 }
 
