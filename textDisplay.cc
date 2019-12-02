@@ -3,17 +3,19 @@
 #include <iostream>
 #include <string>
 
-TextDisplay::TextDisplay() {
+TextDisplay::TextDisplay(std::vector<std::string> resources, std::vector<std::string> tileValues) {
     for (int i = 0; i < 54; i++) {
         criteria.emplace_back(i < 10 ? " " + std::to_string(i) : std::to_string(i));
     }
     for (int i = 0; i < 72; i++) {
         goals.emplace_back(i < 10 ? " " + std::to_string(i) : std::to_string(i));
     }
+    this->resources = resources;
+    this->values = tileValues;
 }
 
 void TextDisplay::drawBoard() {
-    Hexagon hexa {"CAFFEINE", criteria, goals};
+    Hexagon hexa {resources, criteria, goals, values};
 
     std::cout << hexa.getTab(2) << hexa.getSpace(5) << hexa.getHexagon(0) << std::endl;
     std::cout << hexa.getTab(2) << hexa.getSpace(5) << hexa.getHexagon(1) << std::endl;

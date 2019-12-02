@@ -44,8 +44,8 @@ void GameManager::startGame() {
         gameBoard->completeCriteria(loc, it->get(), true);
     }
     dice->setBoard(gameBoard.get());
-    turns = new Turn{this};
-    startTurns();
+    // turns = new Turn{this};
+    // startTurns();
 }
 
 void GameManager::startTurns() {
@@ -67,26 +67,15 @@ void GameManager::gameOver() { // MAYBE PASS IN " Player *winner " as parameter?
 }
 
 void GameManager::createBoard(int boardSize) {
-    std::cout << "here 1" << std::endl;
     gameBoard = std::make_unique<Board>();
     if (gameState->values.size() != 0) {
-        std::cout << "here 2" << std::endl;
         gameBoard->initValues(gameState->values);
     } else {
-        std::cout << "here 3" << std::endl;
         std::vector<int> shuffleVal = {2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12};
-        std::cout << "here 4" << std::endl;
         std::random_shuffle(shuffleVal.begin(), shuffleVal.end());
-        std::cout << "here 5" << std::endl;
         gameState->values = shuffleVal;
-        std::cout << "here 6" << std::endl;
-        // for (int i = 0; i < boardSize; i++) {
-        //     gameState->values.emplace_back(shuffleVal.at(i));
-        // }
         gameBoard->initValues(gameState->values);
-        std::cout << "here 7" << std::endl;
     }
-    std::cout << "here 8" << std::endl;
     gameBoard->init(boardSize);
 }
 
