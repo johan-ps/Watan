@@ -27,12 +27,13 @@ void FileManager::readBoardFromFile(std::string fileName, GameState &gameState) 
     while (true){
         int resourceType = -1;
         if (sin >> resourceType) {
-            int tileValue = -1;
+            // Add in resourceType to next tile in GameState
+            gameState.resourceTypes.emplace_back(resourceType);
 
-            // Add in tileValue to next tile in GameState
-            
+            int tileValue = -1;
             if (sin >> tileValue){
-                // Now we have the resourceType and tileValue for the next tile in board
+                // Add in tileValue to next tile in GameState
+                gameState.values.emplace_back(tileValue);
             }
             else {
                 if (sin.eof()) {
@@ -57,7 +58,6 @@ void FileManager::readBoardFromFile(std::string fileName, GameState &gameState) 
             }
         }
     }
-    //
 
 }
 
