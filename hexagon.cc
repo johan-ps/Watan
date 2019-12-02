@@ -119,19 +119,26 @@ std::string Hexagon::getHexagon(int x) {
     return temp;
 }
 
-std::string *Hexagon::getHex(int x) {
-    std::string *temp = this->hex;
+std::string Hexagon::getHex(int x) {
+    std::string temp = this->hex[x];
     
     if (x == 0) {
-        locCount++;
+        if (locCount < 18) {
+            locCount++;
+        }
+        std::cerr << temp << " : " << locCount << std::endl;
         setHexagon(iteratorC, iteratorG);
         setHex(iteratorC, iteratorG);
     } else if (x == 1) {
-        rCount++;
+        if (rCount < 18) {
+            rCount++;
+        }
         setHexagon(iteratorC, iteratorG);
         setHex(iteratorC, iteratorG);
     } else if (x == 2) {
-        valCount++;
+        if (valCount < 18) {
+            valCount++;
+        }
         setHexagon(iteratorC, iteratorG);
         setHex(iteratorC, iteratorG);
     }

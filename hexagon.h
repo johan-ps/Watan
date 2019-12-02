@@ -34,7 +34,7 @@ class Hexagon {
     void setHexagon(int c, int g);
     void setHex(int c, int g);
     std::string getHexagon(int x);
-    std::string *getHex(int x);
+    std::string getHex(int x);
     std::string resourceSpace(std::string resource);
 };
 
