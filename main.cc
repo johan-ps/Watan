@@ -31,7 +31,7 @@ int main(int argc, char *argv[]) {
         }
     }
     
-    bool restartGame = true;
+    //bool restartGame = true;
 
     // END OF GAME NOT FULLY DONE; NEED TO PROB REFACTOR
     //while (restartGame){

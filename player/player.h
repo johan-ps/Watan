@@ -4,12 +4,11 @@
 #include <vector>
 #include <string>
 
-//#include "../resources.h"
+#include "../resources.h"
 //#include "../developments/criteria/criterion.h"
 
 class Criterion;
 class Goal;
-class Resource;
 
 class Player {
     std::string colour;
@@ -20,6 +19,7 @@ class Player {
         std::vector<Criterion*> criteria;
         std::vector<Goal*> goals;
         std::vector<int> resources;
+        std::vector<int> resourcesGained = {0, 0, 0, 0, 0};
 
         int getCriteriaSize();
 
@@ -37,6 +37,8 @@ class Player {
         virtual std::vector<Criterion*> getCriterion();
         virtual std::vector<Goal*> getGoals();
         virtual std::vector<int> getResources();
+        virtual std::vector<int> getResourcesGained();
+        virtual void addResourceGained(Resource type, int amount = 1);
 
         //Should possibly change to development pointer or add a purchaseGoal method
         virtual void purchaseCriteria(std::vector<int> cost, Criterion *newCriterion, bool improving, bool init = false) = 0;

@@ -42,6 +42,22 @@ void Turn::startTurn(Player *playerTurn){
                 //roll dice
                 try {
                     gm->dice->roll();
+                    unsigned int resourceCount = 0;
+                    for (auto &player : gm->gameState->players) {
+                        std::string resourcesGained = "";
+                        std::vector<int> tempResources = player->getResourcesGained();
+                        for (auto resourceNum : tempResources) {
+                            resourceCount += resourceNum;
+                            Resource resource {resourceNum};
+                            resourcesGained += std::to_string(resourceNum) + " " + resource.getNameToUpper() + "\n";
+                        }
+                        if (resourcesGained.length() > 0) {
+                            std::cout << "Student " << player->getColour() << " gained:" << std::endl;
+                        }
+                    }
+                    if (resourceCount == 0) {
+                        std::cout << "No students gained resources." << std::endl;
+                    }
                     gm->gameState->curTurn = count;
                     endTurn();
                     return;
@@ -97,8 +113,8 @@ void Turn::endTurn() {
                 } catch (InvalidLocationException &l) {
                     std::cout << l.getError() << std::endl;
                     continue;
-                } catch (char const *s) {
-                    std::cout << s << std::endl;
+                } catch (CannotBuildGoalHereException &g) {
+                    std::cout << g.getError() << std::endl;
                 }
             } else if (input == "complete") {
                 int loc;
@@ -114,8 +130,11 @@ void Turn::endTurn() {
                 } catch (InvalidLocationException &l) {
                     std::cout << l.getError() << std::endl;
                     continue;
-                } catch (char const *s) {
-                    std::cout << s << std::endl;
+                } catch (NoAdjacentAchievementException &a) {
+                    std::cout << a.getError() << std::endl;
+                    continue;
+                } catch (AdjacentCriteriaExistException &a) {
+                    std::cout << a.getError() << std::endl;
                     continue;
                 } catch (GameOverException &g) {
                     throw g;

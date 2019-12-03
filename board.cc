@@ -39,15 +39,16 @@ std::string findDir(int colA, int rowA, int colB, int rowB) {
 
 //notify appropriate tiles with the given dice value
 void Board::notify(int diceVal) {
-    std::cout << "Notify board with dice value " << diceVal << std::endl;
-    if (diceVal == 7) {
-        return;
-    }
+    std::cout << "The dice roll value is " << diceVal << "." << std::endl;
+    // if (diceVal == 7) {
+    //     return;
+    // }
     for (auto &n : tiles) {
         if (n->getInfo().value == diceVal) {
             n->notify();
         }
     }
+    
 }
 
 void Board::initValues(std::vector<int> tileVals) {
@@ -498,14 +499,14 @@ void Board::completeCriteria(int loc, Player *player, bool init) {
     if(!init){
         for(auto&& aTile: tiles){
             if(!aTile->checkAdjAchievements(loc, player->getColour())){
-                throw "NoAdjacentAchievementException";
+                throw NoAdjacentAchievementException{};
             }
         }   
     }
 
     for(auto&& aTile: tiles){
         if(!aTile->checkAdjCriteria(loc)){
-            throw "AdjacentCriteriaExistException";
+            throw AdjacentCriteriaExistException{};
         }
     }
 
@@ -533,7 +534,7 @@ void Board::achieveGoal(int loc, Player *player, bool init) {
     }
 
     if(!canBuild){
-        throw "CannotBuildHereException";
+        throw CannotBuildGoalHereException{};
     }
 
     if (loc < 0 || loc > 71) {

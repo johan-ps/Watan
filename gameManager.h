@@ -34,13 +34,8 @@ class GameManager {
     void startGame();
     void gameOver(std::string winner);
     void createPlayers(int num);
-    // void createDice();
     void createBoard(int boardSize);
-    // void createFileManager();
-    // void moveGeese();
-    // void printPlayerStatus();
     void startTurns();
-    // void saveGame();
     Board getGameBoard();
     void seed(int x);
     void load(std::string x);

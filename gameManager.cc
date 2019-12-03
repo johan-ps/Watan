@@ -49,35 +49,60 @@ void GameManager::startGame() {
             td->notify(goal->getLocationVal(), 'g', playerAchievement); 
         }
     }
+    gameBoard->drawBoard();
     //initialize player criteria
-    // for (auto &n : gameState->players) {
-    //     int loc;
-    //     std::cout << "Student " << n->getColour() << ", where do you want to complete an Assignment?\n> ";
-    //     std::cin >> loc;
-    //     gameBoard->completeCriteria(loc, n.get(), true);
-    // }
-    // for (std::vector<std::unique_ptr<Player>>::reverse_iterator it = gameState->players.rbegin(); it != gameState->players.rend(); ++it) {
-    //     int loc;
-    //     std::cout << "Student " << it->get()->getColour() << ", where do you want to complete an Assignment?\n> ";
-    //     std::cin >> loc;
-    //     gameBoard->completeCriteria(loc, it->get(), true);
-    // }
+    for (auto &n : gameState->players) {
+        int loc;
+        std::cout << "Student " << n->getColour() << ", where do you want to complete an Assignment?" << std::endl;
+        while (true) {
+            std::cout << "> ";
+            try {
+                std::cin >> loc;
+                gameBoard->completeCriteria(loc, n.get(), true);
+                gameBoard->drawBoard();
+                break;
+            } catch (AlreadyCompletedException &c) {
+                std::cout << c.getError() << std::endl;
+                continue;
+            } catch (InvalidLocationException &l) {
+                std::cout << l.getError() << std::endl;
+                continue;
+            } catch (AdjacentCriteriaExistException &a) {
+                std::cout << a.getError() << std::endl;
+                continue;
+            } catch (GameOverException &g) {
+                gameOver(g.getColour());
+            }
+        }
+    }
+    for (std::vector<std::unique_ptr<Player>>::reverse_iterator it = gameState->players.rbegin(); it != gameState->players.rend(); ++it) {
+        int loc;
+        std::cout << "Student " << it->get()->getColour() << ", where do you want to complete an Assignment?" << std::endl;
+        while (true) {
+            std::cout << "> ";
+            try {
+            std::cin >> loc;
+            gameBoard->completeCriteria(loc, it->get(), true);
+            gameBoard->drawBoard();
+            break;
+            } catch (AlreadyCompletedException &c) {
+                std::cout << c.getError() << std::endl;
+                continue;
+            } catch (InvalidLocationException &l) {
+                std::cout << l.getError() << std::endl;
+                continue;
+            } catch (AdjacentCriteriaExistException &a) {
+                std::cout << a.getError() << std::endl;
+                continue;
+            } catch (GameOverException &g) {
+                gameOver(g.getColour());
+            }   
+        }
+    }
     dice->setBoard(gameBoard.get());
     turns = new Turn{this};
 
     startTurns();
-
-    // if (response == "yes"){
-    //     return true;
-    // }
-    // else if (response == "no"){
-    //     return false;
-    // }
-    // else{
-    //     // MAYBE NEED TO HAVE THIS CHECK IN StartTurns()?
-    //     std::cout << "Good job man you gave the program an invalid command (should've done yes or no)" << std::endl;
-    //     return false;
-    // }
 }
 
 void GameManager::startTurns() {
