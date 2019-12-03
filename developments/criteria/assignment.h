@@ -4,6 +4,7 @@
 #include "criterion.h"
 #include "../../player/player.h"
 #include "../../exception.h"
+#include "../../resources.h"
 
 class Assignment : public Criterion {
 
