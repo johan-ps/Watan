@@ -52,6 +52,7 @@ class Tile : public Subject, public Observer {
     void addNeighbour(Tile *tile, std::string dir);
     void addCriterion(Criterion *criterion, std::string dir);
     void addGoal(Goal *goal, std::string dir);
+    bool checkAdjCriteria(int locationVal);
     TileInfo getInfo();
 };
 
