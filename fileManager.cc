@@ -59,7 +59,7 @@ void FileManager::readBoardFromString(std::string boardData, GameState &gameStat
             int tileValue = -1;
             if (sin >> tileValue){
                 // Add in tileValue to next tile in GameState
-                gameState.values.emplace_back(tileValue < 10 ? " " + std::to_string(tileValue) : std::to_string(tileValue));
+                gameState.values.emplace_back(tileValue);
             }
             else {
                 if (sin.eof()) {

@@ -50,9 +50,9 @@ void Board::notify(int diceVal) {
     }
 }
 
-void Board::initValues(std::vector<std::string> tileVals) {
+void Board::initValues(std::vector<int> tileVals) {
     for (auto n : tileVals) {
-        values.emplace_back(std::stoi(n));;
+        values.emplace_back(n);;
     }
 }
 
@@ -108,9 +108,6 @@ void Board::initGoals(std::vector<Goal*> goalsOwned) {
 
 void Board::setTextDisplay(TextDisplay *textDisplay) {
     td = textDisplay;
-    // for (auto criterion : criteria) {
-    //     criterion->setTextDisplay(textDisplay);
-    // }
 }
 
 std::vector<std::string> Board::getCriteria() {

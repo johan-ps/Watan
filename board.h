@@ -41,7 +41,7 @@ public:
     void completeCriteria(int loc, Player *player, bool init);
     void improveCriteria(int loc, Player *player);
     void achieveGoal(int loc, Player *player, bool init);
-    void initValues(std::vector<std::string> values);
+    void initValues(std::vector<int> values);
     void initResources(std::vector<std::string> resources);
     void initCriteria(std::vector<Criterion*> criteriaOwned);
     void initGoals(std::vector<Goal*> goalsOwned);

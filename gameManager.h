@@ -21,6 +21,7 @@ class GameManager {
     // Geese geese;
     std::unique_ptr<Board> gameBoard;
     TextDisplay *td;
+    int seedVal;
     //std::vector<std::unique_ptr<Player>> players;
 
 

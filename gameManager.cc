@@ -15,6 +15,8 @@ Board GameManager::getGameBoard() {
 void GameManager::seed(int x) {
     //std::cout << "Set seed to " << x << std::endl;
     dice->setSeed(x);
+    seedVal = x;
+    srand(seedVal);
 }
 
 void GameManager::load(std::string x) {
@@ -60,7 +62,7 @@ bool GameManager::startGame() {
     //     std::cout << "Student " << it->get()->getColour() << ", where do you want to complete an Assignment?\n> ";
     //     std::cin >> loc;
     //     gameBoard->completeCriteria(loc, it->get(), true);
-    //}
+    // }
     dice->setBoard(gameBoard.get());
     turns = new Turn{this};
 
@@ -112,7 +114,7 @@ void GameManager::createBoard(int boardSize) {
         gameBoard->initValues(gameState->values);
         gameBoard->initResources(gameState->resourceTypes);
     } else {
-        std::vector<std::string> shuffleVal = {" 2", " 3", " 3", " 4", " 4", " 5", " 5", " 6", " 6", " 7", " 8", " 8", " 9", " 9", "10", "10", "11", "11", "12"};
+        std::vector<int> shuffleVal = {2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12};
         std::random_shuffle(shuffleVal.begin(), shuffleVal.end());
         gameState->values = shuffleVal;
         gameBoard->initValues(gameState->values);

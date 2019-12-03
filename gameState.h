@@ -11,7 +11,7 @@ struct GameState {
     int curTurn;
     int gooseTile = 5;
     std::vector<std::unique_ptr<Player>> players;
-    std::vector<std::string> values;
+    std::vector<int> values;
     std::vector<std::string> resourceTypes;
 };
 
