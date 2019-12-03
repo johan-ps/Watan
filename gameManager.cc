@@ -32,7 +32,7 @@ bool GameManager::startGame() {
     gameBoard = std::make_unique<Board>();
     createPlayers(4);
     createBoard(19);
-    td = new TextDisplay{gameState->resourceTypes, gameState->values};
+    td = new TextDisplay{gameState->resourceTypes, gameState->values, gameState->gooseTile};
     //td = new TextDisplay(gameBoard->getCriteria(), gameBoard->getGoals(), gameState->resourceTypes, gameState->values);
     gameBoard->setTextDisplay(td);
     //modify textdisplay to current state
