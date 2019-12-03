@@ -491,11 +491,11 @@ void Board::drawBoard() {
 }
 
 void Board::completeCriteria(int loc, Player *player, bool init) {
-    // for(auto&& aTile: tiles){
-    //     if(aTile->checkAdjCriteria(loc)){
-    //         throw "AdjacentCriteriaExistException";
-    //     }
-    // }
+    for(auto&& aTile: tiles){
+        if(aTile->checkAdjCriteria(loc)){
+            throw "AdjacentCriteriaExistException";
+        }
+    }
 
     try {
         std::cout << "Try" << std::endl;
@@ -508,6 +508,13 @@ void Board::completeCriteria(int loc, Player *player, bool init) {
 }
 
 void Board::achieveGoal(int loc, Player *player, bool init) {
+    for(auto&& aTile: tiles){
+        if(!aTile->checkAdjGoal(loc, player->getColour())){
+            throw "InvalidAchievementLocationException"
+        }
+    }
+
+
     try {
         std::cout << "Try" << std::endl;
         goals.at(loc)->achieve(player, init);

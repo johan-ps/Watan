@@ -1,6 +1,7 @@
 #include "tile.h"
 #include <iostream>
 #include <cmath>
+#include <memory>
 
 Tile::Tile(int location, int value, std::string resource, int col, int row):
     location{location}, value{value}, resource{resource}, col{col}, row{row} {}
@@ -86,6 +87,78 @@ bool Tile::checkAdjCriteria(int locationVal){
     return true;
 }
 
+bool Tile::checkAdjGoal(int locationVal, std::string colour){
+    std::string critCard[6] = {"NW", "NE", "W", "E", "SW", "SE"};
+    std::string goalCard[6] = {"N", "NW", "NE", "SW", "SE", "S"};
+    std::string choice;
+    double spot;
+
+    for(int i = 0; i < 6; ++i){
+        choice = goalCard[i];
+
+        if(locationVal == goals[choice]->getLocationVal()){
+            spot = i;
+            std::unique_ptr<Player> adjCritA = criteria[critCard[(int)(fabs(spot - 0.5) - 0.5)]]->getOwner;
+            std::unique_ptr<Player> adjCritB = criteria[critCard[(int)(-fabs(spot - 4.5) + 5.5)]]->getOwner;
+            std::unique_ptr<Player> adjGoalA = goals[goalCard[(int)(fabs(spot - 1.5) - 0.5)]]->getOwner;
+            std::unique_ptr<Player> adjGoalB = goals[goalCard[(int)(-fabs(spot - 3.5) + 5.5)]]->getOwner;
+            Tile * adjTileA = neighbours[goalCard[(int)(fabs(spot - 1.5) - 0.5)]];
+            Tile * adjTileB = neighbours[goalCard[(int)(-fabs(spot - 3.5) + 5.5)]];
+
+            //Checks adjacent Criteria
+            if(adjCritA && (colour == adjCritA->getColour())){
+                return true;
+            } 
+            if(adjCritB && (colour == adjCritB->getColour())){
+                return true;
+            //Checks adjacent Goals on the same tile
+            } 
+            if(adjGoalA && (colour == adjGoalA->getColour())){
+                return true;
+            } 
+            if(adjGoalB && (colour == adjGoalB->getColour())){
+                return true;
+            }
+
+            //Checks adjacent Goals on adjacent Tiles
+            if(adjTileA->checkAdjTile(spot, true, colour) || adjTileB->checkAdjTile(spot, false, colour)) {
+                return true;
+            } 
+        }
+    }
+    return false;
+}
+
+bool Tile::checkAdjTile(double spot, bool isTileA, std::string colour){
+    std::string goalCard[6] = {"N", "NW", "NE", "SW", "SE", "S"};
+    std::unique_ptr<Player> adjGoalA;
+    std::unique_ptr<Player> adjGoalB;
+
+    int x = (int) spot;
+    if(isTileA){
+        if(x % 5){ 
+            adjGoalA = goals["S"]->getOwner;
+        } else {
+            adjGoalA = goals["SE"]->getOwner;
+        }
+        adjGoalB = goals[goalCard[(int)(-fabs(spot - 2.5) + 4.5)]]->getOwner;
+    } else {
+        if(x % 5){ 
+            adjGoalA = goals["N"]->getOwner;
+        } else {
+            adjGoalA = goals["NW"]->getOwner;
+        }
+        adjGoalB = goals[goalCard[(int)(fabs(spot - 2.5) + 0.5)]]->getOwner;
+    }
+
+    if(adjGoalA && (colour == adjGoalB->getColour())){
+        return true;
+    } else if(adjGoalB && (colour == adjGoalB->getColour())){
+        return true;
+    }
+
+    return false;
+}
 
 TileInfo Tile::getInfo() {
     return {

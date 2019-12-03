@@ -5,6 +5,8 @@
 // #include "goal.h"
 #include "./developments/criteria/criterion.h"
 #include "./developments/goal/achievement.h"
+#include "./player/player.h"
+
 #include "observer.h"
 #include "subject.h"
 // #include "geese.h"
@@ -53,6 +55,8 @@ class Tile : public Subject, public Observer {
     void addCriterion(Criterion *criterion, std::string dir);
     void addGoal(Goal *goal, std::string dir);
     bool checkAdjCriteria(int locationVal);
+    bool checkAdjGoal(int locationVal, std::string colour);
+    bool checkAdjTile(double spot, bool isTileA, std::string colour);
     TileInfo getInfo();
 };
 

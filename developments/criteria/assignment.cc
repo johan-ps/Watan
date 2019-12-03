@@ -42,17 +42,8 @@ void Assignment::improve(Player* player, bool init) {
     } else {
         throw "CriteriaCannotBeImprovedException";
     }
-    setCriteriaVal(++currentVal);
     if(player->purchaseCriteria(upgradeCost, this, true, init)){
         setCriteriaVal(++currentVal);
-        // char criteriaType = 'A';
-        // if (getCriteriaVal() == 2) {
-        //     criteriaType = 'M';
-        // } else {
-        //     criteriaType = 'E';
-        // }
-        // std::string playerAssignment = player->getColour().substr(0, 1) + criteriaType;
-        // td->notify(getLocationVal(), 'c', playerAssignment);
     } else {
         throw "NotEnoughResourcesToImproveException";
     }
