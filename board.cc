@@ -495,6 +495,14 @@ void Board::completeCriteria(int loc, Player *player, bool init) {
         throw InvalidLocationException{};
     }
 
+    if(!init){
+        for(auto&& aTile: tiles){
+            if(!aTile->checkAdjAchievements(loc, player->getColour())){
+                throw "NoAdjacentAchievementException";
+            }
+        }   
+    }
+
     for(auto&& aTile: tiles){
         if(!aTile->checkAdjCriteria(loc)){
             throw "AdjacentCriteriaExistException";
