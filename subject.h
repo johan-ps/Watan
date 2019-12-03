@@ -6,12 +6,12 @@
 class Observer;
 
 class Subject {
-    //std::vector<Observer*> observers;
+    std::vector<Observer*> observers;
     public:
-    // virtual void attach(Observer) = 0;
-    // virtual void detach(Observer) = 0;
-    // virtual void notifyObserver(Observer) = 0;
-    virtual ~Subject();
+        virtual void attach(Observer*) = 0;
+        virtual void detach(Observer*) = 0;
+        virtual void notifyObservers() = 0;
+        virtual ~Subject();
 };
 
 #endif
