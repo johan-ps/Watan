@@ -133,10 +133,6 @@ void Student::purchaseCriteria(std::vector<int> cost, Criterion *newCriterion, b
     }
 
     ++criteriaCompleted;
-    if(criteriaCompleted >= 10){
-        //end the game somehow 
-        // WE SHOULD PROBABLY THROW A "GameWon" EXCEPTION AND CATCH IT ALL THE WAY BACK IN END TURN!!!
-    }
 }
 
 void Student::purchaseGoal(std::vector<int> cost, Goal *newGoal, bool init) {

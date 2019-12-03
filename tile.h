@@ -47,8 +47,10 @@ class Tile : public Subject, public Observer {
         bool isOverrun();
         TileInfo getInfo();
         bool checkAdjCriteria(int locationVal);
+        bool checkAdjAchievements(int locationVal, std::string colour);
         bool checkAdjGoal(int locationVal, std::string colour);
         bool checkAdjTile(double spot, bool isTileA, std::string colour);
+        
 
         // Setters
         void addNeighbour(Tile *tile, std::string dir);

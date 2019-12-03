@@ -39,6 +39,17 @@ std::vector<int> Player::getResources() {
     return resources;
 }
 
+std::vector<int> Player::getResourcesGained() {
+    std::vector<int> temp = resourcesGained;
+    for (auto &n : resourcesGained) {
+        n = 0;
+    }
+    return temp;
+}
+
+void Player::addResourceGained(Resource type, int amount) {
+    resourcesGained.at(type.getVal()) += amount;
+}
 
 // PlayerInfo Player::getInfo(){
 //     return {resources, criteria, colour};

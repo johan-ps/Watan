@@ -63,6 +63,27 @@ std::string DiceNotSetException::getError() {
     return temp;
 }
 
+std::string AdjacentCriteriaExistException::getError() {
+    std::string temp = "Can't complete criterion, next to an adjacent completed criterion.";
+    return temp;
+}
+
+std::string NoAdjacentAchievementException::getError() {
+    std::string temp = "Can't complete criterion without an adjacent achieved goal.";
+    return temp;
+}
+
+std::string CannotBuildGoalHereException::getError() {
+    std::string temp = "Can't achieve goals without adjacent achieved goals or completed criterion.";
+    return temp;
+}
+
+GameOverException::GameOverException(std::string playerColour):
+    playerColour{playerColour} {}
+
+std::string GameOverException::getColour() {
+    return playerColour;
+}
 
 
 

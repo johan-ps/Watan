@@ -27,20 +27,16 @@ class GameManager {
     std::unique_ptr<Board> gameBoard;
     TextDisplay *td;
     bool seedInit = false;
+    bool loadFromFile = false;
 
 
     public:
     GameManager();
-    bool startGame();
-    std::string gameOver();
+    void startGame();
+    void gameOver(std::string winner);
     void createPlayers(int num);
-    // void createDice();
     void createBoard(int boardSize);
-    // void createFileManager();
-    // void moveGeese();
-    // void printPlayerStatus();
-    std::string startTurns();
-    // void saveGame();
+    void startTurns(int whoseTurn = 0);
     Board getGameBoard();
     void seed(int x);
     void load(std::string x);

@@ -45,6 +45,25 @@ void Turn::startTurn(Player *playerTurn){
                 //roll dice
                 try {
                     gm->dice->roll();
+                    unsigned int totalResourceCount = 0;
+                    for (auto &player : gm->gameState->players) {
+                        std::string resourcesGained = "";
+                        unsigned int playerResourceCount = 0;
+                        std::vector<int> tempResources = player->getResourcesGained();
+                        for (auto resourceNum : tempResources) {
+                            totalResourceCount += resourceNum;
+                            playerResourceCount += resourceNum;
+                            Resource resource {resourceNum};
+                            resourcesGained += std::to_string(resourceNum) + " " + resource.getNameToUpper() + "\n";
+                        }
+                        if (playerResourceCount != 0) {
+                            std::cout << "Student " << player->getColour() << " gained:" << std::endl;
+                            std::cout << resourcesGained;
+                        }
+                    }
+                    if (totalResourceCount == 0) {
+                        std::cout << "No students gained resources." << std::endl;
+                    }
                     gm->gameState->curTurn = count;
                     endTurn();
                     return;
@@ -110,16 +129,16 @@ void Turn::endTurn() {
     // Check roll value for special cases, such as Geese
     if (gm->dice->getRollVal() == 7){
 
+        // Geese eats all players resources that have 10 or more
         for (auto &player: gm->gameState->players){
-
                 if (player->getResourceCount() >= 10){
                     gm->gameState->geese->eatResources(player.get());
                 }
-
         }
 
         // CHECK THAT GOOSETILE UPDATES
 
+        // Current player places GEESE
         std::cout << "Choose where to place the GEESE." << std::endl;
         std::cout << "> ";
         int tileToBePlaced;
@@ -131,6 +150,7 @@ void Turn::endTurn() {
 
         Tile *geeseTile = gm->gameBoard->getTileByLocation(gm->gameState->gooseTile); // NOTE: Might be easier to just have Geese have a pointer to it's currently owned tile
         
+        // If Geese was placed on tile successfully
         if (geeseTile){
             for (auto criterionPair: geeseTile->getInfo().criteria){ // Does this call getInfo() each iteration??
                 Criterion *criterion = criterionPair.second;
@@ -145,6 +165,7 @@ void Turn::endTurn() {
                 }
             }
 
+            // If there are students to steal from, start the stealing process for the active player
             if (studentVictims.size() > 0){
                 commenceSteal(studentVictims);
             }
@@ -186,7 +207,9 @@ void Turn::endTurn() {
                 } catch (InvalidLocationException &l) {
                     std::cout << l.getError() << std::endl;
                     continue;
-                }         
+                } catch (CannotBuildGoalHereException &g) {
+                    std::cout << g.getError() << std::endl;
+                }
             } else if (input == "complete") {
                 int loc;
                 std::cin >> loc;
@@ -201,9 +224,14 @@ void Turn::endTurn() {
                 } catch (InvalidLocationException &l) {
                     std::cout << l.getError() << std::endl;
                     continue;
-                } catch (char const *s) {
-                    std::cout << s << std::endl;
+                } catch (NoAdjacentAchievementException &a) {
+                    std::cout << a.getError() << std::endl;
                     continue;
+                } catch (AdjacentCriteriaExistException &a) {
+                    std::cout << a.getError() << std::endl;
+                    continue;
+                } catch (GameOverException &g) {
+                    throw g;
                 }
             } else if (input == "improve") {
                 int loc;
@@ -222,6 +250,8 @@ void Turn::endTurn() {
                 } catch (InvalidLocationException &l) {
                     std::cout << l.getError() << std::endl;
                     continue;
+                } catch (GameOverException &g) {
+                    throw g;
                 }
             } else if (input == "trade") {
                 Player *player = nullptr;

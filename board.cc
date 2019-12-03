@@ -39,13 +39,17 @@ std::string findDir(int colA, int rowA, int colB, int rowB) {
 
 //notify appropriate tiles with the given dice value
 void Board::notify(int diceVal) {
-    std::cout << "Notify board with dice value " << diceVal << std::endl;
-
-    for (auto &tile : tiles) {
-        if (tile->getInfo().value == diceVal && !(tile->isOverrun())) {
-            tile->notify();
+    std::cout << "The dice roll value is " << diceVal << "." << std::endl;
+    if (diceVal == 7) {
+        // Update text display
+        return;
+    }
+    for (auto &n : tiles) {
+        if (n->getInfo().value == diceVal) {
+            n->notify();
         }
     }
+
 }
 
 void Board::placeGeese(int tileNum){
@@ -494,9 +498,6 @@ std::string Board::findNeighbourByGoal(std::string goalDir) {
 }
 
 void Board::drawBoard() {
-    // for (int i = 0; i < 19; i++) {
-    //     tiles.at(i)->printTile();
-    // }
     td->drawBoard();
 }
 
@@ -505,9 +506,17 @@ void Board::completeCriteria(int loc, Player *player, bool init) {
         throw InvalidLocationException{};
     }
 
+    if(!init){
+        for(auto&& aTile: tiles){
+            if(!aTile->checkAdjAchievements(loc, player->getColour())){
+                throw NoAdjacentAchievementException{};
+            }
+        }   
+    }
+
     for(auto&& aTile: tiles){
         if(!aTile->checkAdjCriteria(loc)){
-            throw "AdjacentCriteriaExistException";
+            throw AdjacentCriteriaExistException{};
         }
     }
 
@@ -519,6 +528,8 @@ void Board::completeCriteria(int loc, Player *player, bool init) {
         throw r;
     } catch (InvalidLocationException &l) {
         throw l;
+    } catch (GameOverException &g) {
+        throw g;
     }
     std::string playerAssignment = player->getColour().substr(0, 1) + 'A';
     td->notify(loc, 'c', playerAssignment);
@@ -533,7 +544,7 @@ void Board::achieveGoal(int loc, Player *player, bool init) {
     }
 
     if(!canBuild){
-        throw "CannotBuildHereException";
+        throw CannotBuildGoalHereException{};
     }
 
     if (loc < 0 || loc > 71) {

@@ -40,6 +40,34 @@ bool Tile::checkAdjCriteria(int locationVal){
     return true;
 }
 
+bool Tile::checkAdjAchievements(int locationVal, std::string colour){
+    std::string goalCard[6] = {"N", "NW", "NE", "SW", "SE", "S"};
+    std::string choice;
+    double spot;
+
+    for(int i = 0; i < 6; ++i){
+        choice = goalCard[i];
+
+        if(locationVal == goals[choice]->getLocationVal()){
+            spot = i;
+            Player * adjOne = goals[goalCard[(int)(fabs(spot - 0.5) - 0.5)]]->getOwner();
+            Player * adjTwo = goals[goalCard[(int)(-fabs(spot - 4.5) + 5.5)]]->getOwner();
+
+            if(adjOne){
+                if(colour == adjOne->getColour()){
+                    return true;
+                }
+            }
+            if(adjTwo){
+                if(colour == adjTwo->getColour()){
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
 bool Tile::checkAdjGoal(int locationVal, std::string colour){
     std::string critCard[6] = {"NW", "NE", "W", "E", "SW", "SE"};
     std::string goalCard[6] = {"N", "NW", "NE", "SW", "SE", "S"};

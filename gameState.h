@@ -11,8 +11,8 @@ class Player;
 class Geese;
 
 struct GameState {
-    int curTurn;
-    int gooseTile = 5; // REMOVE THIS DEFAULT VALUE
+    int curTurn = 0;
+    int gooseTile = 5;
     std::vector<std::unique_ptr<Player>> players;
     std::vector<int> values;
     std::vector<Resource> resourceTypes;

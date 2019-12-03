@@ -9,21 +9,23 @@ void Dice::setBoard(Board *board) {
 }
 
 void Dice::roll() {
-    if (!isSet) {
-        throw DiceNotSetException{};
-    }
-    isSet = false;
+    // if (!isSet) {
+    //     throw DiceNotSetException{};
+    // }
+    // isSet = false;
     if (isRandom){
         if (!isSeed) {
             srand(time(0));
         }
-        rollVal = rand() % 10 + 2;
+        rollVal = 0;
+        rollVal += rand() % 6 + 1;
+        rollVal += rand() % 6 + 1;
     }
 
     // Special cases to deal with, such as Geese
-    if (rollVal == 7){
-        return;
-    }
+    // if (rollVal == 7){
+    //     return;
+    // }
 
 
     board->notify(rollVal);

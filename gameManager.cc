@@ -20,17 +20,15 @@ void GameManager::seed(int x) {
 }
 
 void GameManager::load(std::string x) {
-    //std::cout << "Load saved game from file: " << x << std::endl;
     fileManager->readGameFromFile(*gameState, x);
-    //std::cout << "Size >>>>>>>>>> " << gameState->resourcesTypes.size() << std::endl;
+    loadFromFile = true;
 }
 
 void GameManager::board(std::string x) {
-    //std::cout << "Load board from file: " << x << std::endl;
     fileManager->readBoardFromFile(*gameState, x);
 }
 
-bool GameManager::startGame() {
+void GameManager::startGame() {
     gameBoard = std::make_unique<Board>();
     createPlayers(4);
     createBoard(19);
@@ -49,63 +47,121 @@ bool GameManager::startGame() {
             td->notify(goal->getLocationVal(), 'g', playerAchievement); 
         }
     }
+    gameBoard->drawBoard();
     //initialize player criteria
-    // for (auto &n : gameState->players) {
-    //     int loc;
-    //     std::cout << "Student " << n->getColour() << ", where do you want to complete an Assignment?\n> ";
-    //     std::cin >> loc;
-    //     gameBoard->completeCriteria(loc, n.get(), true);
-    // }
-    // for (std::vector<std::unique_ptr<Player>>::reverse_iterator it = gameState->players.rbegin(); it != gameState->players.rend(); ++it) {
-    //     int loc;
-    //     std::cout << "Student " << it->get()->getColour() << ", where do you want to complete an Assignment?\n> ";
-    //     std::cin >> loc;
-    //     gameBoard->completeCriteria(loc, it->get(), true);
-    // }
+    if (!loadFromFile) {
+        for (auto &n : gameState->players) {
+            int loc;
+            std::cout << "Student " << n->getColour() << ", where do you want to complete an Assignment?" << std::endl;
+            while (true) {
+                std::cout << "> ";
+                try {
+                    std::cin >> loc;
+                    gameBoard->completeCriteria(loc, n.get(), true);
+                    gameBoard->drawBoard();
+                    break;
+                } catch (AlreadyCompletedException &c) {
+                    std::cout << c.getError() << std::endl;
+                    continue;
+                } catch (InvalidLocationException &l) {
+                    std::cout << l.getError() << std::endl;
+                    continue;
+                } catch (AdjacentCriteriaExistException &a) {
+                    std::cout << a.getError() << std::endl;
+                    continue;
+                } catch (GameOverException &g) {
+                    gameOver(g.getColour());
+                }
+            }
+        }
+        for (std::vector<std::unique_ptr<Player>>::reverse_iterator it = gameState->players.rbegin(); it != gameState->players.rend(); ++it) {
+            int loc;
+            std::cout << "Student " << it->get()->getColour() << ", where do you want to complete an Assignment?" << std::endl;
+            while (true) {
+                std::cout << "> ";
+                try {
+                std::cin >> loc;
+                gameBoard->completeCriteria(loc, it->get(), true);
+                gameBoard->drawBoard();
+                break;
+                } catch (AlreadyCompletedException &c) {
+                    std::cout << c.getError() << std::endl;
+                    continue;
+                } catch (InvalidLocationException &l) {
+                    std::cout << l.getError() << std::endl;
+                    continue;
+                } catch (AdjacentCriteriaExistException &a) {
+                    std::cout << a.getError() << std::endl;
+                    continue;
+                } catch (GameOverException &g) {
+                    gameOver(g.getColour());
+                }   
+            }
+        }
+    }
     dice->setBoard(gameBoard.get());
     turns = new Turn{this};
 
-    std::string response = startTurns();
+    startTurns(gameState->curTurn);
+}
 
-    if (response == "yes"){
-        return true;
-    }
-    else if (response == "no"){
-        return false;
-    }
-    else{
-        // MAYBE NEED TO HAVE THIS CHECK IN StartTurns()?
-        std::cout << "Good job man you gave the program an invalid command (should've done yes or no)" << std::endl;
-        return false;
+void GameManager::startTurns(int whoseTurn) {
+    try {
+        for (unsigned int i = whoseTurn; i < gameState->players.size(); i++) {
+            turns->startTurn(gameState->players.at(i).get());
+        }
+        while (true) {
+            for (auto &player : gameState->players) {
+                turns->startTurn(player.get());
+            }
+        }
+    } catch (GameOverException &g) {
+        gameOver(g.getColour());
     }
 }
 
-std::string GameManager::startTurns() {
-    while (true) {
-        for (auto &player : gameState->players) {
-            turns->startTurn(player.get());
-            std::cout << "DEBUG: Next Player's Turn" << std::endl;
-
-            // CHANGE THIS (and anything else after in the call chain) 
-            // TO WORK WITH AN EXCEPTION THAT WE THROW, IF APPLICABLE
-
-            //std::cout << "DEBUG: RIGHT BEFORE IF STATEMENT" << std::endl;
-            if (player->getCompleted() >= 10){ 
-                //std::cout << "ENTERED IF STATEMENT" << std::endl;
-                std::string response = gameOver();
-                return response;
+void GameManager::gameOver(std::string winner) {
+    std::string response;
+    std::cout << "Student " << winner << " wins!!!" << std::endl;
+    std::cout << "Would you like to play again?\n> " << std::endl;
+    while(true) {
+        if (std::cin >> response) {
+            if (response == "yes") {
+                std::cout << "Would you like to start a new game, or load from a file?\n> " << std::endl;
+                while(true) {
+                    if (std::cin >> response) {
+                        if (response == "new") {
+                            startGame();
+                        } else if (response == "file") {
+                            std::cin >> response;
+                            board(response);
+                        } else {
+                            std::cout << "Enter 'new' or 'file <filename>'." << std::endl;
+                        }
+                    }else {
+                        if (std::cin.eof()) {
+                            break;
+                        } else if (std::cin.fail()) {
+                            std::cin.clear();
+                            std::cin.ignore();
+                        }
+                    }
+                }
+            } else if (response == "no") {
+                break;
+            } else {
+                std::cout << "Enter 'yes' or 'no'." << std::endl;
             }
-            //////////////////////////////////////////////////////////
+        } else {
+            if (std::cin.eof()) {
+                break;
+            } else if (std::cin.fail()) {
+                std::cin.clear();
+                std::cin.ignore();
+            }
         }
     }
-}
 
-std::string GameManager::gameOver() { // MAYBE PASS IN " Player *winner " as parameter?
-    //end game
-    std::string response;
-    std::cout << "Would you like to play again? \n>" << std::endl; // TODO - CHANGE "\n>"" TO SOMETHING BETTER
-    std::cin >> response;
-    return response;
 }
 
 void GameManager::createBoard(int boardSize) {
