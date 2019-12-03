@@ -16,7 +16,7 @@ Student::Student(std::string colour, std::vector<Criterion*> criteria,
 
 // Trade a resource with otherPlayer
 void Student::trade(Player *otherPlayer, std::string resourceOffered, std::string resourceRequested) {
-
+    
 }
 
 // Steal a random resource from a victim

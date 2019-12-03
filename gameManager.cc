@@ -15,9 +15,9 @@ Board GameManager::getGameBoard() {
 void GameManager::seed(int x) {
     //std::cout << "Set seed to " << x << std::endl;
     dice->setSeed(x);
-    seedVal = x;
+    //seedVal = x;
     seedInit = true;
-    srand(seedVal);
+    srand(x);
 }
 
 void GameManager::load(std::string x) {
