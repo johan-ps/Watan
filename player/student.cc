@@ -53,8 +53,12 @@ void Student::printStatus() {
     }
 }
 
-bool Student::purchaseCriteria(std::vector<int> cost, Criterion * newCriterion, bool improving) {
-
+bool Student::purchaseCriteria(std::vector<int> cost, Criterion * newCriterion, bool improving, bool init) {
+    if (init) {
+        criteria.push_back(newCriterion);
+        ++criteriaCompleted;
+        return true;
+    }
     for(int i = 0; i < 5; ++i) {
         if(cost[i] > resources[i]) {
             return false;

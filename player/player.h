@@ -32,9 +32,11 @@ class Player {
         virtual void recieve(int, int) = 0;
         virtual void printStatus() = 0;
         virtual void printCompletions() = 0;
+        virtual std::vector<Criterion*> getCriterion();
+        virtual std::vector<Goal*> getGoals();
 
         //Should possibly change to development pointer or add a purchaseGoal method
-        virtual bool purchaseCriteria(std::vector<int>, Criterion *, bool) = 0;
+        virtual bool purchaseCriteria(std::vector<int>, Criterion *, bool, bool init = false) = 0;
         virtual bool purchaseGoal(std::vector<int>, Goal *) = 0;
         
         // Accessors

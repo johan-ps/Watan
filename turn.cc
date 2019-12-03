@@ -64,7 +64,7 @@ void Turn::endTurn() {
             } else if (input == "complete") {
                 int loc;
                 std::cin >> loc;
-                gm->gameBoard->completeCriteria(loc, whoseTurn, false);
+                gm->gameBoard->completeCriteria(loc, whoseTurn, true);
             } else if (input == "improve") {
                 int loc;
                 std::cin >> loc;

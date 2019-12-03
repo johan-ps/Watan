@@ -9,8 +9,8 @@ class Criterion : public Development, public Observer {
     public:
         Criterion(int locationVal, std::vector<int> cost);
         virtual void notify() = 0;
-        virtual void complete(Player* player, bool init) = 0;
-        virtual void improve(Player* player) = 0;
+        virtual void complete(Player* player, bool init = false) = 0;
+        virtual void improve(Player* player, bool init = false) = 0;
         virtual void distributeResources(std::string) = 0;
 };
 

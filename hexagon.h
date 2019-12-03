@@ -15,15 +15,15 @@ class Hexagon {
     // space = {"0 spaces", "1 space", "2 space", "3 spaces", "4 spaces", "5 spaces", "6 spaces", "7 spaces",
     //          "8 spaces", "9 spaces", "10 spaces", "11 spaces"}
     std::string space[12] = {"", " ", "  ", "   ", "    ", "     ", "      ", "       ", "        ", "         ", "          ", "           "};
+    std::vector<std::string> resources;
     std::vector<std::string> criteria;
     std::vector<std::string> goals;
     std::vector<std::string> values;
-    std::vector<std::string> resources;
     //calculate the remaining spaces after resources is printed
     
     //tab = {"0 spaces", "15 spaces", "30 spaces"}
     std::string tab[3] = {"", "               ", "                              "};
-    std::string hexagon[10];
+    std::string hexagon[11];
     std::string hex[3];
 
     public:

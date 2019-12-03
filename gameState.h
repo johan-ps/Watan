@@ -9,9 +9,10 @@ class Player;
 
 struct GameState {
     int curTurn;
+    int gooseTile;
     std::vector<std::unique_ptr<Player>> players;
-    std::vector<int> values;
-    std::vector<int> resourceTypes;
+    std::vector<std::string> values;
+    std::vector<std::string> resourceTypes;
 };
 
 #endif

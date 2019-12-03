@@ -1,11 +1,11 @@
 #include "player.h"
 
 Player::Player(std::string colour, std::vector<int> resources): 
-    colour{colour}, criteriaCompleted{10}, resources{resources} {}
+    colour{colour}, criteriaCompleted{0}, resources{resources} {}
 
 Player::Player(std::string colour, std::vector<Criterion*> criteria, 
     std::vector<Goal*> goals, std::vector<int> resources): 
-    colour{colour}, criteriaCompleted{10}, criteria{criteria}, goals{goals}, resources{resources} {}
+    colour{colour}, criteriaCompleted{0}, criteria{criteria}, goals{goals}, resources{resources} {}
 
 int Player::getCriteriaSize(){
     return criteria.size();
@@ -16,6 +16,13 @@ std::string Player::getColour(){
 
 int Player::getCompleted(){
     return criteriaCompleted;
+}
+
+std::vector<Criterion*> Player::getCriterion() {
+    return criteria;
+}
+std::vector<Goal*> Player::getGoals() {
+    return goals;
 }
 
 

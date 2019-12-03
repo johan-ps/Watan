@@ -12,6 +12,7 @@
 
 class FileManager {
     //std::string fileName;
+    void readBoardFromString(std::string boardData, GameState &gameState);
 
     public:
     FileManager();
