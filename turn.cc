@@ -42,20 +42,23 @@ void Turn::startTurn(Player *playerTurn){
                 //roll dice
                 try {
                     gm->dice->roll();
-                    unsigned int resourceCount = 0;
+                    unsigned int totalResourceCount = 0;
                     for (auto &player : gm->gameState->players) {
                         std::string resourcesGained = "";
+                        unsigned int playerResourceCount = 0;
                         std::vector<int> tempResources = player->getResourcesGained();
                         for (auto resourceNum : tempResources) {
-                            resourceCount += resourceNum;
+                            totalResourceCount += resourceNum;
+                            playerResourceCount += resourceNum;
                             Resource resource {resourceNum};
                             resourcesGained += std::to_string(resourceNum) + " " + resource.getNameToUpper() + "\n";
                         }
-                        if (resourcesGained.length() > 0) {
+                        if (playerResourceCount != 0) {
                             std::cout << "Student " << player->getColour() << " gained:" << std::endl;
+                            std::cout << resourcesGained;
                         }
                     }
-                    if (resourceCount == 0) {
+                    if (totalResourceCount == 0) {
                         std::cout << "No students gained resources." << std::endl;
                     }
                     gm->gameState->curTurn = count;

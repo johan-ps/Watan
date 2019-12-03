@@ -9,7 +9,7 @@
 class Player;
 
 struct GameState {
-    int curTurn;
+    int curTurn = 0;
     int gooseTile = 5;
     std::vector<std::unique_ptr<Player>> players;
     std::vector<int> values;

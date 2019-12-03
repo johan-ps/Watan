@@ -39,7 +39,7 @@ std::vector<int> Player::getResourcesGained() {
 }
 
 void Player::addResourceGained(Resource type, int amount) {
-    resources.at(type.getVal()) += amount;
+    resourcesGained.at(type.getVal()) += amount;
 }
 
 // PlayerInfo Player::getInfo(){

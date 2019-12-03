@@ -27,6 +27,7 @@ class GameManager {
     std::unique_ptr<Board> gameBoard;
     TextDisplay *td;
     bool seedInit = false;
+    bool loadFromFile = false;
 
 
     public:
@@ -35,7 +36,7 @@ class GameManager {
     void gameOver(std::string winner);
     void createPlayers(int num);
     void createBoard(int boardSize);
-    void startTurns();
+    void startTurns(int whoseTurn = 0);
     Board getGameBoard();
     void seed(int x);
     void load(std::string x);

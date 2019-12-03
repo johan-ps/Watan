@@ -40,15 +40,15 @@ std::string findDir(int colA, int rowA, int colB, int rowB) {
 //notify appropriate tiles with the given dice value
 void Board::notify(int diceVal) {
     std::cout << "The dice roll value is " << diceVal << "." << std::endl;
-    // if (diceVal == 7) {
-    //     return;
-    // }
+    if (diceVal == 7) {
+        return;
+    }
     for (auto &n : tiles) {
         if (n->getInfo().value == diceVal) {
             n->notify();
         }
     }
-    
+
 }
 
 void Board::initValues(std::vector<int> tileVals) {
@@ -485,9 +485,6 @@ std::string Board::findNeighbourByGoal(std::string goalDir) {
 }
 
 void Board::drawBoard() {
-    // for (int i = 0; i < 19; i++) {
-    //     tiles.at(i)->printTile();
-    // }
     td->drawBoard();
 }
 
