@@ -32,7 +32,7 @@ class GameManager {
     public:
     GameManager();
     bool startGame();
-    std::string gameOver();
+    void gameOver(std::string winner);
     void createPlayers(int num);
     // void createDice();
     void createBoard(int boardSize);

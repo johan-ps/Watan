@@ -97,7 +97,9 @@ void Turn::endTurn() {
                 } catch (InvalidLocationException &l) {
                     std::cout << l.getError() << std::endl;
                     continue;
-                }         
+                } catch (char const *s) {
+                    std::cout << s << std::endl;
+                }
             } else if (input == "complete") {
                 int loc;
                 std::cin >> loc;
@@ -115,6 +117,8 @@ void Turn::endTurn() {
                 } catch (char const *s) {
                     std::cout << s << std::endl;
                     continue;
+                } catch (GameOverException &g) {
+                    throw g;
                 }
             } else if (input == "improve") {
                 int loc;
@@ -133,6 +137,8 @@ void Turn::endTurn() {
                 } catch (InvalidLocationException &l) {
                     std::cout << l.getError() << std::endl;
                     continue;
+                } catch (GameOverException &g) {
+                    throw g;
                 }
             } else if (input == "trade") {
                 Player *player = nullptr;

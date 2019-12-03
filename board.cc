@@ -509,6 +509,8 @@ void Board::completeCriteria(int loc, Player *player, bool init) {
         throw r;
     } catch (InvalidLocationException &l) {
         throw l;
+    } catch (GameOverException &g) {
+        throw g;
     }
     std::string playerAssignment = player->getColour().substr(0, 1) + 'A';
     td->notify(loc, 'c', playerAssignment);

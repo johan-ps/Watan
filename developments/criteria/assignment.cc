@@ -6,10 +6,13 @@ Assignment::Assignment(int locationVal, std::vector<int> cost):
     Criterion{locationVal, cost} {}
 
 void Assignment::complete(Player *player, bool init) {
-    if(!isSet() /*AND IF THERE IS NO ADJACENT*/){
+    if(!isSet()){
         try {
             player->purchaseCriteria(getCost(), this, false, init);
             setDevelopment(player, 1);
+            if (player->getCompleted() == 10) {
+                throw GameOverException{player->getColour()};
+            }
         } catch (InsufficientResourcesException &r) {
             throw r;
         }
@@ -23,6 +26,7 @@ void Assignment::notify() {}
 void Assignment::distributeResources(Resource resource) {
     Player *owner = getOwner();
     if(owner) {
+        std::cout << owner->getColour() << " recieved a " << resource.getName() << std::endl;
         owner->recieve(resource.getVal(), getCriteriaVal());
     }
 }
@@ -47,6 +51,9 @@ void Assignment::improve(Player* player, bool init) {
     try {
         player->purchaseCriteria(upgradeCost, this, true, init);
         setCriteriaVal(++currentVal);
+        if (player->getCompleted() == 10) {
+            throw GameOverException{player->getColour()};
+        }
     } catch (InsufficientResourcesException &r) {
         throw r;
     }

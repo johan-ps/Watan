@@ -63,6 +63,12 @@ std::string DiceNotSetException::getError() {
     return temp;
 }
 
+GameOverException::GameOverException(std::string playerColour):
+    playerColour{playerColour} {}
+
+std::string GameOverException::getColour() {
+    return playerColour;
+}
 
 
 

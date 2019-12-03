@@ -66,7 +66,17 @@ class DiceNotSetException {
     std::string getError();
 };
 
-class GameOverException {};
+class AdjacentCriteriaExistException{
+    public:
+    std::string getError();
+};
+
+class GameOverException {
+    std::string playerColour;
+    public:
+    GameOverException(std::string playerColour);
+    std::string getColour();
+};
 
 #endif
 

@@ -81,31 +81,59 @@ bool GameManager::startGame() {
 }
 
 std::string GameManager::startTurns() {
-    while (true) {
-        for (auto &player : gameState->players) {
-            turns->startTurn(player.get());
-            std::cout << "DEBUG: Next Player's Turn" << std::endl;
-
-            // CHANGE THIS (and anything else after in the call chain) 
-            // TO WORK WITH AN EXCEPTION THAT WE THROW, IF APPLICABLE
-
-            //std::cout << "DEBUG: RIGHT BEFORE IF STATEMENT" << std::endl;
-            if (player->getCompleted() >= 10){ 
-                //std::cout << "ENTERED IF STATEMENT" << std::endl;
-                std::string response = gameOver();
-                return response;
+    try {
+        while (true) {
+            for (auto &player : gameState->players) {
+                turns->startTurn(player.get());
             }
-            //////////////////////////////////////////////////////////
         }
+    } catch (GameOverException &g) {
+        gameOver(g.getColour());
     }
 }
 
-std::string GameManager::gameOver() { // MAYBE PASS IN " Player *winner " as parameter?
-    //end game
+void GameManager::gameOver(std::string winner) {
     std::string response;
-    std::cout << "Would you like to play again? \n>" << std::endl; // TODO - CHANGE "\n>"" TO SOMETHING BETTER
-    std::cin >> response;
-    return response;
+    std::cout << "Student " << winner << " wins!!!" << std::endl;
+    std::cout << "Would you like to play again?\n> " << std::endl;
+    while(true) {
+        if (std::cin >> response) {
+            if (response == "yes") {
+                std::cout << "Would you like to start a new game, or load from a file?\n> " << std::endl;
+                while(true) {
+                    if (std::cin >> response) {
+                        if (response == "new") {
+                            startGame();
+                        } else if (response == "file") {
+                            std::cin >> response;
+                            board(response);
+                        } else {
+                            std::cout << "Enter 'new' or 'file <filename>'." << std::endl;
+                        }
+                    }else {
+                        if (std::cin.eof()) {
+                            break;
+                        } else if (std::cin.fail()) {
+                            std::cin.clear();
+                            std::cin.ignore();
+                        }
+                    }
+                }
+            } else if (response == "no") {
+                break;
+            } else {
+                std::cout << "Enter 'yes' or 'no'." << std::endl;
+            }
+        } else {
+            if (std::cin.eof()) {
+                break;
+            } else if (std::cin.fail()) {
+                std::cin.clear();
+                std::cin.ignore();
+            }
+        }
+    }
+
 }
 
 void GameManager::createBoard(int boardSize) {
