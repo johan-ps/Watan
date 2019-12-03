@@ -491,15 +491,15 @@ void Board::drawBoard() {
 }
 
 void Board::completeCriteria(int loc, Player *player, bool init) {
+    if (loc < 0 || loc > 53) {
+        throw InvalidLocationException{};
+    }
+
     // for(auto&& aTile: tiles){
     //     if(aTile->checkAdjCriteria(loc)){
     //         throw "AdjacentCriteriaExistException";
     //     }
     // }
-
-    if (loc < 0 || loc > 53) {
-        throw InvalidLocationException{};
-    }
 
     try {
         criteria.at(loc)->complete(player, init);
@@ -532,12 +532,12 @@ void Board::achieveGoal(int loc, Player *player, bool init) {
     td->notify(loc, 'g', playerAchievement);
 }
 
-void Board::improveCriteria(int loc, Player *player) {
+void Board::improveCriteria(int loc, Player *player, bool init) {
     if (loc < 0 || loc > 53) {
         throw InvalidLocationException{};
     }
     try {
-        criteria.at(loc)->improve(player);
+        criteria.at(loc)->improve(player, init);
     } catch (InsufficientResourcesException &r) {
         throw r;
     } catch (InvalidCriteriaException &c) {
@@ -548,7 +548,7 @@ void Board::improveCriteria(int loc, Player *player) {
     char criteriaType = 'A';
     if (criteria.at(loc)->getCriteriaVal() == 2) {
         criteriaType = 'M';
-    } else {
+    } else if (criteria.at(loc)->getCriteriaVal() == 3) {
         criteriaType = 'E';
     }
     std::string playerAssignment = player->getColour().substr(0, 1) + criteriaType;

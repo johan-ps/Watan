@@ -37,9 +37,9 @@ public:
     void setValues(std::vector<int> values);
     void init(int boardSize);
     void drawBoard();
-    void completeCriteria(int loc, Player *player, bool init);
-    void improveCriteria(int loc, Player *player);
-    void achieveGoal(int loc, Player *player, bool init);
+    void completeCriteria(int loc, Player *player, bool init = false);
+    void improveCriteria(int loc, Player *player, bool init = false);
+    void achieveGoal(int loc, Player *player, bool init = false);
     void initValues(std::vector<int> values);
     void initResources(std::vector<Resource> resources);
     void initCriteria(std::vector<Criterion*> criteriaOwned);

@@ -78,6 +78,7 @@ void Student::purchaseCriteria(std::vector<int> cost, Criterion *newCriterion, b
     if (init) {
         criteria.push_back(newCriterion);
         ++criteriaCompleted;
+        return;
     }
 
     for(unsigned int i = 0; i < 5; ++i) {
@@ -104,6 +105,7 @@ void Student::purchaseCriteria(std::vector<int> cost, Criterion *newCriterion, b
 void Student::purchaseGoal(std::vector<int> cost, Goal *newGoal, bool init) {
     if (init) {
         goals.push_back(newGoal);
+        return;
     }
     for(unsigned int i = 0; i < 5; ++i) {
         if(cost[i] > resources[i]) {

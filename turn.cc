@@ -93,12 +93,14 @@ void Turn::endTurn() {
                     std::cout << r.getError() << std::endl;
                 } catch (InvalidLocationException &l) {
                     std::cout << l.getError() << std::endl;
-                } 
+                } catch (char const *s) {
+                    std::cout << s << std::endl;
+                }
             } else if (input == "improve") {
                 int loc;
                 std::cin >> loc;
                 try {
-                    gm->gameBoard->improveCriteria(loc, whoseTurn);
+                    gm->gameBoard->improveCriteria(loc, whoseTurn, true);
                 } catch (InsufficientResourcesException &r) {
                     std::cout << r.getError() << std::endl;
                 }  catch (InvalidCriteriaException &c) {

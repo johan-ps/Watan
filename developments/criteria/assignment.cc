@@ -43,7 +43,7 @@ void Assignment::improve(Player* player, bool init) {
     } else {
         throw CriteriaCannotBeImprovedException{getLocationVal()};
     }
-    setCriteriaVal(++currentVal);
+    
     try {
         player->purchaseCriteria(upgradeCost, this, true, init);
         setCriteriaVal(++currentVal);
