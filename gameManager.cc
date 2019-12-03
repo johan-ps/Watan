@@ -30,7 +30,7 @@ void GameManager::board(std::string x) {
     fileManager->readBoardFromFile(*gameState, x);
 }
 
-bool GameManager::startGame() {
+void GameManager::startGame() {
     gameBoard = std::make_unique<Board>();
     createPlayers(4);
     createBoard(19);
@@ -65,22 +65,22 @@ bool GameManager::startGame() {
     dice->setBoard(gameBoard.get());
     turns = new Turn{this};
 
-    std::string response = startTurns();
+    startTurns();
 
-    if (response == "yes"){
-        return true;
-    }
-    else if (response == "no"){
-        return false;
-    }
-    else{
-        // MAYBE NEED TO HAVE THIS CHECK IN StartTurns()?
-        std::cout << "Good job man you gave the program an invalid command (should've done yes or no)" << std::endl;
-        return false;
-    }
+    // if (response == "yes"){
+    //     return true;
+    // }
+    // else if (response == "no"){
+    //     return false;
+    // }
+    // else{
+    //     // MAYBE NEED TO HAVE THIS CHECK IN StartTurns()?
+    //     std::cout << "Good job man you gave the program an invalid command (should've done yes or no)" << std::endl;
+    //     return false;
+    // }
 }
 
-std::string GameManager::startTurns() {
+void GameManager::startTurns() {
     try {
         while (true) {
             for (auto &player : gameState->players) {

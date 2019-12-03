@@ -31,7 +31,7 @@ class GameManager {
 
     public:
     GameManager();
-    bool startGame();
+    void startGame();
     void gameOver(std::string winner);
     void createPlayers(int num);
     // void createDice();
@@ -39,7 +39,7 @@ class GameManager {
     // void createFileManager();
     // void moveGeese();
     // void printPlayerStatus();
-    std::string startTurns();
+    void startTurns();
     // void saveGame();
     Board getGameBoard();
     void seed(int x);
