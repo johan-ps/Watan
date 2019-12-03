@@ -75,8 +75,8 @@ bool Tile::checkAdjCriteria(int locationVal){
 
         if(locationVal == criteria[choice]->getLocationVal()){
             spot = i;
-            adjOne = cardinal[(int)(abs(spot - 1.5) - 0.5)];
-            adjTwo = cardinal[(int)(-abs(spot - 3.5) + 5.5)];
+            adjOne = cardinal[(int)(fabs(spot - 1.5) - 0.5)];
+            adjTwo = cardinal[(int)(-fabs(spot - 3.5) + 5.5)];
 
             if(criteria[adjOne]->isSet() || criteria[adjTwo]->isSet()){
                 return false;
