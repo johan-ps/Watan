@@ -495,11 +495,11 @@ void Board::completeCriteria(int loc, Player *player, bool init) {
         throw InvalidLocationException{};
     }
 
-    // for(auto&& aTile: tiles){
-    //     if(aTile->checkAdjCriteria(loc)){
-    //         throw "AdjacentCriteriaExistException";
-    //     }
-    // }
+    for(auto&& aTile: tiles){
+        if(!aTile->checkAdjCriteria(loc)){
+            throw "AdjacentCriteriaExistException";
+        }
+    }
 
     try {
         criteria.at(loc)->complete(player, init);

@@ -87,7 +87,7 @@ void Turn::endTurn() {
                 int loc;
                 std::cin >> loc;
                 try {
-                    gm->gameBoard->achieveGoal(loc, whoseTurn, true);
+                    gm->gameBoard->achieveGoal(loc, whoseTurn);
                 } catch (AlreadyAchievedException &a) {
                     std::cout << a.getError() << std::endl;
                     continue;
@@ -102,7 +102,7 @@ void Turn::endTurn() {
                 int loc;
                 std::cin >> loc;
                 try {
-                    gm->gameBoard->completeCriteria(loc, whoseTurn, true);
+                    gm->gameBoard->completeCriteria(loc, whoseTurn);
                 } catch (AlreadyCompletedException &c) {
                     std::cout << c.getError() << std::endl;
                     continue;
@@ -120,7 +120,7 @@ void Turn::endTurn() {
                 int loc;
                 std::cin >> loc;
                 try {
-                    gm->gameBoard->improveCriteria(loc, whoseTurn, true);
+                    gm->gameBoard->improveCriteria(loc, whoseTurn);
                 } catch (InsufficientResourcesException &r) {
                     std::cout << r.getError() << std::endl;
                     continue;
