@@ -60,22 +60,110 @@ void Board::placeGeese(int tileNum){
     std:: cout << "(Or desired tile does not exist)" << std::endl;
 }
 
-void Board::initValues(std::vector<int> values) {
-    this->values = values;
+void Board::initValues(std::vector<int> tileVals) {
+    for (auto n : tileVals) {
+        values.emplace_back(n);;
+    }
+}
+
+void Board::initResources(std::vector<Resource> resourceTypes) {
+    this->resources = resourceTypes;
+}
+
+void Board::initCriteria(std::vector<Criterion*> criteriaOwned) {
+    bool isAdd = false;
+    if (criteriaOwned.size() == 0) {
+        for (int i = 0; i < 54; i++) {
+            criteria.emplace_back(new Assignment{i});
+        }
+    } else {
+        for (int i = 0; i < 54; i++) {
+            for (unsigned int j = 0; j < criteriaOwned.size(); j++) {
+                if (criteriaOwned.at(j)->getLocationVal() == i) {
+                    criteria.emplace_back(criteriaOwned.at(j));
+                    isAdd = true;
+                    break;
+                }
+            }
+            if (!isAdd) {
+                criteria.emplace_back(new Assignment{i});
+            }
+            isAdd = false;
+        }
+    }
+}
+
+void Board::initGoals(std::vector<Goal*> goalsOwned) {
+    bool isAdd = false;
+    if (goalsOwned.size() == 0) {
+        for (int i = 0; i < 72; i++) {
+            goals.emplace_back(new Achievement{i});
+        }
+    } else {
+        for (int i = 0; i < 72; i++) {
+            for (unsigned int j = 0; j < goalsOwned.size(); j++) {
+                if (goalsOwned.at(j)->getLocationVal() == i) {
+                    goals.emplace_back(goalsOwned.at(j));
+                    isAdd = true;
+                    break;
+                }
+            }
+            if (!isAdd) {
+                goals.emplace_back(new Achievement{i});
+            }
+            isAdd = false;
+        }
+    }
+}
+
+void Board::setTextDisplay(TextDisplay *textDisplay) {
+    td = textDisplay;
+}
+
+std::vector<std::string> Board::getCriteria() {
+    std::vector<std::string> criteriaTemp;
+
+    for (auto n : criteria) {
+        if (n->getOwner()) {
+            char criteriaType = 'A';
+            if (n->getCriteriaVal() == 2) {
+                criteriaType = 'M';
+            } else {
+                criteriaType = 'E';
+            }
+            std::string playerAssignment = n->getOwner()->getColour().substr(0, 1) + criteriaType;
+            std::cout << "Criteria: <" << n->getLocationVal() << "> has owner: " << playerAssignment << std::endl;
+            criteriaTemp.emplace_back(playerAssignment);
+        } else {
+            criteriaTemp.emplace_back(n->getLocationVal() < 10 ? " " + std::to_string(n->getLocationVal()) : std::to_string(n->getLocationVal()));
+        }
+        //std::cerr << criteriaTemp.back() << std::endl;
+    }
+    return criteriaTemp;
+}
+
+std::vector<std::string> Board::getGoals() {
+    std::vector<std::string> goalsTemp;
+    for (auto n : goals) {
+        if (n->getOwner()) {
+            char goalType = 'A';
+            std::string playerAssignment = n->getOwner()->getColour().substr(0, 1) + goalType;
+            goalsTemp.emplace_back(playerAssignment);
+        } else {
+            goalsTemp.emplace_back(n->getLocationVal() < 10 ? " " + std::to_string(n->getLocationVal()) : std::to_string(n->getLocationVal()));
+        }
+    }
+    return goalsTemp;
 }
 
 void Board::initTiles() {
-    // for (int i = 0; i < 19; i++) {
-    //     values[0] = std::rand() %
-    // }
-
     int counter = 0, width[9] = {1, 2, 3, 2, 3, 2, 3, 2, 1};
 
     //fill board with tiles
     int col = 0, row = 2;
     for (int i = 0; i < 9; i++) {
         for (int j = 0; j < width[i]; j++) {
-            tiles.emplace_back(new Tile(counter, values.at(counter), std::string("CAFFEINE"), col, row));
+            tiles.emplace_back(new Tile(counter, values.at(counter), resources.at(counter), col, row));
             row += 2;
             counter++;
         }
@@ -105,12 +193,7 @@ void Board::initTiles() {
     }
 }
 
-void Board::initCriteria() {
-    //create 54 criterion objects
-    for (int i = 0; i < 54; i++) {
-        criteria.emplace_back(new Assignment{i});
-    }
-
+void Board::setCriteria() {
     //init first 3 rows of criteria
     int count = 0;
     std::string dir[6] = {"NW", "NE", "W", "E", "SW", "SE"};
@@ -176,14 +259,10 @@ void Board::initCriteria() {
     }
 }
 
-void Board::initGoals() {
+void Board::setGoals() {
     int width[9] = {1, 2, 3, 2, 3, 2, 3, 2, 1};
     std::string dir[6] = {"N", "NW", "NE", "SW", "SE", "S"};
     int tileCount = 0, goalCount = 0;
-
-    for (int i = 0; i < 72; i++) {
-        goals.emplace_back(new Achievement{i});
-    }
 
     for (int i = 0; i < 3; i++) {
         for (int j = 0; j < width[i]; j++) {
@@ -328,17 +407,8 @@ void Board::init(int boardSize) {
     tileCount = boardSize;
 
     initTiles();
-    initCriteria();
-    initGoals();
-
-    std::vector<std::string> resources;
-    std::vector<std::string> tileValues;
-    for (int i = 0; i < boardSize; i++) {
-        resources.emplace_back(tiles.at(i)->getInfo().resource);
-        tileValues.emplace_back(values.at(i) < 10 ? " " + std::to_string(values.at(i)) : std::to_string(values.at(i)));
-    }
-    
-    td = new TextDisplay(resources, tileValues);
+    setCriteria();
+    setGoals();
 }
 
 std::string Board::getOppositeDirection(std::string dirTile, std::string dirCriterion) {
@@ -431,25 +501,75 @@ void Board::drawBoard() {
 }
 
 void Board::completeCriteria(int loc, Player *player, bool init) {
+    if (loc < 0 || loc > 53) {
+        throw InvalidLocationException{};
+    }
+
+    for(auto&& aTile: tiles){
+        if(!aTile->checkAdjCriteria(loc)){
+            throw "AdjacentCriteriaExistException";
+        }
+    }
+
     try {
         criteria.at(loc)->complete(player, init);
-    } catch (std::string) {
-        return;
+    } catch (AlreadyCompletedException &c) {
+        throw c;
+    } catch (InsufficientResourcesException &r) {
+        throw r;
+    } catch (InvalidLocationException &l) {
+        throw l;
     }
     std::string playerAssignment = player->getColour().substr(0, 1) + 'A';
     td->notify(loc, 'c', playerAssignment);
 }
 
-void Board::improveCriteria(int loc, Player *player) {
+void Board::achieveGoal(int loc, Player *player, bool init) {
+    bool canBuild = false;
+    for(auto&& aTile: tiles){
+        if(aTile->checkAdjGoal(loc, player->getColour())){
+            canBuild = true;
+        }
+    }
+
+    if(!canBuild){
+        throw "CannotBuildHereException";
+    }
+
+    if (loc < 0 || loc > 71) {
+        throw InvalidLocationException{};
+    }
+
     try {
-        criteria.at(loc)->improve(player);
-    } catch (std::string) {
-        return;
+        goals.at(loc)->achieve(player, init);
+    } catch (AlreadyAchievedException &a) {
+        throw a;
+    } catch (InsufficientResourcesException &r) {
+        throw r;
+    } catch (InvalidLocationException &l) {
+        throw l;
+    }
+    std::string playerAchievement = player->getColour().substr(0, 1) + 'A';
+    td->notify(loc, 'g', playerAchievement);
+}
+
+void Board::improveCriteria(int loc, Player *player, bool init) {
+    if (loc < 0 || loc > 53) {
+        throw InvalidLocationException{};
+    }
+    try {
+        criteria.at(loc)->improve(player, init);
+    } catch (InsufficientResourcesException &r) {
+        throw r;
+    } catch (InvalidCriteriaException &c) {
+        throw c;
+    } catch (CriteriaCannotBeImprovedException &c) {
+        throw c;
     }
     char criteriaType = 'A';
     if (criteria.at(loc)->getCriteriaVal() == 2) {
         criteriaType = 'M';
-    } else {
+    } else if (criteria.at(loc)->getCriteriaVal() == 3) {
         criteriaType = 'E';
     }
     std::string playerAssignment = player->getColour().substr(0, 1) + criteriaType;
@@ -461,7 +581,7 @@ void Board::setGeese(Geese *incomingFlock){
     geese = incomingFlock;
 }
 
-Tile *Board::getTileByLocation(int loc){
+Tile *Board::getTileByLocation(int loc){ // Maybe consider Geese having a reference to it's owned tile?
     for (auto tile: tiles){
         if (tile->getInfo().location == loc){
             return tile;
@@ -471,3 +591,16 @@ Tile *Board::getTileByLocation(int loc){
     // Otherwise, return nullptr as tile was not found
     return nullptr;
 }
+Board::~Board() {
+    delete td;
+    tiles.clear();
+    criteria.clear();
+    goals.clear();
+    values.clear();
+    resources.clear();
+}
+
+
+
+
+

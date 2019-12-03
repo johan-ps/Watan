@@ -3,11 +3,6 @@
 
 #include "../player/player.h"
 #include <vector>
-//#include <map>
-
-
-//class Player;
-//class Resource;
 
 class Development {
     int locationVal;
@@ -28,7 +23,12 @@ class Development {
         int getCriteriaVal();
         void setCriteriaVal(int);
         bool isSet();
-        Player * getOwner();
+        Player *getOwner();
 };
 
 #endif
+
+
+
+
+

@@ -5,13 +5,14 @@
 // #include "./assets/developments/criteria/assignment.h"
 // #include "./assets/developments/goal/goal.h"
 // #include "./assets/developments/goal/achievement.h"
-#include "./player/player.h"
-#include "board.h"
+//#include "resource.h"
+//#include "./player/player.h"
+//#include "board.h"
 //#include "tile.h"
-#include "textDisplay.h"
+//#include "textDisplay.h"
 #include "gameManager.h"
 
-#include "dice.h"
+//#include "dice.h"
 #include <iostream>
 
 int main(int argc, char *argv[]) {
@@ -44,3 +45,8 @@ int main(int argc, char *argv[]) {
     // TextDisplay *td = new TextDisplay();
     // td->drawBoard();
 }
+
+
+
+
+

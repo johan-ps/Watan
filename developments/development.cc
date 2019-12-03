@@ -38,8 +38,15 @@ const std::vector<int> Development::getCost(){
     return cost;
 }
 
-Player * Development::getOwner() {
+Player *Development::getOwner() {
     return player;
 }
 
-Development::~Development() {}
+Development::~Development() {
+    delete player;
+}
+
+
+
+
+

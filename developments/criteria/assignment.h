@@ -2,18 +2,22 @@
 #define ASSIGNMENT_H
 
 #include "criterion.h"
-#include "../../tile.h"
 #include "../../player/player.h"
-#include <vector>
+#include "../../exception.h"
 
 class Assignment : public Criterion {
 
     public:
         Assignment(int location, std::vector<int> cost = {1, 1, 1, 0, 1});
-        void complete(Player* player, bool init) override;
+        void complete(Player* player, bool init = false) override;
         void notify() override;
-        void improve(Player* player) override;
-        void distributeResources(std::string) override;
+        void improve(Player* player, bool init = false) override;
+        void distributeResources(Resource resource) override;
+        ~Assignment();
 };
 
 #endif
+
+
+
+

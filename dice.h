@@ -8,6 +8,7 @@
 class Dice {
     bool isRandom;
     bool isSeed;
+    bool isSet;
     Board *board;
     int rollVal;
 
@@ -16,10 +17,16 @@ class Dice {
         void setBoard(Board *board);
         void roll();
         void setLoadVal(int rollChoice);
-        void setDice(bool isRand);
+        void setFair();
         void setSeed(int seed);
         int getRollVal();
         ~Dice();
 };
 
 #endif
+
+
+
+
+
+

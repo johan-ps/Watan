@@ -1,7 +1,9 @@
 #include "tile.h"
 #include <iostream>
+#include <cmath>
+#include <memory>
 
-Tile::Tile(int location, int value, std::string resource, int col, int row):
+Tile::Tile(int location, int value, Resource resource, int col, int row):
     location{location}, value{value}, resource{resource}, col{col}, row{row} {}
 
 
@@ -15,6 +17,104 @@ TileInfo Tile::getInfo() {
     return {
         location, value, col, row, resource, criteria, goals, neighbours
     };
+}
+
+bool Tile::checkAdjCriteria(int locationVal){
+    std::string cardinal[6] = {"NW", "NE", "W", "E", "SW", "SE"};
+    std::string choice, adjOne, adjTwo;
+    double spot;
+
+    for(int i = 0; i < 6; ++i){
+        choice = cardinal[i];
+
+        if(locationVal == criteria[choice]->getLocationVal()){
+            spot = i;
+            adjOne = cardinal[(int)(fabs(spot - 1.5) - 0.5)];
+            adjTwo = cardinal[(int)(-fabs(spot - 3.5) + 5.5)];
+
+            if(criteria[adjOne]->isSet() || criteria[adjTwo]->isSet()){
+                return false;
+            }
+        }
+    }
+    return true;
+}
+
+bool Tile::checkAdjGoal(int locationVal, std::string colour){
+    std::string critCard[6] = {"NW", "NE", "W", "E", "SW", "SE"};
+    std::string goalCard[6] = {"N", "NW", "NE", "SW", "SE", "S"};
+    std::string choice;
+    double spot;
+
+    for(int i = 0; i < 6; ++i){
+        choice = goalCard[i];
+
+        if(locationVal == goals[choice]->getLocationVal()){
+            spot = i;
+            Player * adjCritA = criteria[critCard[(int)(fabs(spot - 0.5) - 0.5)]]->getOwner();
+            Player * adjCritB = criteria[critCard[(int)(-fabs(spot - 4.5) + 5.5)]]->getOwner();
+            Player * adjGoalA = goals[goalCard[(int)(fabs(spot - 1.5) - 0.5)]]->getOwner();
+            Player * adjGoalB = goals[goalCard[(int)(-fabs(spot - 3.5) + 5.5)]]->getOwner();
+            Tile * adjTileA = neighbours[goalCard[(int)(fabs(spot - 1.5) - 0.5)]];
+            Tile * adjTileB = neighbours[goalCard[(int)(-fabs(spot - 3.5) + 5.5)]];
+
+            //Checks adjacent Criteria
+            if(adjCritA && (colour == adjCritA->getColour())){
+                return true;
+            } else if(adjCritB && (colour == adjCritB->getColour())){
+                return true;
+            //Checks adjacent Goals on the same tile
+            } else if(adjGoalA && (colour == adjGoalA->getColour())){
+                return true;
+            } else if(adjGoalB && (colour == adjGoalB->getColour())){
+                return true;
+            }
+
+            //Checks adjacent Goals on adjacent Tiles
+            if(adjTileA){
+                if(adjTileA->checkAdjTile(spot, true, colour)) {
+                    return true;
+                } 
+            } 
+            if(adjTileB){
+                if(adjTileB->checkAdjTile(spot, false, colour)) {
+                    return true;
+                } 
+            }
+        }
+    }
+    return false;
+}
+
+bool Tile::checkAdjTile(double spot, bool isTileA, std::string colour){
+    std::string tileCard[6] = {"N", "NW", "NE", "SW", "SE", "S"};
+    Player * adjGoalA;
+    Player * adjGoalB;
+
+    int x = (int) spot;
+    if(isTileA){
+        if(x % 5){ 
+            adjGoalA = goals["S"]->getOwner();
+        } else {
+            adjGoalA = goals["SE"]->getOwner();
+        }
+        adjGoalB = goals[tileCard[(int)(-fabs(spot - 2.5) + 4.5)]]->getOwner();
+    } else {
+        if(x % 5){ 
+            adjGoalA = goals["N"]->getOwner();
+        } else {
+            adjGoalA = goals["NW"]->getOwner();
+        }
+        adjGoalB = goals[tileCard[(int)(fabs(spot - 2.5) + 0.5)]]->getOwner();
+    }
+
+    if(adjGoalA && (colour == adjGoalA->getColour())){
+        return true;
+    } else if(adjGoalB && (colour == adjGoalB->getColour())){
+        return true;
+    }
+
+    return false;
 }
 
 
@@ -71,6 +171,7 @@ void Tile::printTile() {
     //     }
     //     std::cout << std::endl;
     // }
+    
     std::string dir3[6] = {"N", "NW", "NE", "SW", "SE", "S"};
     for (int i = 0; i < 6; i++) {
         try {
@@ -84,3 +185,15 @@ void Tile::printTile() {
     }
 
 }
+
+
+Tile::~Tile() {
+    // criteria.clear();
+    // goals.clear();
+    // neighbours.clear();
+}
+
+
+
+
+
