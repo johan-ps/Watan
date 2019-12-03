@@ -21,13 +21,13 @@ void GameManager::seed(int x) {
 
 void GameManager::load(std::string x) {
     //std::cout << "Load saved game from file: " << x << std::endl;
-    fileManager->readGameFromFile(x, *gameState);
+    fileManager->readGameFromFile(*gameState, x);
     //std::cout << "Size >>>>>>>>>> " << gameState->resourcesTypes.size() << std::endl;
 }
 
 void GameManager::board(std::string x) {
     //std::cout << "Load board from file: " << x << std::endl;
-    fileManager->readBoardFromFile(x, *gameState);
+    fileManager->readBoardFromFile(*gameState, x);
 }
 
 bool GameManager::startGame() {

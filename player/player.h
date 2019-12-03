@@ -39,8 +39,8 @@ class Player {
         virtual std::vector<int> getResources();
 
         //Should possibly change to development pointer or add a purchaseGoal method
-        virtual bool purchaseCriteria(std::vector<int> cost, Criterion *newCriterion, bool improving, bool init = false) = 0;
-        virtual bool purchaseGoal(std::vector<int> cost, Goal *newGoal  , bool init = false) = 0;
+        virtual void purchaseCriteria(std::vector<int> cost, Criterion *newCriterion, bool improving, bool init = false) = 0;
+        virtual void purchaseGoal(std::vector<int> cost, Goal *newGoal  , bool init = false) = 0;
         
         // Accessors
         std::string getColour();

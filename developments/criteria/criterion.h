@@ -2,7 +2,6 @@
 #define __CRITERION_H__
 #include "../development.h"
 #include "../../observer.h"
-//#include "../../player/player.h"
 #include "../../resources.h"
 #include <string>
 

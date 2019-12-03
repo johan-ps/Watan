@@ -3,6 +3,7 @@
 
 #include "goal.h"
 #include "../../player/player.h"
+#include "../../exception.h"
 
 class Achievement : public Goal {
     public:

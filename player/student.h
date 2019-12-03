@@ -4,7 +4,6 @@
 #include "player.h"
 #include "../exception.h"
 
-//class InvalidTradeException;
 class Development;
 
 class Student : public Player {
@@ -18,8 +17,8 @@ class Student : public Player {
     void remove(Resource type, int amount) override;
     void printStatus() override;
     void printCompletions() override;
-    bool purchaseCriteria(std::vector<int> cost, Criterion *newCriterion, bool improving, bool init = false) override;
-    bool purchaseGoal(std::vector<int> cost, Goal *newGoal, bool init = false) override;
+    void purchaseCriteria(std::vector<int> cost, Criterion *newCriterion, bool improving, bool init = false) override;
+    void purchaseGoal(std::vector<int> cost, Goal *newGoal, bool init = false) override;
     ~Student();
 };
 

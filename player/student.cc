@@ -74,15 +74,16 @@ void Student::printStatus() {
     }
 }
 
-bool Student::purchaseCriteria(std::vector<int> cost, Criterion * newCriterion, bool improving, bool init) {
+void Student::purchaseCriteria(std::vector<int> cost, Criterion *newCriterion, bool improving, bool init) {
     if (init) {
         criteria.push_back(newCriterion);
         ++criteriaCompleted;
-        return true;
     }
-    for(int i = 0; i < 5; ++i) {
+
+    for(unsigned int i = 0; i < 5; ++i) {
         if(cost[i] > resources[i]) {
-            return false;
+            Resource temp {i};
+            throw InsufficientResourcesException {temp.getName(), getColour()};
         }
     }
     for(int j = 0; j < 5; ++j){
@@ -98,17 +99,16 @@ bool Student::purchaseCriteria(std::vector<int> cost, Criterion * newCriterion, 
         //end the game somehow 
         // WE SHOULD PROBABLY THROW A "GameWon" EXCEPTION AND CATCH IT ALL THE WAY BACK IN END TURN!!!
     }
-    return true;
 }
 
-bool Student::purchaseGoal(std::vector<int> cost, Goal *newGoal, bool init) {
+void Student::purchaseGoal(std::vector<int> cost, Goal *newGoal, bool init) {
     if (init) {
         goals.push_back(newGoal);
-        return true;
     }
-    for(int i = 0; i < 5; ++i) {
+    for(unsigned int i = 0; i < 5; ++i) {
         if(cost[i] > resources[i]) {
-            return false;
+            Resource temp {i};
+            throw InsufficientResourcesException {temp.getName(), getColour()};
         }
     }
     for(int j = 0; j < 5; ++j){
@@ -116,7 +116,6 @@ bool Student::purchaseGoal(std::vector<int> cost, Goal *newGoal, bool init) {
     }
 
     goals.push_back(newGoal);
-    return true;
 }
 
 

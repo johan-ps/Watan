@@ -14,7 +14,6 @@
 #include "fileManager.h"
 #include "dice.h"
 #include "turn.h"
-//#include "resources.h"
 #include "exception.h"
 
 class Resource;

@@ -497,34 +497,53 @@ void Board::completeCriteria(int loc, Player *player, bool init) {
     //     }
     // }
 
+    if (loc < 0 || loc > 53) {
+        throw InvalidLocationException{};
+    }
+
     try {
-        std::cout << "Try" << std::endl;
         criteria.at(loc)->complete(player, init);
-    } catch (...) {
-        return;
+    } catch (AlreadyCompletedException &c) {
+        throw c;
+    } catch (InsufficientResourcesException &r) {
+        throw r;
+    } catch (InvalidLocationException &l) {
+        throw l;
     }
     std::string playerAssignment = player->getColour().substr(0, 1) + 'A';
     td->notify(loc, 'c', playerAssignment);
 }
 
 void Board::achieveGoal(int loc, Player *player, bool init) {
-    try {
-        std::cout << "Try" << std::endl;
-        goals.at(loc)->achieve(player, init);
-    } catch (...) {
-        return;
+    if (loc < 0 || loc > 71) {
+        throw InvalidLocationException{};
     }
-    std::cout << "Set" << std::endl;
+
+    try {
+        goals.at(loc)->achieve(player, init);
+    } catch (AlreadyAchievedException &a) {
+        throw a;
+    } catch (InsufficientResourcesException &r) {
+        throw r;
+    } catch (InvalidLocationException &l) {
+        throw l;
+    }
     std::string playerAchievement = player->getColour().substr(0, 1) + 'A';
     td->notify(loc, 'g', playerAchievement);
-    std::cout << "Updated" << std::endl;
 }
 
 void Board::improveCriteria(int loc, Player *player) {
+    if (loc < 0 || loc > 53) {
+        throw InvalidLocationException{};
+    }
     try {
         criteria.at(loc)->improve(player);
-    } catch (std::string) {
-        return;
+    } catch (InsufficientResourcesException &r) {
+        throw r;
+    } catch (InvalidCriteriaException &c) {
+        throw c;
+    } catch (CriteriaCannotBeImprovedException &c) {
+        throw c;
     }
     char criteriaType = 'A';
     if (criteria.at(loc)->getCriteriaVal() == 2) {

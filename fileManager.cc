@@ -7,7 +7,7 @@ FileManager::FileManager() {
 
 }
 
-void FileManager::writeToFile(std::string fileName, GameState &gameState) {
+void FileManager::writeToFile(GameState &gameState, std::string fileName) {
     std::ofstream fout {fileName};
     fout << gameState.curTurn << std::endl;
     for (auto &player : gameState.players) {
@@ -85,7 +85,7 @@ void FileManager::readBoardFromString(std::string boardData, GameState &gameStat
     }
 }
 
-void FileManager::readBoardFromFile(std::string fileName, GameState &gameState) {
+void FileManager::readBoardFromFile(GameState &gameState, std::string fileName) {
     std::ifstream file {fileName};
 
     std::string boardData;
@@ -95,7 +95,7 @@ void FileManager::readBoardFromFile(std::string fileName, GameState &gameState) 
 }
 
 
-void FileManager::readGameFromFile(std::string fileName, GameState &gameState) {
+void FileManager::readGameFromFile(GameState &gameState, std::string fileName) {
     std::ifstream fin {fileName};
 
 

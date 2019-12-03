@@ -2,9 +2,8 @@
 #define ASSIGNMENT_H
 
 #include "criterion.h"
-//#include "../../tile.h"
 #include "../../player/player.h"
-//#include <vector>
+#include "../../exception.h"
 
 class Assignment : public Criterion {
 

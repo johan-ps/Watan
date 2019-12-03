@@ -1,35 +1,8 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-
-
-//#include "tile.h"
-//#include "resources.h"
-//#include "textDisplay.h"
-//criterion.h
-    //development.h
-        //player.h
-        //vector
-    //observer.h
-    //player.h
-//tile.h
-    //criterion.h
-    //achievement.h
-        //goal.h
-            //development.h
-    //observer.h
-    //subject.h
-    //vector
-    //string
-    //map
-//player.h
-    //vector
-    //string
-//vector
-
 #include "./developments/goal/achievement.h"
 #include "./developments/criteria/assignment.h"
-//goal.h
 #include "tile.h"
 #include "./player/player.h"
 #include "textDisplay.h"
@@ -38,9 +11,7 @@
 #include "subject.h"
 #include <stdlib.h>
 
-//class Tile;
 class Resource;
-class TextDisplay;
 
 class Board : public Subject, public Observer {
     std::vector<Tile*> tiles;
