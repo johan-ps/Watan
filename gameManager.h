@@ -22,6 +22,7 @@ class GameManager {
     std::unique_ptr<Board> gameBoard;
     TextDisplay *td;
     int seedVal;
+    bool seedInit = false;
     //std::vector<std::unique_ptr<Player>> players;
 
 

@@ -16,6 +16,7 @@ void GameManager::seed(int x) {
     //std::cout << "Set seed to " << x << std::endl;
     dice->setSeed(x);
     seedVal = x;
+    seedInit = true;
     srand(seedVal);
 }
 
@@ -35,7 +36,6 @@ bool GameManager::startGame() {
     createPlayers(4);
     createBoard(19);
     td = new TextDisplay{gameState->resourceTypes, gameState->values, gameState->gooseTile};
-    //td = new TextDisplay(gameBoard->getCriteria(), gameBoard->getGoals(), gameState->resourceTypes, gameState->values);
     gameBoard->setTextDisplay(td);
     //modify textdisplay to current state
     for (auto &player : gameState->players) {
@@ -114,15 +114,23 @@ void GameManager::createBoard(int boardSize) {
         gameBoard->initValues(gameState->values);
         gameBoard->initResources(gameState->resourceTypes);
     } else {
+        if (!seedInit) {
+            srand(std::time(0));
+        }
         std::vector<int> shuffleVal = {2, 3, 3, 4, 4, 5, 5, 6, 6, 7, 8, 8, 9, 9, 10, 10, 11, 11, 12};
         std::random_shuffle(shuffleVal.begin(), shuffleVal.end());
         gameState->values = shuffleVal;
         gameBoard->initValues(gameState->values);
-        
-        for (int i = 0; i < 19; i++) {
-            gameState->resourceTypes.emplace_back("CAFFEINE");
-        }
-        
+        std::vector<std::string> shuffleResources = {
+            "CAFFEINE", "CAFFEINE", "CAFFEINE", "CAFFEINE",
+            "LAB", "LAB", "LAB", "LAB",
+            "LECTURE", "LECTURE", "LECTURE", "LECTURE",
+            "TUTORIAL", "TUTORIAL", "TUTORIAL",
+            "STUDY", "STUDY", "STUDY",
+            "NETFLIX"
+        };
+        std::random_shuffle(shuffleResources.begin(), shuffleResources.end());
+        gameState->resourceTypes = shuffleResources;        
         gameBoard->initResources(gameState->resourceTypes);
     }
     gameBoard->init(boardSize);
