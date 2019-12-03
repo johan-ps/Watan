@@ -62,3 +62,8 @@ std::string DiceNotSetException::getError() {
     std::string temp = "Please set the dice to be loaded or fair: valid commands: [load <diceRoll>] or [fair].";
     return temp;
 }
+
+
+
+
+

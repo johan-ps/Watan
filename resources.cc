@@ -44,3 +44,9 @@ std::string Resource::getNameToUpper() {
     }
     return nameUpper;
 }
+
+
+
+
+
+

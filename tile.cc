@@ -95,3 +95,8 @@ Tile::~Tile() {
     // goals.clear();
     // neighbours.clear();
 }
+
+
+
+
+

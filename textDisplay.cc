@@ -62,3 +62,9 @@ void TextDisplay::notify(int location, char type, std::string player) {
         gooseTile = location;
     }
 }
+
+
+
+
+
+
