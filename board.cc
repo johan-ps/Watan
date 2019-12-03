@@ -495,11 +495,11 @@ void Board::completeCriteria(int loc, Player *player, bool init) {
         throw InvalidLocationException{};
     }
 
-    // for(auto&& aTile: tiles){
-    //     if(aTile->checkAdjCriteria(loc)){
-    //         throw "AdjacentCriteriaExistException";
-    //     }
-    // }
+    for(auto&& aTile: tiles){
+        if(!(aTile->checkAdjCriteria(loc))){
+            throw "AdjacentCriteriaExistException";
+        }
+    }
 
     try {
         criteria.at(loc)->complete(player, init);
@@ -515,20 +515,21 @@ void Board::completeCriteria(int loc, Player *player, bool init) {
 }
 
 void Board::achieveGoal(int loc, Player *player, bool init) {
-<<<<<<< HEAD
+    bool canBuild = false;
     for(auto&& aTile: tiles){
-        if(!aTile->checkAdjGoal(loc, player->getColour())){
-            throw "InvalidAchievementLocationException"
+        if(aTile->checkAdjGoal(loc, player->getColour())){
+            canBuild = true;
         }
     }
 
+    if(!canBuild){
+        throw "CannotBuildHereException";
+    }
 
-=======
     if (loc < 0 || loc > 71) {
         throw InvalidLocationException{};
     }
 
->>>>>>> 012ebceab89784c096697609618f28432da7ed76
     try {
         goals.at(loc)->achieve(player, init);
     } catch (AlreadyAchievedException &a) {
