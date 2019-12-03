@@ -20,6 +20,9 @@ class GameManager {
     Turn *turns;
     // Geese geese;
     std::unique_ptr<Board> gameBoard;
+    TextDisplay *td;
+    //int seedVal;
+    bool seedInit = false;
     //std::vector<std::unique_ptr<Player>> players;
 
 

@@ -8,6 +8,10 @@ void Development::setDevelopment(Player *owner, int developmentVal){
     setCriteriaVal(developmentVal);
 }
 
+void Development::setTextDisplay(TextDisplay *textdisplay) {
+    td = textdisplay;
+}
+
 void Development::setOwner(Player * owner){
     player = owner;
 }

@@ -3,6 +3,7 @@
 
 #include "../player/player.h"
 #include <vector>
+#include "../textDisplay.h"
 //#include <map>
 
 
@@ -19,6 +20,7 @@ class Development {
 
     protected:
         void setDevelopment(Player *, int);
+        TextDisplay *td;
 
     public:
         Development(int locationVal, const std::vector<int> cost);
@@ -27,6 +29,7 @@ class Development {
         int getLocationVal();
         int getCriteriaVal();
         void setCriteriaVal(int);
+        void setTextDisplay(TextDisplay *td);
         bool isSet();
         Player * getOwner();
 };

@@ -18,6 +18,18 @@ int Player::getCompleted(){
     return criteriaCompleted;
 }
 
+std::vector<Criterion*> Player::getCriterion() {
+    return criteria;
+}
+
+std::vector<Goal*> Player::getGoals() {
+    return goals;
+}
+
+std::vector<int> Player::getResources() {
+    return resources;
+}
+
 
 // PlayerInfo Player::getInfo(){
 //     return {resources, criteria, colour};

@@ -15,8 +15,8 @@ class Student : public Player {
     void recieve(int, int) override;
     void printStatus() override;
     void printCompletions() override;
-    bool purchaseCriteria(std::vector<int>, Criterion *, bool) override;
-    bool purchaseGoal(std::vector<int>, Goal *) override;
+    bool purchaseCriteria(std::vector<int>, Criterion *, bool, bool init = false) override;
+    bool purchaseGoal(std::vector<int>, Goal *, bool init = false) override;
 };
 
 #endif

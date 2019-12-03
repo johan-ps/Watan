@@ -16,7 +16,7 @@ Student::Student(std::string colour, std::vector<Criterion*> criteria,
 
 // Trade a resource with otherPlayer
 void Student::trade(Player *otherPlayer, std::string resourceOffered, std::string resourceRequested) {
-
+    
 }
 
 // Steal a random resource from a victim
@@ -53,8 +53,12 @@ void Student::printStatus() {
     }
 }
 
-bool Student::purchaseCriteria(std::vector<int> cost, Criterion * newCriterion, bool improving) {
-
+bool Student::purchaseCriteria(std::vector<int> cost, Criterion * newCriterion, bool improving, bool init) {
+    if (init) {
+        criteria.push_back(newCriterion);
+        ++criteriaCompleted;
+        return true;
+    }
     for(int i = 0; i < 5; ++i) {
         if(cost[i] > resources[i]) {
             return false;
@@ -76,8 +80,11 @@ bool Student::purchaseCriteria(std::vector<int> cost, Criterion * newCriterion, 
     return true;
 }
 
-bool Student::purchaseGoal(std::vector<int> cost, Goal * newGoal) {
-
+bool Student::purchaseGoal(std::vector<int> cost, Goal *newGoal, bool init) {
+    if (init) {
+        goals.push_back(newGoal);
+        return true;
+    }
     for(int i = 0; i < 5; ++i) {
         if(cost[i] > resources[i]) {
             return false;
