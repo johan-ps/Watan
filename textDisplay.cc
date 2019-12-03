@@ -1,12 +1,7 @@
 #include "textDisplay.h"
-#include "hexagon.h"
 #include <iostream>
-#include <string>
 
-// TextDisplay::TextDisplay(std::vector<std::string> resources, std::vector<std::string> tileValues, std::vector<std::string> criteria, std::vector<std::string> goals, int gooseTile):
-//     resources{resources}, values{tileValues}, criteria{criteria}, goals{goals}, gooseTile{gooseTile} {}
-    
-TextDisplay::TextDisplay(std::vector<std::string> resources, std::vector<int> tileValues, int gooseTile):
+TextDisplay::TextDisplay(std::vector<Resource> resources, std::vector<int> tileValues, int gooseTile):
     resources{resources}, gooseTile{gooseTile} {
         for (auto tileVal : tileValues) {
             values.emplace_back(tileVal < 10 ? " " + std::to_string(tileVal) : std::to_string(tileVal));

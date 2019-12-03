@@ -8,10 +8,6 @@ void Development::setDevelopment(Player *owner, int developmentVal){
     setCriteriaVal(developmentVal);
 }
 
-void Development::setTextDisplay(TextDisplay *textdisplay) {
-    td = textdisplay;
-}
-
 void Development::setOwner(Player * owner){
     player = owner;
 }
@@ -42,8 +38,10 @@ const std::vector<int> Development::getCost(){
     return cost;
 }
 
-Player * Development::getOwner() {
+Player *Development::getOwner() {
     return player;
 }
 
-Development::~Development() {}
+Development::~Development() {
+    delete player;
+}

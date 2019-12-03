@@ -56,7 +56,7 @@ void Board::initValues(std::vector<int> tileVals) {
     }
 }
 
-void Board::initResources(std::vector<std::string> resourceTypes) {
+void Board::initResources(std::vector<Resource> resourceTypes) {
     this->resources = resourceTypes;
 }
 
@@ -534,4 +534,13 @@ void Board::improveCriteria(int loc, Player *player) {
     }
     std::string playerAssignment = player->getColour().substr(0, 1) + criteriaType;
     td->notify(loc, 'c', playerAssignment);
+}
+
+Board::~Board() {
+    delete td;
+    tiles.clear();
+    criteria.clear();
+    goals.clear();
+    values.clear();
+    resources.clear();
 }

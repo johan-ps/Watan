@@ -132,7 +132,7 @@ void Turn::endTurn() {
                     continue;
                 }
                 std::cout << whoseTurn->getColour() << " offers " << colour << " one " << give << " for one " << take << "." << std::endl;
-                std::cout << "Does " << colour << "accept this offer?" << std::endl;
+                std::cout << "Does " << colour << " accept this offer?" << std::endl;
                 while (std::cin >> accept) {
                     if (accept == "yes") {
                         whoseTurn->trade(player, give, take);

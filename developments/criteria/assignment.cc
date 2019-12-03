@@ -22,11 +22,12 @@ void Assignment::complete(Player *player, bool init) {
 
 void Assignment::notify() {}
 
-void Assignment::distributeResources(std::string resource) {
+void Assignment::distributeResources(Resource resource) {
     Player *owner = getOwner();
     if(owner) {
-        int resourceNum = getResourceNum(resource);
-        owner->recieve(resourceNum, getCriteriaVal());
+        owner->recieve(resource.getVal(), getCriteriaVal());
+        // int resourceNum = getResourceNum(resource);
+        // owner->recieve(resourceNum, getCriteriaVal());
     }
 }
 
@@ -57,3 +58,5 @@ void Assignment::improve(Player* player, bool init) {
         throw "NotEnoughResourcesToImproveException";
     }
 }
+
+Assignment::~Assignment() {}

@@ -4,6 +4,7 @@
 #include <vector>
 #include <memory>
 #include <algorithm>
+#include "resources.h"
 
 class Player;
 
@@ -12,7 +13,7 @@ struct GameState {
     int gooseTile = 5;
     std::vector<std::unique_ptr<Player>> players;
     std::vector<int> values;
-    std::vector<std::string> resourceTypes;
+    std::vector<Resource> resourceTypes;
 };
 
 #endif

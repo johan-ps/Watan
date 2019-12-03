@@ -5,25 +5,29 @@
 #include <vector>
 #include <memory>
 #include <stdlib.h>
+
+#include "board.h"
+#include "textDisplay.h"
 #include "./player/student.h"
+#include "./developments/goal/achievement.h"
+#include "./developments/criteria/assignment.h"
 #include "fileManager.h"
 #include "dice.h"
 #include "turn.h"
+//#include "resources.h"
+#include "exception.h"
 
+class Resource;
 class Turn;
-class Board;
 
 class GameManager {
     GameState *gameState;
     FileManager *fileManager;
     Dice *dice;
     Turn *turns;
-    // Geese geese;
     std::unique_ptr<Board> gameBoard;
     TextDisplay *td;
-    //int seedVal;
     bool seedInit = false;
-    //std::vector<std::unique_ptr<Player>> players;
 
 
     public:
@@ -42,6 +46,7 @@ class GameManager {
     void seed(int x);
     void load(std::string x);
     void board(std::string x);
+    ~GameManager();
     friend class Turn;
 };
 
