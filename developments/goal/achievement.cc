@@ -21,3 +21,8 @@ void Achievement::achieve(Player *player, bool init){
 }
 
 Achievement::~Achievement() {}
+
+
+
+
+

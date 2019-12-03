@@ -13,3 +13,8 @@ ${EXEC}: ${OBJECTS}
 
 clean:
 	rm ${DEPENDS} ${OBJECTS} ${EXEC}
+
+
+
+
+

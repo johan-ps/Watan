@@ -19,3 +19,8 @@ class Criterion : public Development, public Observer {
 };
 
 #endif
+
+
+
+
+

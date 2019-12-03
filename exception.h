@@ -56,6 +56,21 @@ class InvalidLocationException {
     std::string getError();
 };
 
+class DiceOutOfRangeException {
+    public:
+    std::string getError();
+};
+
+class DiceNotSetException {
+    public:
+    std::string getError();
+};
+
 class GameOverException {};
 
 #endif
+
+
+
+
+

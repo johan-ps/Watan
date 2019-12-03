@@ -49,6 +49,21 @@ std::string CriteriaCannotBeImprovedException::getError() {
 }
 
 std::string InvalidLocationException::getError() {
-    std::string temp = "Please enter a valid location.";
+    std::string temp = "Please enter a valid location: (0 <= criterion <= 53) and (0 <= goals <= 71).";
     return temp;
 }
+
+std::string DiceOutOfRangeException::getError() {
+    std::string temp = "Please enter a valid dice roll value between 2 and 12 inclusive.";
+    return temp;
+}
+
+std::string DiceNotSetException::getError() {
+    std::string temp = "Please set the dice to be loaded or fair: valid commands: [load <diceRoll>] or [fair].";
+    return temp;
+}
+
+
+
+
+

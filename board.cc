@@ -496,7 +496,7 @@ void Board::completeCriteria(int loc, Player *player, bool init) {
     }
 
     for(auto&& aTile: tiles){
-        if(!(aTile->checkAdjCriteria(loc))){
+        if(!aTile->checkAdjCriteria(loc)){
             throw "AdjacentCriteriaExistException";
         }
     }
@@ -574,3 +574,8 @@ Board::~Board() {
     values.clear();
     resources.clear();
 }
+
+
+
+
+
