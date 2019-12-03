@@ -1,5 +1,5 @@
 #include "assignment.h"
-#include "../../resource.h"
+#include "../../resources.h"
 #include <iostream>
 
 Assignment::Assignment(int locationVal, std::vector<int> cost):
