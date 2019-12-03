@@ -52,13 +52,10 @@ void Tile::printTile() {
 }
 
 void Tile::addNeighbour(Tile *tile, std::string dir) {
-    //std::cout << "Called with dir: " << dir << " and Loc" << tile->getInfo().location << std::endl;
     neighbours[dir] = tile;
 }
 
 void Tile::addCriterion(Criterion *criterion, std::string dir) {
-    //std::cout << "Tile at location: " << location << ", added criteria <" << criterion->getLocationVal() << "> in dir: " << dir << std::endl;
-    //std::cout << "Called with dir: " << dir << " and Loc" << criterion->getLocationVal() << std::endl;
     criteria[dir] = criterion;
 }
 void Tile::addGoal(Goal *goal, std::string dir) {

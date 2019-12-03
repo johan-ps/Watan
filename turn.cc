@@ -22,19 +22,33 @@ void Turn::startTurn(Player *playerTurn){
         std::cout << "> ";
         if (std::cin >> input) {
             if (input == "load") {
-                int val;
+                std::string val;
                 std::cin >> val;
-                gm->dice->setDice(false);
-                gm->dice->setLoadVal(val);
+                try {
+                    try {
+                        gm->dice->setLoadVal(std::stoi(val));
+                    } catch (std::invalid_argument &a) {
+                        std::cout << "Invalid command." << std::endl;
+                        continue;
+                    }
+                } catch (DiceOutOfRangeException &d) {
+                    std::cout << d.getError() << std::endl;
+                    continue;
+                }
             } else if (input == "fair") {
                 //set dice to fair
-                gm->dice->setDice(true);
+                gm->dice->setFair();
             } else if (input == "roll") {
                 //roll dice
-                gm->dice->roll();
-                gm->gameState->curTurn = count;
-                endTurn();
-                return;
+                try {
+                    gm->dice->roll();
+                    gm->gameState->curTurn = count;
+                    endTurn();
+                    return;
+                } catch (DiceNotSetException &d) {
+                    std::cout << d.getError() << std::endl;
+                    continue;
+                }
             } else {
                 //print error msg
                 std::cout << "Invalid command" << std::endl;
@@ -44,10 +58,9 @@ void Turn::startTurn(Player *playerTurn){
                 gm->fileManager->writeToFile(*(gm->gameState));
                 break;
             } else if (std::cin.fail()) {
+                std::cout << "here" << std::endl;
                 std::cin.clear();
                 std::cin.ignore();
-                gm->fileManager->writeToFile(*(gm->gameState));
-                break;
             }
         }
     }
@@ -77,10 +90,13 @@ void Turn::endTurn() {
                     gm->gameBoard->achieveGoal(loc, whoseTurn, true);
                 } catch (AlreadyAchievedException &a) {
                     std::cout << a.getError() << std::endl;
+                    continue;
                 } catch (InsufficientResourcesException &r) {
                     std::cout << r.getError() << std::endl;
+                    continue;
                 } catch (InvalidLocationException &l) {
                     std::cout << l.getError() << std::endl;
+                    continue;
                 }         
             } else if (input == "complete") {
                 int loc;
@@ -89,12 +105,16 @@ void Turn::endTurn() {
                     gm->gameBoard->completeCriteria(loc, whoseTurn, true);
                 } catch (AlreadyCompletedException &c) {
                     std::cout << c.getError() << std::endl;
+                    continue;
                 } catch (InsufficientResourcesException &r) {
                     std::cout << r.getError() << std::endl;
+                    continue;
                 } catch (InvalidLocationException &l) {
                     std::cout << l.getError() << std::endl;
+                    continue;
                 } catch (char const *s) {
                     std::cout << s << std::endl;
+                    continue;
                 }
             } else if (input == "improve") {
                 int loc;
@@ -103,12 +123,16 @@ void Turn::endTurn() {
                     gm->gameBoard->improveCriteria(loc, whoseTurn, true);
                 } catch (InsufficientResourcesException &r) {
                     std::cout << r.getError() << std::endl;
+                    continue;
                 }  catch (InvalidCriteriaException &c) {
                     std::cout << c.getError() << std::endl;
+                    continue;
                 } catch (CriteriaCannotBeImprovedException &c) {
                     std::cout << c.getError() << std::endl;
+                    continue;
                 } catch (InvalidLocationException &l) {
                     std::cout << l.getError() << std::endl;
+                    continue;
                 }
             } else if (input == "trade") {
                 Player *player = nullptr;
@@ -201,8 +225,6 @@ void Turn::endTurn() {
             } else if (std::cin.fail()) {
                 std::cin.clear();
                 std::cin.ignore();
-                gm->fileManager->writeToFile(*(gm->gameState));
-                break;
             }
         }
     }
