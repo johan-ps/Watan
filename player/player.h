@@ -4,11 +4,12 @@
 #include <vector>
 #include <string>
 
-#include "../resource.h"
+//#include "../resources.h"
 //#include "../developments/criteria/criterion.h"
 
 class Criterion;
 class Goal;
+class Resource;
 
 class Player {
     std::string colour;
@@ -23,13 +24,14 @@ class Player {
         int getCriteriaSize();
 
     public:
-        Player(std::string colour, std::vector<int>);
-        Player(std::string colour, std::vector<Criterion*>, std::vector<Goal*>, std::vector<int>);
+        Player(std::string colour, std::vector<int> resources = {0, 0, 0, 0, 0});
+        Player(std::string colour, std::vector<Criterion*> criteria, std::vector<Goal*> goals, std::vector<int> resources = {0, 0, 0, 0, 0});
 
         // Public Methods
-        virtual void steal(Player *) = 0;
-        virtual void trade(Player *, std::string, std::string) = 0;
-        virtual void recieve(int, int) = 0;
+        virtual void steal(Player *victim) = 0;
+        virtual void trade(Player *otherPlayer, Resource gained, Resource lost) = 0;
+        virtual void recieve(Resource type, int amount) = 0;
+        virtual void remove(Resource type, int amount) = 0;
         virtual void printStatus() = 0;
         virtual void printCompletions() = 0;
         virtual std::vector<Criterion*> getCriterion();
@@ -37,8 +39,8 @@ class Player {
         virtual std::vector<int> getResources();
 
         //Should possibly change to development pointer or add a purchaseGoal method
-        virtual bool purchaseCriteria(std::vector<int>, Criterion *, bool, bool init = false) = 0;
-        virtual bool purchaseGoal(std::vector<int>, Goal *, bool init = false) = 0;
+        virtual void purchaseCriteria(std::vector<int> cost, Criterion *newCriterion, bool improving, bool init = false) = 0;
+        virtual void purchaseGoal(std::vector<int> cost, Goal *newGoal  , bool init = false) = 0;
         
         // Accessors
         std::string getColour();

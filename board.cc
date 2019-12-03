@@ -56,7 +56,7 @@ void Board::initValues(std::vector<int> tileVals) {
     }
 }
 
-void Board::initResources(std::vector<std::string> resourceTypes) {
+void Board::initResources(std::vector<Resource> resourceTypes) {
     this->resources = resourceTypes;
 }
 
@@ -491,23 +491,31 @@ void Board::drawBoard() {
 }
 
 void Board::completeCriteria(int loc, Player *player, bool init) {
-    for(auto&& aTile: tiles){
-        if(aTile->checkAdjCriteria(loc)){
-            throw "AdjacentCriteriaExistException";
-        }
+    if (loc < 0 || loc > 53) {
+        throw InvalidLocationException{};
     }
 
+    // for(auto&& aTile: tiles){
+    //     if(aTile->checkAdjCriteria(loc)){
+    //         throw "AdjacentCriteriaExistException";
+    //     }
+    // }
+
     try {
-        std::cout << "Try" << std::endl;
         criteria.at(loc)->complete(player, init);
-    } catch (...) {
-        return;
+    } catch (AlreadyCompletedException &c) {
+        throw c;
+    } catch (InsufficientResourcesException &r) {
+        throw r;
+    } catch (InvalidLocationException &l) {
+        throw l;
     }
     std::string playerAssignment = player->getColour().substr(0, 1) + 'A';
     td->notify(loc, 'c', playerAssignment);
 }
 
 void Board::achieveGoal(int loc, Player *player, bool init) {
+<<<<<<< HEAD
     for(auto&& aTile: tiles){
         if(!aTile->checkAdjGoal(loc, player->getColour())){
             throw "InvalidAchievementLocationException"
@@ -515,30 +523,53 @@ void Board::achieveGoal(int loc, Player *player, bool init) {
     }
 
 
-    try {
-        std::cout << "Try" << std::endl;
-        goals.at(loc)->achieve(player, init);
-    } catch (...) {
-        return;
+=======
+    if (loc < 0 || loc > 71) {
+        throw InvalidLocationException{};
     }
-    std::cout << "Set" << std::endl;
+
+>>>>>>> 012ebceab89784c096697609618f28432da7ed76
+    try {
+        goals.at(loc)->achieve(player, init);
+    } catch (AlreadyAchievedException &a) {
+        throw a;
+    } catch (InsufficientResourcesException &r) {
+        throw r;
+    } catch (InvalidLocationException &l) {
+        throw l;
+    }
     std::string playerAchievement = player->getColour().substr(0, 1) + 'A';
     td->notify(loc, 'g', playerAchievement);
-    std::cout << "Updated" << std::endl;
 }
 
-void Board::improveCriteria(int loc, Player *player) {
+void Board::improveCriteria(int loc, Player *player, bool init) {
+    if (loc < 0 || loc > 53) {
+        throw InvalidLocationException{};
+    }
     try {
-        criteria.at(loc)->improve(player);
-    } catch (std::string) {
-        return;
+        criteria.at(loc)->improve(player, init);
+    } catch (InsufficientResourcesException &r) {
+        throw r;
+    } catch (InvalidCriteriaException &c) {
+        throw c;
+    } catch (CriteriaCannotBeImprovedException &c) {
+        throw c;
     }
     char criteriaType = 'A';
     if (criteria.at(loc)->getCriteriaVal() == 2) {
         criteriaType = 'M';
-    } else {
+    } else if (criteria.at(loc)->getCriteriaVal() == 3) {
         criteriaType = 'E';
     }
     std::string playerAssignment = player->getColour().substr(0, 1) + criteriaType;
     td->notify(loc, 'c', playerAssignment);
+}
+
+Board::~Board() {
+    delete td;
+    tiles.clear();
+    criteria.clear();
+    goals.clear();
+    values.clear();
+    resources.clear();
 }

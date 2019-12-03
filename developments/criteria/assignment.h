@@ -2,9 +2,8 @@
 #define ASSIGNMENT_H
 
 #include "criterion.h"
-#include "../../tile.h"
 #include "../../player/player.h"
-#include <vector>
+#include "../../exception.h"
 
 class Assignment : public Criterion {
 
@@ -13,7 +12,8 @@ class Assignment : public Criterion {
         void complete(Player* player, bool init = false) override;
         void notify() override;
         void improve(Player* player, bool init = false) override;
-        void distributeResources(std::string) override;
+        void distributeResources(Resource resource) override;
+        ~Assignment();
 };
 
 #endif

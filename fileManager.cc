@@ -7,7 +7,7 @@ FileManager::FileManager() {
 
 }
 
-void FileManager::writeToFile(std::string fileName, GameState &gameState) {
+void FileManager::writeToFile(GameState &gameState, std::string fileName) {
     std::ofstream fout {fileName};
     fout << gameState.curTurn << std::endl;
     for (auto &player : gameState.players) {
@@ -26,7 +26,7 @@ void FileManager::writeToFile(std::string fileName, GameState &gameState) {
         fout << std::endl;
     }
     for (unsigned int i = 0; i < gameState.values.size(); i++) {
-        fout << " " << getResourceNum(gameState.resourceTypes.at(i));
+        fout << " " << gameState.resourceTypes.at(i).getVal();
         fout << " " << gameState.values.at(i);
     }
     fout << std::endl;
@@ -43,17 +43,17 @@ void FileManager::readBoardFromString(std::string boardData, GameState &gameStat
         if (sin >> resourceType) {
             // Add in resourceType to next tile in GameState
             if (resourceType == 0) {
-                gameState.resourceTypes.emplace_back("CAFFEINE");
+                gameState.resourceTypes.emplace_back(Resource{"CAFFEINE"});
             } else if (resourceType == 1) {
-                gameState.resourceTypes.emplace_back("LAB");
+                gameState.resourceTypes.emplace_back(Resource{"LAB"});
             } else if (resourceType == 2) {
-                gameState.resourceTypes.emplace_back("LECTURE");
+                gameState.resourceTypes.emplace_back(Resource{"LECTURE"});
             } else if (resourceType == 3) {
-                gameState.resourceTypes.emplace_back("STUDY");
+                gameState.resourceTypes.emplace_back(Resource{"STUDY"});
             } else if (resourceType == 4) {
-                gameState.resourceTypes.emplace_back("TUTORIAL");
+                gameState.resourceTypes.emplace_back(Resource{"TUTORIAL"});
             } else {
-                gameState.resourceTypes.emplace_back("NETFLIX");
+                gameState.resourceTypes.emplace_back(Resource{"NETFLIX"});
             }
 
             int tileValue = -1;
@@ -85,7 +85,7 @@ void FileManager::readBoardFromString(std::string boardData, GameState &gameStat
     }
 }
 
-void FileManager::readBoardFromFile(std::string fileName, GameState &gameState) {
+void FileManager::readBoardFromFile(GameState &gameState, std::string fileName) {
     std::ifstream file {fileName};
 
     std::string boardData;
@@ -95,7 +95,7 @@ void FileManager::readBoardFromFile(std::string fileName, GameState &gameState) 
 }
 
 
-void FileManager::readGameFromFile(std::string fileName, GameState &gameState) {
+void FileManager::readGameFromFile(GameState &gameState, std::string fileName) {
     std::ifstream fin {fileName};
 
 

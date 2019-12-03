@@ -3,7 +3,7 @@
 #include <cmath>
 #include <memory>
 
-Tile::Tile(int location, int value, std::string resource, int col, int row):
+Tile::Tile(int location, int value, Resource resource, int col, int row):
     location{location}, value{value}, resource{resource}, col{col}, row{row} {}
 
 void Tile::notify() {
@@ -164,4 +164,10 @@ TileInfo Tile::getInfo() {
     return {
         location, value, col, row, resource, criteria, goals, neighbours
     };
+}
+
+Tile::~Tile() {
+    // criteria.clear();
+    // goals.clear();
+    // neighbours.clear();
 }

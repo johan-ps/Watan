@@ -1,25 +1,24 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-//#include "tile.h"
-#include "textDisplay.h"
-#include "./developments/criteria/assignment.h"
 #include "./developments/goal/achievement.h"
+#include "./developments/criteria/assignment.h"
+#include "tile.h"
+#include "./player/player.h"
+#include "textDisplay.h"
 #include <vector>
 #include "observer.h"
 #include "subject.h"
 #include <stdlib.h>
 
-class Tile;
-//class TextDisplay;
+class Resource;
 
 class Board : public Subject, public Observer {
     std::vector<Tile*> tiles;
     std::vector<Criterion*> criteria;
     std::vector<Goal*> goals;
     std::vector<int> values;
-    std::vector<std::string> resources;
-    //std::vector<std::vector<Criterion *>> criteria;
+    std::vector<Resource> resources;
     TextDisplay *td = nullptr;
     int tileCount;
 
@@ -38,15 +37,16 @@ public:
     void setValues(std::vector<int> values);
     void init(int boardSize);
     void drawBoard();
-    void completeCriteria(int loc, Player *player, bool init);
-    void improveCriteria(int loc, Player *player);
-    void achieveGoal(int loc, Player *player, bool init);
+    void completeCriteria(int loc, Player *player, bool init = false);
+    void improveCriteria(int loc, Player *player, bool init = false);
+    void achieveGoal(int loc, Player *player, bool init = false);
     void initValues(std::vector<int> values);
-    void initResources(std::vector<std::string> resources);
+    void initResources(std::vector<Resource> resources);
     void initCriteria(std::vector<Criterion*> criteriaOwned);
     void initGoals(std::vector<Goal*> goalsOwned);
     std::vector<std::string> getCriteria();
     std::vector<std::string> getGoals();
+    ~Board();
 };
 
 #endif

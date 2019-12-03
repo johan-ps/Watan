@@ -1,5 +1,4 @@
 #include "gameManager.h"
-#include "board.h"
 
 #include <iostream>
 
@@ -22,13 +21,13 @@ void GameManager::seed(int x) {
 
 void GameManager::load(std::string x) {
     //std::cout << "Load saved game from file: " << x << std::endl;
-    fileManager->readGameFromFile(x, *gameState);
+    fileManager->readGameFromFile(*gameState, x);
     //std::cout << "Size >>>>>>>>>> " << gameState->resourcesTypes.size() << std::endl;
 }
 
 void GameManager::board(std::string x) {
     //std::cout << "Load board from file: " << x << std::endl;
-    fileManager->readBoardFromFile(x, *gameState);
+    fileManager->readBoardFromFile(*gameState, x);
 }
 
 bool GameManager::startGame() {
@@ -121,13 +120,13 @@ void GameManager::createBoard(int boardSize) {
         std::random_shuffle(shuffleVal.begin(), shuffleVal.end());
         gameState->values = shuffleVal;
         gameBoard->initValues(gameState->values);
-        std::vector<std::string> shuffleResources = {
-            "CAFFEINE", "CAFFEINE", "CAFFEINE", "CAFFEINE",
-            "LAB", "LAB", "LAB", "LAB",
-            "LECTURE", "LECTURE", "LECTURE", "LECTURE",
-            "TUTORIAL", "TUTORIAL", "TUTORIAL",
-            "STUDY", "STUDY", "STUDY",
-            "NETFLIX"
+        std::vector<Resource> shuffleResources = {
+            Resource("CAFFEINE"), Resource("CAFFEINE"), Resource("CAFFEINE"), Resource("CAFFEINE"),
+            Resource("LAB"), Resource("LAB"), Resource("LAB"), Resource("LAB"),
+            Resource("LECTURE"), Resource("LECTURE"), Resource("LECTURE"), Resource("LECTURE"),
+            Resource("TUTORIAL"), Resource("TUTORIAL"), Resource("TUTORIAL"),
+            Resource("STUDY"), Resource("STUDY"), Resource("STUDY"),
+            Resource("NETFLIX")
         };
         std::random_shuffle(shuffleResources.begin(), shuffleResources.end());
         gameState->resourceTypes = shuffleResources;        
@@ -160,5 +159,13 @@ void GameManager::createPlayers(int num) {
     }
     gameBoard->initCriteria(criteriaTemp);
     gameBoard->initGoals(goalsTemp);
+}
+
+GameManager::~GameManager() {
+    delete gameState;
+    delete fileManager;
+    delete dice;
+    delete turns;
+    delete td;
 }
 

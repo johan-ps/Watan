@@ -1,7 +1,7 @@
 #include "hexagon.h"
 #include <iostream>
 
-Hexagon::Hexagon(std::vector<std::string> resourceTypes, std::vector<std::string> criteriaVal, std::vector<std::string> goalsVal, std::vector<std::string> val, int gooseTile):
+Hexagon::Hexagon(std::vector<Resource> resourceTypes, std::vector<std::string> criteriaVal, std::vector<std::string> goalsVal, std::vector<std::string> val, int gooseTile):
     resources{resourceTypes}, criteria{criteriaVal}, goals{goalsVal}, values{val}, gooseTile{gooseTile} {
 
     // for (int i = 0; i < criteria.size(); i++) {
@@ -11,7 +11,7 @@ Hexagon::Hexagon(std::vector<std::string> resourceTypes, std::vector<std::string
     hexagon[0] = "|" + criteria.at(countC) + "|--" + goals.at(countG) + "--|" + criteria.at(countC + 1) + "|";
     hexagon[1] = "/            \\";
     hexagon[2] = goals.at(countG) + space[6] +  format(locCount) + space[5] + goals.at(countG + 1);
-    hexagon[3] = "/" + space[5] + resources.at(rCount) + resourceSpace(resources.at(rCount)) + "\\";
+    hexagon[3] = "/" + space[5] + resources.at(rCount).getName() + resourceSpace(resources.at(rCount).getName()) + "\\";
     hexagon[4] = "|" + criteria.at(countC) + "|" + space[7] + values.at(valCount) + space[7] + "|" + criteria.at(countC + 1) + "|";
     hexagon[5] = "\\" + space[5] + goose + space[6] + "/";
     hexagon[6] = goals.at(countG) + space[7] + space[6] + goals.at(countG + 1);
@@ -20,7 +20,7 @@ Hexagon::Hexagon(std::vector<std::string> resourceTypes, std::vector<std::string
     hexagon[9] = "--" + goals.at(countG) + "--";
 
     hex[0] = space[6] + format(locCount) + space[5]; //just location
-    hex[1] = space[5] + resources.at(rCount) + resourceSpace(resources.at(rCount)); //just resource
+    hex[1] = space[5] + resources.at(rCount).getName() + resourceSpace(resources.at(rCount).getName()); //just resource
     hex[2] = space[7] + values.at(valCount) + space[7]; //just value
     hex[3] = space[5] + goose + space[6];
 }
@@ -70,7 +70,7 @@ void Hexagon::setHexagon(int c, int g) {
         return;
     } else if (countG + 2 > goals.size()) {
         hexagon[0] = "|" + criteria.at(countC) + "|--" + goals.at(countG) + "--|" + criteria.at(countC + 1) + "|";
-        hexagon[3] = "/" + space[5] + resources.at(rCount) + resourceSpace(resources.at(rCount)) + "\\";
+        hexagon[3] = "/" + space[5] + resources.at(rCount).getName() + resourceSpace(resources.at(rCount).getName()) + "\\";
         hexagon[4] = "|" + criteria.at(countC) + "|" + space[7] + values.at(valCount) + space[7] + "|" + criteria.at(countC + 1) + "|";
         hexagon[5] = "\\" + space[5] + goose + space[6] + "/";
         hexagon[8] = "|" + criteria.at(countC) + "|--" + goals.at(countG) + "--|" + criteria.at(countC + 1) + "|";
@@ -78,7 +78,7 @@ void Hexagon::setHexagon(int c, int g) {
     } else {
         hexagon[0] = "|" + criteria.at(countC) + "|--" + goals.at(countG) + "--|" + criteria.at(countC + 1) + "|";
         hexagon[2] = goals.at(countG) + space[6] + format(locCount) + space[5] + goals.at(countG + 1);
-        hexagon[3] = "/" + space[5] + resources.at(rCount) + resourceSpace(resources.at(rCount)) + "\\";
+        hexagon[3] = "/" + space[5] + resources.at(rCount).getName() + resourceSpace(resources.at(rCount).getName()) + "\\";
         hexagon[4] = "|" + criteria.at(countC) + "|" + space[7] + values.at(valCount) + space[7] + "|" + criteria.at(countC + 1) + "|";
         hexagon[5] = "\\" + space[5] + goose + space[6] + "/";
         hexagon[6] = goals.at(countG) + space[7] + space[6] + goals.at(countG + 1);
@@ -92,7 +92,7 @@ void Hexagon::setHex(int c, int g) {
         return;
     }
     hex[0] = space[6] + format(locCount) + space[5]; //just location
-    hex[1] = space[5] + resources.at(rCount) + resourceSpace(resources.at(rCount)); //just resource
+    hex[1] = space[5] + resources.at(rCount).getName() + resourceSpace(resources.at(rCount).getName()); //just resource
     hex[2] = space[7] + values.at(valCount) + space[7]; //just value
     hex[3] = space[5] + goose + space[6]; //just goose
 }

@@ -41,10 +41,13 @@ void Turn::startTurn(Player *playerTurn){
             }
         } else {
             if (std::cin.eof()) {
+                gm->fileManager->writeToFile(*(gm->gameState));
                 break;
             } else if (std::cin.fail()) {
                 std::cin.clear();
                 std::cin.ignore();
+                gm->fileManager->writeToFile(*(gm->gameState));
+                break;
             }
         }
     }
@@ -70,15 +73,43 @@ void Turn::endTurn() {
             } else if (input == "achieve") {
                 int loc;
                 std::cin >> loc;
-                gm->gameBoard->achieveGoal(loc, whoseTurn, true);
+                try {
+                    gm->gameBoard->achieveGoal(loc, whoseTurn, true);
+                } catch (AlreadyAchievedException &a) {
+                    std::cout << a.getError() << std::endl;
+                } catch (InsufficientResourcesException &r) {
+                    std::cout << r.getError() << std::endl;
+                } catch (InvalidLocationException &l) {
+                    std::cout << l.getError() << std::endl;
+                }         
             } else if (input == "complete") {
                 int loc;
                 std::cin >> loc;
-                gm->gameBoard->completeCriteria(loc, whoseTurn, true);
+                try {
+                    gm->gameBoard->completeCriteria(loc, whoseTurn, true);
+                } catch (AlreadyCompletedException &c) {
+                    std::cout << c.getError() << std::endl;
+                } catch (InsufficientResourcesException &r) {
+                    std::cout << r.getError() << std::endl;
+                } catch (InvalidLocationException &l) {
+                    std::cout << l.getError() << std::endl;
+                } catch (char const *s) {
+                    std::cout << s << std::endl;
+                }
             } else if (input == "improve") {
                 int loc;
                 std::cin >> loc;
-                gm->gameBoard->improveCriteria(loc, whoseTurn);
+                try {
+                    gm->gameBoard->improveCriteria(loc, whoseTurn, true);
+                } catch (InsufficientResourcesException &r) {
+                    std::cout << r.getError() << std::endl;
+                }  catch (InvalidCriteriaException &c) {
+                    std::cout << c.getError() << std::endl;
+                } catch (CriteriaCannotBeImprovedException &c) {
+                    std::cout << c.getError() << std::endl;
+                } catch (InvalidLocationException &l) {
+                    std::cout << l.getError() << std::endl;
+                }
             } else if (input == "trade") {
                 Player *player = nullptr;
                 std::string colour, give, take, accept;
@@ -132,10 +163,15 @@ void Turn::endTurn() {
                     continue;
                 }
                 std::cout << whoseTurn->getColour() << " offers " << colour << " one " << give << " for one " << take << "." << std::endl;
-                std::cout << "Does " << colour << "accept this offer?" << std::endl;
+                std::cout << "Does " << colour << " accept this offer?" << std::endl;
                 while (std::cin >> accept) {
                     if (accept == "yes") {
-                        whoseTurn->trade(player, give, take);
+                        try {
+                            whoseTurn->trade(player, give, take);
+                        } catch (InvalidTradeException &t) {
+                            std::cout << t.getError() << std::endl;
+                            break;
+                        }
                         std::cout << whoseTurn->getColour() << " gains one " << take << " and loses one " << give << "," << std::endl;
                         std::cout << colour << " gains one " << give << " and loses one " << take << "." << std::endl;
                         break;
@@ -151,7 +187,7 @@ void Turn::endTurn() {
             } else if (input == "save") {
                 std::string fileName;
                 std::cin >> fileName;
-                gm->fileManager->writeToFile(fileName, *(gm->gameState));
+                gm->fileManager->writeToFile(*(gm->gameState), fileName);
             } else if (input == "help") {
                 help();
             } else {
@@ -160,10 +196,13 @@ void Turn::endTurn() {
             }
         } else {
             if (std::cin.eof()) {
+                gm->fileManager->writeToFile(*(gm->gameState));
                 break;
             } else if (std::cin.fail()) {
                 std::cin.clear();
                 std::cin.ignore();
+                gm->fileManager->writeToFile(*(gm->gameState));
+                break;
             }
         }
     }

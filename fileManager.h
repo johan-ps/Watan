@@ -16,9 +16,9 @@ class FileManager {
 
     public:
     FileManager();
-    void writeToFile(std::string fileName, GameState &gameState);
-    void readGameFromFile(std::string fileName, GameState &gameState);
-    void readBoardFromFile(std::string fileName, GameState &gameState);
+    void writeToFile(GameState &gameState, std::string fileName = "backup.sv");
+    void readGameFromFile(GameState &gameState, std::string fileName = "backup.sv");
+    void readBoardFromFile(GameState &gameState, std::string fileName = "backup.sv");
 };
 
 #endif
