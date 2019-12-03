@@ -35,26 +35,44 @@ void Student::trade(Player *otherPlayer, Resource gained, Resource lost) {
 
 // Steal a random resource from a victim
 // Note: Should be called by a player who currently has a Geese
-void Student::steal(Player *victim) {
+void Student::steal(Player *victim, int amount) {
 
     // Calculate randomly selected resource to be stolen
+    Resource stolen = victim->getRandomResource();
 
-    std::string stolenResource = "CAFFEINE"; // DEFAULT PLACEHOLDER
+    // NOTE: Currently if amount > 1, it would steal x amount of the same resource
+    //       instead of x random resources
 
-    int totalResources = victim->getResourceCount();
+    victim->remove(stolen, amount);
+    recieve(stolen, amount); // MAYBE CONSIDER EXCEPTIONS?
 
-    /*The probability of stealing/losing each resource is the number of the resource the student being
-    stolen from has, divided by the total number of resources the student being stolen from has. */
-
-    int resourceToBeStolen = rand() % totalResources;
-
-    //int resourceStolen = victim->stealResource(resourceToBeStolen); // change to Resource type
-
-
-
-    std::cout << "Student " << getColour() << " steals " << stolenResource;
+    std::cout << "Student " << getColour() << " steals " << stolen.getNameToUpper();
     std::cout << " from student " << victim->getColour() << "." << std::endl;
 
+}
+
+Resource Student::getRandomResource(){
+    int totalResources = getResourceCount();
+
+    int resourceNumToBeStolen = rand() % totalResources + 1;
+
+    return findResource(resourceNumToBeStolen);
+}
+
+Resource Student::findResource(int resourceNum){
+    std::vector<int> resources = getResources();
+
+    int numResourcesSoFar = 0;
+    for (int resourceType = 0; resourceType < resources.size(); ++resourceType){
+        numResourcesSoFar += resources[resourceType];
+        if (resourceNum <= numResourcesSoFar){
+                return Resource{resourceType};
+                break;
+        }
+    }
+
+    // IF DESIRED RESOURCE COULD NOT BE FOUND, RETURN NETFLIX AS A "null" VALUE
+    return Resource{"netflix"};
 }
 
 void Student::remove(Resource type, int amount) {

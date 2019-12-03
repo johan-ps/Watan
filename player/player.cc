@@ -19,7 +19,7 @@ int Player::getCompleted(){
 }
 
 int Player::getResourceCount(){
-    int resourceCount;
+    int resourceCount = 0;
     for (auto resource: resources){
         resourceCount += resource;
     }

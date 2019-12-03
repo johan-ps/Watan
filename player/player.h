@@ -29,22 +29,17 @@ class Player {
         Player(std::string colour, std::vector<Criterion*> criteria, std::vector<Goal*> goals, std::vector<int> resources = {0, 0, 0, 0, 0});
 
         // Public Methods
-<<<<<<< HEAD
-        
-        virtual void steal(Player *) = 0;
-        virtual void trade(Player *, std::string, std::string) = 0;
-        virtual void recieve(int, int) = 0;
-=======
-        virtual void steal(Player *victim) = 0;
+        virtual void steal(Player *victim, int amount = 1) = 0;
         virtual void trade(Player *otherPlayer, Resource gained, Resource lost) = 0;
         virtual void recieve(Resource type, int amount) = 0;
         virtual void remove(Resource type, int amount) = 0;
->>>>>>> cf4db4332a78177f29081f2d9099560a4d8f5d8c
         virtual void printStatus() = 0;
         virtual void printCompletions() = 0;
         virtual std::vector<Criterion*> getCriterion();
         virtual std::vector<Goal*> getGoals();
         virtual std::vector<int> getResources();
+
+        virtual Resource getRandomResource() = 0;
 
         //Should possibly change to development pointer or add a purchaseGoal method
         virtual void purchaseCriteria(std::vector<int> cost, Criterion *newCriterion, bool improving, bool init = false) = 0;

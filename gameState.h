@@ -15,7 +15,7 @@ struct GameState {
     int gooseTile = 5; // REMOVE THIS DEFAULT VALUE
     std::vector<std::unique_ptr<Player>> players;
     std::vector<int> values;
-    std::vector<int> resourceTypes;
+    std::vector<Resource> resourceTypes;
     Geese* geese;
 };
 

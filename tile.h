@@ -41,7 +41,7 @@ class Tile : public Subject, public Observer {
 
 
     public:
-        Tile(int location, int value, std::string resource, int col, int row);
+        Tile(int location, int value, Resource resource, int col, int row);
 
         // Getters
         bool isOverrun();
