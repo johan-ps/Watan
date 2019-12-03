@@ -80,8 +80,11 @@ bool Student::purchaseCriteria(std::vector<int> cost, Criterion * newCriterion, 
     return true;
 }
 
-bool Student::purchaseGoal(std::vector<int> cost, Goal * newGoal) {
-
+bool Student::purchaseGoal(std::vector<int> cost, Goal *newGoal, bool init) {
+    if (init) {
+        goals.push_back(newGoal);
+        return true;
+    }
     for(int i = 0; i < 5; ++i) {
         if(cost[i] > resources[i]) {
             return false;

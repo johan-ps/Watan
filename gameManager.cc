@@ -6,7 +6,6 @@
 GameManager::GameManager():
     fileManager{new FileManager{}}, dice{new Dice{}} {
         gameState = new GameState{};
-        std::cerr << "reach here xxx" << std::endl;
     }
 
 Board GameManager::getGameBoard() {

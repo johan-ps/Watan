@@ -6,6 +6,13 @@ Turn::Turn(GameManager *gm):
 
 void Turn::startTurn(Player *playerTurn){
     whoseTurn = playerTurn;
+    
+    int count = 0;
+    for (auto &player : gm->gameState->players) {
+        if (player->getColour() == playerTurn->getColour()) {
+            gm->gameState->curTurn = count++;
+        }
+    }
 
     std::cout << "Student " << whoseTurn->getColour() << "'s turn." << std::endl;
     whoseTurn->printStatus();
@@ -25,6 +32,7 @@ void Turn::startTurn(Player *playerTurn){
             } else if (input == "roll") {
                 //roll dice
                 gm->dice->roll();
+                gm->gameState->curTurn = count;
                 endTurn();
                 return;
             } else {
@@ -60,7 +68,9 @@ void Turn::endTurn() {
                 //prints the criteria the current student has completed
                 whoseTurn->printCompletions();
             } else if (input == "achieve") {
-                
+                int loc;
+                std::cin >> loc;
+                gm->gameBoard->achieveGoal(loc, whoseTurn, true);
             } else if (input == "complete") {
                 int loc;
                 std::cin >> loc;
@@ -74,7 +84,9 @@ void Turn::endTurn() {
             } else if (input == "next") {
                 return;
             } else if (input == "save") {
-
+                std::string fileName;
+                std::cin >> fileName;
+                gm->fileManager->writeToFile(fileName, *(gm->gameState));
             } else if (input == "help") {
                 help();
             } else {

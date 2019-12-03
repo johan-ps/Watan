@@ -21,8 +21,13 @@ int Player::getCompleted(){
 std::vector<Criterion*> Player::getCriterion() {
     return criteria;
 }
+
 std::vector<Goal*> Player::getGoals() {
     return goals;
+}
+
+std::vector<int> Player::getResources() {
+    return resources;
 }
 
 

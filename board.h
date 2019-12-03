@@ -40,6 +40,7 @@ public:
     void drawBoard();
     void completeCriteria(int loc, Player *player, bool init);
     void improveCriteria(int loc, Player *player);
+    void achieveGoal(int loc, Player *player, bool init);
     void initValues(std::vector<std::string> values);
     void initResources(std::vector<std::string> resources);
     void initCriteria(std::vector<Criterion*> criteriaOwned);

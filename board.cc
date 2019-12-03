@@ -40,6 +40,9 @@ std::string findDir(int colA, int rowA, int colB, int rowB) {
 //notify appropriate tiles with the given dice value
 void Board::notify(int diceVal) {
     std::cout << "Notify board with dice value " << diceVal << std::endl;
+    if (diceVal == 7) {
+        return;
+    }
     for (auto &n : tiles) {
         if (n->getInfo().value == diceVal) {
             n->notify();
@@ -83,7 +86,7 @@ void Board::initCriteria(std::vector<Criterion*> criteriaOwned) {
 void Board::initGoals(std::vector<Goal*> goalsOwned) {
     bool isAdd = false;
     if (goalsOwned.size() == 0) {
-        for (int i = 0; i < 74; i++) {
+        for (int i = 0; i < 72; i++) {
             goals.emplace_back(new Achievement{i});
         }
     } else {
@@ -491,11 +494,11 @@ void Board::drawBoard() {
 }
 
 void Board::completeCriteria(int loc, Player *player, bool init) {
-    for(auto&& aTile: tiles){
-        if(aTile->checkAdjCriteria(loc)){
-            throw "AdjacentCriteriaExistException";
-        }
-    }
+    // for(auto&& aTile: tiles){
+    //     if(aTile->checkAdjCriteria(loc)){
+    //         throw "AdjacentCriteriaExistException";
+    //     }
+    // }
 
     try {
         std::cout << "Try" << std::endl;
@@ -505,6 +508,19 @@ void Board::completeCriteria(int loc, Player *player, bool init) {
     }
     std::string playerAssignment = player->getColour().substr(0, 1) + 'A';
     td->notify(loc, 'c', playerAssignment);
+}
+
+void Board::achieveGoal(int loc, Player *player, bool init) {
+    try {
+        std::cout << "Try" << std::endl;
+        goals.at(loc)->achieve(player, init);
+    } catch (...) {
+        return;
+    }
+    std::cout << "Set" << std::endl;
+    std::string playerAchievement = player->getColour().substr(0, 1) + 'A';
+    td->notify(loc, 'g', playerAchievement);
+    std::cout << "Updated" << std::endl;
 }
 
 void Board::improveCriteria(int loc, Player *player) {

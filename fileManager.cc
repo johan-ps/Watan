@@ -7,8 +7,32 @@ FileManager::FileManager() {
 
 }
 
-void FileManager::writeToFile(std::string file) {
-
+void FileManager::writeToFile(std::string fileName, GameState &gameState) {
+    std::ofstream fout {fileName};
+    fout << gameState.curTurn << std::endl;
+    for (auto &player : gameState.players) {
+        for (auto resources : player->getResources()) {
+            fout << resources << " ";
+        }
+        fout << "g";
+        for (auto &goals : player->getGoals()) {
+            fout << " " << goals->getLocationVal();
+        }
+        fout << " c";
+        for (auto criteria : player->getCriterion()) {
+            fout << " " << criteria->getLocationVal();
+            fout << " " << criteria->getCriteriaVal();
+        }
+        fout << std::endl;
+    }
+    for (unsigned int i = 0; i < gameState.values.size(); i++) {
+        fout << " " << getResourceNum(gameState.resourceTypes.at(i));
+        fout << " " << gameState.values.at(i);
+    }
+    fout << std::endl;
+    if (gameState.gooseTile != -1) {
+        fout << gameState.gooseTile << std::endl;
+    }
 }
 
 void FileManager::readBoardFromString(std::string boardData, GameState &gameState) {
@@ -74,6 +98,7 @@ void FileManager::readBoardFromFile(std::string fileName, GameState &gameState) 
 void FileManager::readGameFromFile(std::string fileName, GameState &gameState) {
     std::ifstream fin {fileName};
 
+
     fin >> gameState.curTurn;
 
     std::string studentData;
@@ -137,11 +162,15 @@ void FileManager::readGameFromFile(std::string fileName, GameState &gameState) {
             }
         }
         Player *tempPlayer = new Student{colour[i], criteria, goals, {numCaffeines, numLabs, numLectures, numStudies, numTutorials}};
-        for (auto criterion : criteria) {
-            criterion->complete(tempPlayer, true);
-        }
-        for (auto goal : goals) {
-            goal->achieve(tempPlayer, true);
+        try {
+            for (auto criterion : criteria) {
+                criterion->complete(tempPlayer, true);
+            }
+            for (auto goal : goals) {
+                goal->achieve(tempPlayer, true);
+            }
+        } catch (char const *x) {
+            std::cerr << x << std::endl;
         }
         gameState.players.emplace_back(tempPlayer);      
     }
@@ -150,7 +179,13 @@ void FileManager::readGameFromFile(std::string fileName, GameState &gameState) {
     getline(fin, boardData);
     readBoardFromString(boardData, gameState);
 
-    fin >> gameState.gooseTile;
+    int gooseTile;
+    fin >> gooseTile;
+    if (!fin) {
+        gameState.gooseTile = -1;
+    } else {
+        gameState.gooseTile = gooseTile;
+    }
 
 
 }
