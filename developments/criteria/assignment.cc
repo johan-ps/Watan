@@ -11,7 +11,6 @@ void Assignment::complete(Player *player, bool init) {
             setDevelopment(player, 1);
         } else if(player->purchaseCriteria(getCost(), this, false)) {
             setDevelopment(player, 1);
-            //alert text display of new owner/criteria type somehow
         } else {
             throw "InsufficientResourcesException";
         }

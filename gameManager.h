@@ -18,7 +18,6 @@ class GameManager {
     FileManager *fileManager;
     Dice *dice;
     Turn *turns;
-    // Geese geese;
     std::unique_ptr<Board> gameBoard;
     //std::vector<std::unique_ptr<Player>> players;
 

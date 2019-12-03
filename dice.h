@@ -18,6 +18,7 @@ class Dice {
         void setLoadVal(int rollChoice);
         void setDice(bool isRand);
         void setSeed(int seed);
+        int getRollVal();
         ~Dice();
 };
 

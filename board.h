@@ -8,6 +8,7 @@
 #include <vector>
 #include "observer.h"
 #include "subject.h"
+#include "geese.h"
 #include <stdlib.h>
 
 class Tile;
@@ -21,6 +22,7 @@ class Board : public Subject, public Observer {
     //std::vector<std::vector<Criterion *>> criteria;
     TextDisplay *td = nullptr;
     int tileCount;
+    Geese *geese;
 
     //private methods
     void initTiles();
@@ -39,6 +41,10 @@ public:
     void completeCriteria(int loc, Player *player, bool init);
     void improveCriteria(int loc, Player *player);
     void initValues(std::vector<int> values);
+
+    void placeGeese(int tileNum);
+    void setGeese(Geese *incomingFlock);
+    Tile *getTileByLocation(int loc);
 };
 
 #endif

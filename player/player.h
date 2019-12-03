@@ -19,14 +19,16 @@ class Player {
         std::vector<Criterion*> criteria;
         std::vector<Goal*> goals;
         std::vector<int> resources;
+        //int resourceCount;
 
-        int getCriteriaSize();
+        int getCriteriaSize(); // SHOULD PROBABLY BE PUBLIC
 
     public:
         Player(std::string colour, std::vector<int>);
         Player(std::string colour, std::vector<Criterion*>, std::vector<Goal*>, std::vector<int>);
 
         // Public Methods
+        
         virtual void steal(Player *) = 0;
         virtual void trade(Player *, std::string, std::string) = 0;
         virtual void recieve(int, int) = 0;
@@ -38,8 +40,11 @@ class Player {
         virtual bool purchaseGoal(std::vector<int>, Goal *) = 0;
         
         // Accessors
+
         std::string getColour();
         int getCompleted();
+        int getResourceCount();
+
 
         // Setters/Mutators
 

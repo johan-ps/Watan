@@ -2,6 +2,7 @@
 #include "../resource.h"
 #include <vector>
 #include <iostream>
+#include <stdlib.h>
 
 #include "../developments/criteria/criterion.h"
 
@@ -22,6 +23,24 @@ void Student::trade(Player *otherPlayer, std::string resourceOffered, std::strin
 // Steal a random resource from a victim
 // Note: Should be called by a player who currently has a Geese
 void Student::steal(Player *victim) {
+
+    // Calculate randomly selected resource to be stolen
+
+    std::string stolenResource = "CAFFEINE"; // DEFAULT PLACEHOLDER
+
+    int totalResources = victim->getResourceCount();
+
+    /*The probability of stealing/losing each resource is the number of the resource the student being
+    stolen from has, divided by the total number of resources the student being stolen from has. */
+
+    int resourceToBeStolen = rand() % totalResources;
+
+    //int resourceStolen = victim->stealResource(resourceToBeStolen); // change to Resource type
+
+
+
+    std::cout << "Student " << getColour() << " steals " << stolenResource;
+    std::cout << " from student " << victim->getColour() << "." << std::endl;
 
 }
 

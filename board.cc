@@ -40,11 +40,24 @@ std::string findDir(int colA, int rowA, int colB, int rowB) {
 //notify appropriate tiles with the given dice value
 void Board::notify(int diceVal) {
     std::cout << "Notify board with dice value " << diceVal << std::endl;
-    for (auto &n : tiles) {
-        if (n->getInfo().value == diceVal) {
-            n->notify();
+
+    for (auto &tile : tiles) {
+        if (tile->getInfo().value == diceVal && !(tile->isOverrun())) {
+            tile->notify();
         }
     }
+}
+
+void Board::placeGeese(int tileNum){
+    for (auto &tile : tiles) {
+            if (tile->getInfo().location == tileNum && !(tile->isOverrun())) {
+                tile->setGeese(geese);
+            }
+        }
+    // Otherwise, geese was not set because the requested tile was not found or appropriate.    
+    // TURN THIS INTO A PROPER EXCEPTION!
+    std::cout << "Error: Student wanted to place GEESE on a tile that already has geese" << std::endl;
+    std:: cout << "(Or desired tile does not exist)" << std::endl;
 }
 
 void Board::initValues(std::vector<int> values) {
@@ -441,4 +454,20 @@ void Board::improveCriteria(int loc, Player *player) {
     }
     std::string playerAssignment = player->getColour().substr(0, 1) + criteriaType;
     td->notify(loc, 'c', playerAssignment);
+}
+
+// DO WE NEED THIS??
+void Board::setGeese(Geese *incomingFlock){
+    geese = incomingFlock;
+}
+
+Tile *Board::getTileByLocation(int loc){
+    for (auto tile: tiles){
+        if (tile->getInfo().location == loc){
+            return tile;
+            break;
+        }
+    }
+    // Otherwise, return nullptr as tile was not found
+    return nullptr;
 }

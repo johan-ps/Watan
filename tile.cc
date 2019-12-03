@@ -4,6 +4,42 @@
 Tile::Tile(int location, int value, std::string resource, int col, int row):
     location{location}, value{value}, resource{resource}, col{col}, row{row} {}
 
+
+
+
+bool Tile::isOverrun(){
+    return geese; // HOPEFULLY PTR GETS CASTED TO A BOOL PROPERLY
+}
+
+TileInfo Tile::getInfo() {
+    return {
+        location, value, col, row, resource, criteria, goals, neighbours
+    };
+}
+
+
+
+
+
+void Tile::addNeighbour(Tile *tile, std::string dir) {
+    //std::cout << "Called with dir: " << dir << " and Loc" << tile->getInfo().location << std::endl;
+    neighbours[dir] = tile;
+}
+
+void Tile::addCriterion(Criterion *criterion, std::string dir) {
+    //std::cout << "Tile at location: " << location << ", added criteria <" << criterion->getLocationVal() << "> in dir: " << dir << std::endl;
+    //std::cout << "Called with dir: " << dir << " and Loc" << criterion->getLocationVal() << std::endl;
+    criteria[dir] = criterion;
+}
+void Tile::addGoal(Goal *goal, std::string dir) {
+    goals[dir] = goal;
+}
+
+void Tile::setGeese(Geese *incomingFlock){
+    geese = incomingFlock;
+}
+
+
 void Tile::notify() {
     for (auto &n : criteria) {
         if (n.second->getOwner()) {
@@ -47,24 +83,4 @@ void Tile::printTile() {
         std::cout << std::endl;
     }
 
-}
-
-void Tile::addNeighbour(Tile *tile, std::string dir) {
-    //std::cout << "Called with dir: " << dir << " and Loc" << tile->getInfo().location << std::endl;
-    neighbours[dir] = tile;
-}
-
-void Tile::addCriterion(Criterion *criterion, std::string dir) {
-    //std::cout << "Tile at location: " << location << ", added criteria <" << criterion->getLocationVal() << "> in dir: " << dir << std::endl;
-    //std::cout << "Called with dir: " << dir << " and Loc" << criterion->getLocationVal() << std::endl;
-    criteria[dir] = criterion;
-}
-void Tile::addGoal(Goal *goal, std::string dir) {
-    goals[dir] = goal;
-}
-
-TileInfo Tile::getInfo() {
-    return {
-        location, value, col, row, resource, criteria, goals, neighbours
-    };
 }

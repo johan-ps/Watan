@@ -93,6 +93,9 @@ std::string GameManager::gameOver() { // MAYBE PASS IN " Player *winner " as par
 
 void GameManager::createBoard(int boardSize) {
     gameBoard = std::make_unique<Board>();
+
+    gameBoard->setGeese(gameState->geese);
+
     if (gameState->values.size() != 0) {
         gameBoard->initValues(gameState->values);
     } else {

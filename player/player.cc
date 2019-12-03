@@ -18,6 +18,15 @@ int Player::getCompleted(){
     return criteriaCompleted;
 }
 
+int Player::getResourceCount(){
+    int resourceCount;
+    for (auto resource: resources){
+        resourceCount += resource;
+    }
+
+    return resourceCount;
+}
+
 
 // PlayerInfo Player::getInfo(){
 //     return {resources, criteria, colour};

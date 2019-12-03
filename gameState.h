@@ -7,11 +7,15 @@
 
 class Player;
 
+class Geese;
+
 struct GameState {
     int curTurn;
+    int gooseTile;
     std::vector<std::unique_ptr<Player>> players;
     std::vector<int> values;
     std::vector<int> resourceTypes;
+    Geese* geese;
 };
 
 #endif
