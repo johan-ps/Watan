@@ -1,5 +1,8 @@
 #include "turn.h"
 #include <iostream>
+#include <sstream>
+#include <algorithm>
+
 
 Turn::Turn(GameManager *gm):
     gm{gm} {}
@@ -85,8 +88,96 @@ void Turn::startTurn(Player *playerTurn){
     }
 }
 
+void Turn::commenceSteal(std::vector<Player *> studentVictims){ // MAYBE MAKE REFERENCE?
+    // commenceSteal() /////////////////////////////////
+    std::ostringstream printStudentVictims;
+    for (auto &player: gm->gameState->players){
+        std::vector<Player *>::iterator iter = find(studentVictims.begin(), studentVictims.end(), player.get());
+
+        if (iter != studentVictims.end()){
+            printStudentVictims << player->getColour();
+
+            std::vector<Player *>::iterator temp_iter = iter;
+            temp_iter++;
+            if (temp_iter != studentVictims.end()){
+                printStudentVictims << ", ";
+            }
+        }
+    }
+
+    std::cout << "Student " << whoseTurn->getColour();
+    std::cout << " can choose to steal from " << printStudentVictims.str() << "." << std::endl;
+
+    std::cout << "Choose a student to steal from." << std::endl;
+    std::cout << "> ";
+    std::string victimColour;
+    std::cin >> victimColour;
+
+    // Assuming valid input
+    for (auto &possibleVictim: studentVictims){
+        if (possibleVictim->getColour() == victimColour){
+            whoseTurn->steal(possibleVictim);
+            break;
+        }
+    }
+    ////////////////////////////////////////////////////
+}
+
 void Turn::endTurn() {
     std::string input;
+
+    // Check roll value for special cases, such as Geese
+    if (gm->dice->getRollVal() == 7){
+
+        // Geese eats all players resources that have 10 or more
+        for (auto &player: gm->gameState->players){
+                if (player->getResourceCount() >= 10){
+                    gm->gameState->geese->eatResources(player.get());
+                }
+        }
+
+        // CHECK THAT GOOSETILE UPDATES
+
+        // Current player places GEESE
+        std::cout << "Choose where to place the GEESE." << std::endl;
+        std::cout << "> ";
+        int tileToBePlaced;
+        std::cin >> tileToBePlaced;
+        gm->gameBoard->placeGeese(tileToBePlaced);
+        gm->gameState->gooseTile = tileToBePlaced;
+
+        std::vector<Player *> studentVictims;
+
+        Tile *geeseTile = gm->gameBoard->getTileByLocation(gm->gameState->gooseTile); // NOTE: Might be easier to just have Geese have a pointer to it's currently owned tile
+        
+        // If Geese was placed on tile successfully
+        if (geeseTile){
+            for (auto criterionPair: geeseTile->getInfo().criteria){ // Does this call getInfo() each iteration??
+                Criterion *criterion = criterionPair.second;
+                if (criterion->isSet()){
+                    Player *victim = criterion->getOwner();
+                    std::vector<Player *>::iterator iter = find(studentVictims.begin(), studentVictims.end(), victim);
+
+                    if (iter != studentVictims.end() && victim != whoseTurn && victim->getResourceCount() > 0){
+                        studentVictims.emplace_back(victim);
+                    }
+
+                }
+            }
+
+            // If there are students to steal from, start the stealing process for the active player
+            if (studentVictims.size() > 0){
+                commenceSteal(studentVictims);
+            }
+            else{
+                std::cout << "Student " << whoseTurn->getColour() << " has no students to steal from." << std::endl;
+            }
+
+        }
+        else {
+            std::cout << "Invalid Geese Tile" << std::endl; // REFACTOR USING EXCEPTIONS
+        }
+    }
 
     while(true) {
         std::cout << "> ";

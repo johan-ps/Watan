@@ -41,6 +41,7 @@ std::string findDir(int colA, int rowA, int colB, int rowB) {
 void Board::notify(int diceVal) {
     std::cout << "The dice roll value is " << diceVal << "." << std::endl;
     if (diceVal == 7) {
+        // Update text display
         return;
     }
     for (auto &n : tiles) {
@@ -49,6 +50,18 @@ void Board::notify(int diceVal) {
         }
     }
 
+}
+
+void Board::placeGeese(int tileNum){
+    for (auto &tile : tiles) {
+            if (tile->getInfo().location == tileNum && !(tile->isOverrun())) {
+                tile->setGeese(geese);
+            }
+        }
+    // Otherwise, geese was not set because the requested tile was not found or appropriate.    
+    // TURN THIS INTO A PROPER EXCEPTION!
+    std::cout << "Error: Student wanted to place GEESE on a tile that already has geese" << std::endl;
+    std:: cout << "(Or desired tile does not exist)" << std::endl;
 }
 
 void Board::initValues(std::vector<int> tileVals) {
@@ -574,6 +587,21 @@ void Board::improveCriteria(int loc, Player *player, bool init) {
     td->notify(loc, 'c', playerAssignment);
 }
 
+// DO WE NEED THIS??
+void Board::setGeese(Geese *incomingFlock){
+    geese = incomingFlock;
+}
+
+Tile *Board::getTileByLocation(int loc){ // Maybe consider Geese having a reference to it's owned tile?
+    for (auto tile: tiles){
+        if (tile->getInfo().location == loc){
+            return tile;
+            break;
+        }
+    }
+    // Otherwise, return nullptr as tile was not found
+    return nullptr;
+}
 Board::~Board() {
     delete td;
     tiles.clear();
