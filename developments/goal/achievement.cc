@@ -2,8 +2,8 @@
 
 #include <iostream>
 
-Achievement::Achievement(int locationVal, std::vector<int> cost):
-    Goal{locationVal, cost} {}
+Achievement::Achievement(int locationVal, int criteriaVal, std::vector<int> cost):
+    Goal{locationVal, 0, cost} {}
 
 void Achievement::achieve(Player *player, bool init){
 

@@ -1,7 +1,7 @@
 #include "development.h"
 
-Development::Development(int locationVal, const std::vector<int> cost):
-    locationVal {locationVal}, criteriaVal{0}, cost{cost}, player{nullptr} {}
+Development::Development(int locationVal, int criteriaVal, const std::vector<int> cost):
+    locationVal {locationVal}, criteriaVal{criteriaVal}, cost{cost}, player{nullptr} {}
     
 void Development::setDevelopment(Player *owner, int developmentVal){
     setOwner(owner);

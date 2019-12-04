@@ -16,14 +16,14 @@ class Development {
         void setDevelopment(Player *, int);
 
     public:
-        Development(int locationVal, const std::vector<int> cost);
-        virtual ~Development() = 0;
+        Development(int locationVal, int criteriaVal, const std::vector<int> cost);
         const std::vector<int> getCost();
         int getLocationVal();
         int getCriteriaVal();
-        void setCriteriaVal(int);
+        virtual void setCriteriaVal(int);
         bool isSet();
         Player *getOwner();
+        virtual ~Development() = 0;
 };
 
 #endif

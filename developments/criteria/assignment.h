@@ -9,7 +9,7 @@
 class Assignment : public Criterion {
 
     public:
-        Assignment(int location, std::vector<int> cost = {1, 1, 1, 0, 1});
+        Assignment(int location, int criteriaVal = 1, std::vector<int> cost = {1, 1, 1, 0, 1});
         void complete(Player* player, bool init = false) override;
         void notify() override;
         void improve(Player* player, bool init = false) override;

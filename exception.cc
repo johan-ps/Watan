@@ -49,7 +49,7 @@ std::string CriteriaCannotBeImprovedException::getError() {
 }
 
 std::string InvalidLocationException::getError() {
-    std::string temp = "Please enter a valid location: (0 <= criterion <= 53) and (0 <= goals <= 71).";
+    std::string temp = "Please enter a valid location.";
     return temp;
 }
 

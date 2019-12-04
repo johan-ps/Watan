@@ -37,7 +37,13 @@ void GameManager::startGame() {
     //modify textdisplay to current state
     for (auto &player : gameState->players) {
         for (auto criterion : player->getCriterion()) {
-            std::string playerAssignment = player->getColour().substr(0, 1) + 'A';
+            char type = 'A';
+            if (criterion->getCriteriaVal() == 2) {
+                type = 'M';
+            } else if (criterion->getCriteriaVal() == 3) {
+                type = 'E';
+            }
+            std::string playerAssignment = player->getColour().substr(0, 1) + type;
             td->notify(criterion->getLocationVal(), 'c', playerAssignment);
         }
     }
@@ -51,15 +57,20 @@ void GameManager::startGame() {
     //initialize player criteria
     if (!loadFromFile) {
         for (auto &n : gameState->players) {
-            int loc;
+            std::string loc;
             std::cout << "Student " << n->getColour() << ", where do you want to complete an Assignment?" << std::endl;
             while (true) {
                 std::cout << "> ";
+                std::cin >> loc;
                 try {
-                    std::cin >> loc;
-                    gameBoard->completeCriteria(loc, n.get(), true);
-                    gameBoard->drawBoard();
-                    break;
+                    try {
+                        gameBoard->completeCriteria(std::stoi(loc), n.get(), true);
+                        gameBoard->drawBoard();
+                        break;
+                    } catch (std::invalid_argument &a) {
+                        std::cout << "Invalid command." << std::endl;
+                        continue;
+                    }
                 } catch (AlreadyCompletedException &c) {
                     std::cout << c.getError() << std::endl;
                     continue;
@@ -75,18 +86,23 @@ void GameManager::startGame() {
             }
         }
         for (std::vector<std::unique_ptr<Player>>::reverse_iterator it = gameState->players.rbegin(); it != gameState->players.rend(); ++it) {
-            int loc;
+            std::string loc;
             std::cout << "Student " << it->get()->getColour() << ", where do you want to complete an Assignment?" << std::endl;
             while (true) {
                 std::cout << "> ";
-                try {
                 std::cin >> loc;
-                gameBoard->completeCriteria(loc, it->get(), true);
-                gameBoard->drawBoard();
-                break;
+                try {
+                    try {
+                        gameBoard->completeCriteria(std::stoi(loc), it->get(), true);
+                        gameBoard->drawBoard();
+                        break;
+                    } catch (std::invalid_argument &a) {
+                        std::cout << "Invalid command." << std::endl;
+                        continue;
+                    }
                 } catch (AlreadyCompletedException &c) {
-                    std::cout << c.getError() << std::endl;
-                    continue;
+                std::cout << c.getError() << std::endl;
+                continue;
                 } catch (InvalidLocationException &l) {
                     std::cout << l.getError() << std::endl;
                     continue;
@@ -201,14 +217,13 @@ void GameManager::createPlayers(int num) {
         }
     } else {
         for (auto &player : gameState->players) {
+            // std::cerr << player->getCriterion().size() << std::endl;
             for (auto criterion : player->getCriterion()) {
-                //criterion->complete(player, true);
                 criteriaTemp.emplace_back(criterion);
             }
         }
         for (auto &player : gameState->players) {
             for (auto goal : player->getGoals()) {
-                //goal->achieve(player, true);
                 goalsTemp.emplace_back(goal);
             }
         }

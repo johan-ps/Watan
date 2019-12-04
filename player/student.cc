@@ -63,7 +63,7 @@ Resource Student::findResource(int resourceNum){
     std::vector<int> resources = getResources();
 
     int numResourcesSoFar = 0;
-    for (int resourceType = 0; resourceType < resources.size(); ++resourceType){
+    for (unsigned int resourceType = 0; resourceType < resources.size(); ++resourceType){
         numResourcesSoFar += resources[resourceType];
         if (resourceNum <= numResourcesSoFar){
                 return Resource{resourceType};
@@ -90,7 +90,7 @@ void Student::recieve(Resource type, int amount){
 // Should be called by either TextDisplay or main.cc (depending on implementation)
 void Student::printStatus() {
 
-    cout << getColour() << " has " << getCriteriaSize() << " course criteria, " << endl;
+    cout << getColour() << " has " << getCompleted() << " course criteria, (" << getCriteriaSize() << " individual course criteria)" << endl;
 
     unsigned int last_resource = resources.size();
 
