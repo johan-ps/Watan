@@ -51,15 +51,20 @@ void GameManager::startGame() {
     //initialize player criteria
     if (!loadFromFile) {
         for (auto &n : gameState->players) {
-            int loc;
+            std::string loc;
             std::cout << "Student " << n->getColour() << ", where do you want to complete an Assignment?" << std::endl;
             while (true) {
                 std::cout << "> ";
+                std::cin >> loc;
                 try {
-                    std::cin >> loc;
-                    gameBoard->completeCriteria(loc, n.get(), true);
-                    gameBoard->drawBoard();
-                    break;
+                    try {
+                        gameBoard->completeCriteria(std::stoi(loc), n.get(), true);
+                        gameBoard->drawBoard();
+                        break;
+                    } catch (std::invalid_argument &a) {
+                        std::cout << "Invalid command." << std::endl;
+                        continue;
+                    }
                 } catch (AlreadyCompletedException &c) {
                     std::cout << c.getError() << std::endl;
                     continue;
@@ -75,18 +80,23 @@ void GameManager::startGame() {
             }
         }
         for (std::vector<std::unique_ptr<Player>>::reverse_iterator it = gameState->players.rbegin(); it != gameState->players.rend(); ++it) {
-            int loc;
+            std::string loc;
             std::cout << "Student " << it->get()->getColour() << ", where do you want to complete an Assignment?" << std::endl;
             while (true) {
                 std::cout << "> ";
-                try {
                 std::cin >> loc;
-                gameBoard->completeCriteria(loc, it->get(), true);
-                gameBoard->drawBoard();
-                break;
+                try {
+                    try {
+                        gameBoard->completeCriteria(std::stoi(loc), it->get(), true);
+                        gameBoard->drawBoard();
+                        break;
+                    } catch (std::invalid_argument &a) {
+                        std::cout << "Invalid command." << std::endl;
+                        continue;
+                    }
                 } catch (AlreadyCompletedException &c) {
-                    std::cout << c.getError() << std::endl;
-                    continue;
+                std::cout << c.getError() << std::endl;
+                continue;
                 } catch (InvalidLocationException &l) {
                     std::cout << l.getError() << std::endl;
                     continue;

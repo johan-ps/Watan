@@ -4,6 +4,10 @@
 TextDisplay::TextDisplay(std::vector<Resource> resources, std::vector<int> tileValues, int gooseTile):
     resources{resources}, gooseTile{gooseTile} {
         for (auto tileVal : tileValues) {
+            if (tileVal == 7) {
+                values.emplace_back(" ");
+                continue;
+            }
             values.emplace_back(tileVal < 10 ? " " + std::to_string(tileVal) : std::to_string(tileVal));
         }
         for (int i = 0; i < 54; i++) {
