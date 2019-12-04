@@ -63,7 +63,7 @@ Resource Student::findResource(int resourceNum){
     std::vector<int> resources = getResources();
 
     int numResourcesSoFar = 0;
-    for (int resourceType = 0; resourceType < resources.size(); ++resourceType){
+    for (unsigned int resourceType = 0; resourceType < resources.size(); ++resourceType){
         numResourcesSoFar += resources[resourceType];
         if (resourceNum <= numResourcesSoFar){
                 return Resource{resourceType};

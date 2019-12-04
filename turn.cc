@@ -50,11 +50,11 @@ void Turn::startTurn(Player *playerTurn){
                         std::string resourcesGained = "";
                         unsigned int playerResourceCount = 0;
                         std::vector<int> tempResources = player->getResourcesGained();
-                        for (auto resourceNum : tempResources) {
-                            totalResourceCount += resourceNum;
-                            playerResourceCount += resourceNum;
-                            Resource resource {resourceNum};
-                            resourcesGained += std::to_string(resourceNum) + " " + resource.getNameToUpper() + "\n";
+                        for (unsigned int i = 0; i < tempResources.size(); i++) {
+                            totalResourceCount += tempResources.at(i);
+                            playerResourceCount += tempResources.at(i);
+                            Resource resource {i};
+                            resourcesGained += std::to_string(tempResources.at(i)) + " " + resource.getNameToUpper() + "\n";
                         }
                         if (playerResourceCount != 0) {
                             std::cout << "Student " << player->getColour() << " gained:" << std::endl;
