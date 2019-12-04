@@ -180,6 +180,7 @@ void FileManager::readGameFromFile(GameState &gameState, std::string fileName) {
     } else {
         gameState.gooseTile = gooseTile;
     }
+    gameState->geese = new Geese{};
 
 }
 
