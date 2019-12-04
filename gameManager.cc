@@ -117,7 +117,9 @@ void GameManager::startGame() {
     }
     dice->setBoard(gameBoard.get());
     turns = new Turn{this};
-
+    if (!gameState->geese) {
+        gameState->geese = new Geese{};
+    }
     startTurns(gameState->curTurn);
 }
 

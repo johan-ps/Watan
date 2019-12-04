@@ -159,7 +159,6 @@ void Turn::endTurn() {
                     Tile *requestTile = gm->gameBoard->getTileByLocation(gooseTile);
                     requestTile->setGeese(gm->gameState->geese);
                     gm->gameState->geese->setCurrentGeeseTile(requestTile);
-                    std::cout << "got here" << std::endl;
                     gm->td->notify(gooseTile, 'r');
                     break;
                 } catch (std::invalid_argument) {
@@ -174,7 +173,6 @@ void Turn::endTurn() {
 
         std::vector<Player *> studentVictims;
 
-        std::cout << "ABOUT TO RETRIEVE GEESE_TILE" << std::endl;
         Tile *geeseTile = gm->gameState->geese->getTile();
         
         // If Geese was placed on tile successfully
@@ -185,10 +183,20 @@ void Turn::endTurn() {
                 Criterion *criterion = criterionPair.second;
                 if (criterion->isSet()){
                     Player *victim = criterion->getOwner();
-                    std::vector<Player *>::iterator iter = find(studentVictims.begin(), studentVictims.end(), victim);
-
-                    if (iter != studentVictims.end() && victim != whoseTurn && victim->getResourceCount() > 0){
-                        studentVictims.emplace_back(victim);
+                    if (victim->getColour() == whoseTurn->getColour()) {
+                        continue;
+                    } else if (victim->getResourceCount() == 0) {
+                        continue;
+                    } else {
+                        bool doesContain = false;
+                        for (auto student : studentVictims) {
+                            if (student->getColour() == victim->getColour()) {
+                                doesContain = true;
+                            }
+                        }
+                        if (!doesContain) {
+                            studentVictims.emplace_back(victim);
+                        }
                     }
 
                 }
