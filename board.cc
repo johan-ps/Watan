@@ -507,11 +507,15 @@ void Board::completeCriteria(int loc, Player *player, bool init) {
     }
 
     if(!init){
+        bool canBuild = false;
         for(auto&& aTile: tiles){
-            if(!aTile->checkAdjAchievements(loc, player->getColour())){
-                throw NoAdjacentAchievementException{};
+            if(aTile->checkAdjAchievements(loc, player->getColour())){
+                canBuild = true;
             }
-        }   
+        }
+        if(!canBuild){
+            throw NoAdjacentAchievementException{};
+        }
     }
 
     for(auto&& aTile: tiles){
