@@ -63,7 +63,6 @@ bool Board::placeGeese(int tileNum){
     //         }
     //     }
     // Otherwise, geese was not set because the requested tile was not found or appropriate.    
-    // TURN THIS INTO A PROPER EXCEPTION!
     // std::cout << "Error: Student wanted to place GEESE on a tile that already has geese" << std::endl;
     // std::cout << "(Or desired tile does not exist)" << std::endl;
     return true;
@@ -596,12 +595,7 @@ void Board::improveCriteria(int loc, Player *player, bool init) {
     td->notify(loc, 'c', playerAssignment);
 }
 
-// DO WE NEED THIS??
-// void Board::setGeese(Geese *incomingFlock){
-//     geese = incomingFlock;
-// }
-
-Tile *Board::getTileByLocation(int loc){ // Maybe consider Geese having a reference to it's owned tile?
+Tile *Board::getTileByLocation(int loc){
     return tiles.at(loc);
 }
 Board::~Board() {

@@ -21,8 +21,6 @@ class Player {
         std::vector<int> resources;
         std::vector<int> resourcesGained = {0, 0, 0, 0, 0};
 
-        int getCriteriaSize(); // SHOULD PROBABLY BE PUBLIC
-
     public:
         Player(std::string colour, std::vector<int> resources = {0, 0, 0, 0, 0});
         Player(std::string colour, std::vector<Criterion*> criteria, std::vector<Goal*> goals, std::vector<int> resources = {0, 0, 0, 0, 0});
@@ -41,6 +39,8 @@ class Player {
         virtual void addResourceGained(Resource type, int amount = 1);
 
         virtual Resource getRandomResource() = 0;
+
+        int getCriteriaSize();
 
         //Should possibly change to development pointer or add a purchaseGoal method
         virtual void purchaseCriteria(std::vector<int> cost, Criterion *newCriterion, bool improving, bool init = false) = 0;
