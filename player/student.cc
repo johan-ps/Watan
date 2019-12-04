@@ -90,7 +90,7 @@ void Student::recieve(Resource type, int amount){
 // Should be called by either TextDisplay or main.cc (depending on implementation)
 void Student::printStatus() {
 
-    cout << getColour() << " has " << getCriteriaSize() << " course criteria, " << endl;
+    cout << getColour() << " has " << getCompleted() << " course criteria, (" << getCriteriaSize() << " individual course criteria)" << endl;
 
     unsigned int last_resource = resources.size();
 

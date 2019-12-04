@@ -2,8 +2,8 @@
 #include "../../resources.h"
 #include <iostream>
 
-Assignment::Assignment(int locationVal, std::vector<int> cost):
-    Criterion{locationVal, cost} {}
+Assignment::Assignment(int locationVal, int criteriaVal, std::vector<int> cost):
+    Criterion{locationVal, criteriaVal, cost} {}
 
 void Assignment::complete(Player *player, bool init) {
     if(!isSet()){

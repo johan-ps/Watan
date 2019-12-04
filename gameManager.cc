@@ -37,7 +37,13 @@ void GameManager::startGame() {
     //modify textdisplay to current state
     for (auto &player : gameState->players) {
         for (auto criterion : player->getCriterion()) {
-            std::string playerAssignment = player->getColour().substr(0, 1) + 'A';
+            char type = 'A';
+            if (criterion->getCriteriaVal() == 2) {
+                type = 'M';
+            } else if (criterion->getCriteriaVal() == 3) {
+                type = 'E';
+            }
+            std::string playerAssignment = player->getColour().substr(0, 1) + type;
             td->notify(criterion->getLocationVal(), 'c', playerAssignment);
         }
     }
@@ -211,14 +217,13 @@ void GameManager::createPlayers(int num) {
         }
     } else {
         for (auto &player : gameState->players) {
+            // std::cerr << player->getCriterion().size() << std::endl;
             for (auto criterion : player->getCriterion()) {
-                //criterion->complete(player, true);
                 criteriaTemp.emplace_back(criterion);
             }
         }
         for (auto &player : gameState->players) {
             for (auto goal : player->getGoals()) {
-                //goal->achieve(player, true);
                 goalsTemp.emplace_back(goal);
             }
         }

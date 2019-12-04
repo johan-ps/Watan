@@ -144,13 +144,7 @@ void FileManager::readGameFromFile(GameState &gameState, std::string fileName) {
             if (sin >> input) {
                 int type;
                 sin >> type;
-                if (type == 1) {
-                    criteria.emplace_back(new Assignment{std::stoi(input)});
-                } else if (type == 2) {
-                    criteria.emplace_back(new Assignment{std::stoi(input)});
-                } else {
-                    criteria.emplace_back(new Assignment{std::stoi(input)});
-                }                
+                criteria.emplace_back(new Assignment{std::stoi(input), type});       
             } else {
                 if (sin.eof()) {
                     break;
@@ -161,18 +155,18 @@ void FileManager::readGameFromFile(GameState &gameState, std::string fileName) {
                 }
             }
         }
-        Player *tempPlayer = new Student{colour[i], criteria, goals, {numCaffeines, numLabs, numLectures, numStudies, numTutorials}};
-        try {
-            for (auto criterion : criteria) {
-                criterion->complete(tempPlayer, true);
-            }
-            for (auto goal : goals) {
-                goal->achieve(tempPlayer, true);
-            }
-        } catch (char const *x) {
-            std::cerr << x << std::endl;
+        std::vector<Criterion*> tempCriteria;
+        std::vector<Goal*> tempGoal;
+        Player *tempPlayer = new Student{colour[i], tempCriteria, tempGoal, {numCaffeines, numLabs, numLectures, numStudies, numTutorials}};
+        for (auto criterion : criteria) {
+            int temp = criterion->getCriteriaVal();
+            criterion->complete(tempPlayer, true);
+            criterion->setCriteriaVal(temp);
         }
-        gameState.players.emplace_back(tempPlayer);      
+        for (auto goal : goals) {
+            goal->achieve(tempPlayer, true);
+        }
+        gameState.players.emplace_back(tempPlayer);
     }
 
     std::string boardData;
@@ -186,7 +180,6 @@ void FileManager::readGameFromFile(GameState &gameState, std::string fileName) {
     } else {
         gameState.gooseTile = gooseTile;
     }
-
 
 }
 
