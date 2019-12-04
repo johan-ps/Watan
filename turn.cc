@@ -51,6 +51,9 @@ void Turn::startTurn(Player *playerTurn){
                         unsigned int playerResourceCount = 0;
                         std::vector<int> tempResources = player->getResourcesGained();
                         for (unsigned int i = 0; i < tempResources.size(); i++) {
+                            if (tempResources.at(i) == 0) {
+                                continue;
+                            }
                             totalResourceCount += tempResources.at(i);
                             playerResourceCount += tempResources.at(i);
                             Resource resource {i};
@@ -88,8 +91,7 @@ void Turn::startTurn(Player *playerTurn){
     }
 }
 
-void Turn::commenceSteal(std::vector<Player *> studentVictims){ // MAYBE MAKE REFERENCE?
-    // commenceSteal() /////////////////////////////////
+void Turn::commenceSteal(std::vector<Player *> studentVictims){
     std::ostringstream printStudentVictims;
     for (auto &player: gm->gameState->players){
         std::vector<Player *>::iterator iter = find(studentVictims.begin(), studentVictims.end(), player.get());
@@ -110,7 +112,7 @@ void Turn::commenceSteal(std::vector<Player *> studentVictims){ // MAYBE MAKE RE
 
     std::cout << "Choose a student to steal from." << std::endl;
     std::cout << "> ";
-    std::string victimColour;
+    std::string victimColour; // MAYBE CHECK/EXCEPTION?
     std::cin >> victimColour;
 
     // Assuming valid input
@@ -120,7 +122,6 @@ void Turn::commenceSteal(std::vector<Player *> studentVictims){ // MAYBE MAKE RE
             break;
         }
     }
-    ////////////////////////////////////////////////////
 }
 
 void Turn::endTurn() {
@@ -131,20 +132,38 @@ void Turn::endTurn() {
 
         // Geese eats all players resources that have 10 or more
         for (auto &player: gm->gameState->players){
-                if (player->getResourceCount() >= 10){
-                    gm->gameState->geese->eatResources(player.get());
-                }
+            if (player->getResourceCount() >= 10){
+                gm->gameState->geese->eatResources(player.get());
+            }
         }
 
         // CHECK THAT GOOSETILE UPDATES
 
         // Current player places GEESE
         std::cout << "Choose where to place the GEESE." << std::endl;
-        std::cout << "> ";
-        int tileToBePlaced;
-        std::cin >> tileToBePlaced;
-        gm->gameBoard->placeGeese(tileToBePlaced);
-        gm->gameState->gooseTile = tileToBePlaced;
+        std::string tileToBePlaced;
+        while (true) {
+            std::cout << "> ";
+            try {
+                std::cin >> tileToBePlaced;
+                try {
+                    int gooseTile = std::stoi(tileToBePlaced);
+                    if (gooseTile < 0 || gooseTile > 18 || gooseTile == gm->gameState->gooseTile) {
+                        throw InvalidLocationException{};
+                    }
+                    gm->gameBoard->placeGeese(gooseTile);
+                    gm->gameState->gooseTile = gooseTile;
+                    gm->td->notify(gooseTile, 'r');
+                    break;
+                } catch (std::invalid_argument) {
+                    std::cout << "Invalid arguement." << std::endl;
+                    continue;
+                }
+            } catch (InvalidLocationException &l) {
+                std::cout << l.getError() << std::endl;
+                continue;
+            }
+        }
 
         std::vector<Player *> studentVictims;
 

@@ -54,14 +54,10 @@ void Board::notify(int diceVal) {
 
 void Board::placeGeese(int tileNum){
     for (auto &tile : tiles) {
-            if (tile->getInfo().location == tileNum && !(tile->isOverrun())) {
-                tile->setGeese(geese);
-            }
+        if (tile->getInfo().location == tileNum && !(tile->isOverrun())) {
+            tile->setGeese(geese);
         }
-    // Otherwise, geese was not set because the requested tile was not found or appropriate.    
-    // TURN THIS INTO A PROPER EXCEPTION!
-    std::cout << "Error: Student wanted to place GEESE on a tile that already has geese" << std::endl;
-    std:: cout << "(Or desired tile does not exist)" << std::endl;
+    }
 }
 
 void Board::initValues(std::vector<int> tileVals) {

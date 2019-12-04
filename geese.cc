@@ -23,8 +23,18 @@ void Geese::eatResources(Player* victim){
     // NOTE: numResourcesLost may not always equal lostResources.size() if something unexpected happens
     //       When debugging, print both to see if that is the case.
 
+    std::vector<int> tempResources = {0, 0, 0, 0, 0};
     for (auto resourceLost: lostResources){ // SHOULD TURN INTO MAP TO PRINT # of EACH TYPE
-        std::cout << resourceLost.getNameToUpper() << std::endl;
+        tempResources.at(resourceLost.getVal())++;
+        //std::cout << resourceLost.getNameToUpper() << std::endl;
+    }
+
+    for (unsigned int i = 0; i < tempResources.size(); i++) {
+        if (tempResources.at(i)) {
+            continue;
+        }
+        Resource temp {i};
+        std::cout << tempResources.at(i) << " " << temp.getNameToUpper() << std::endl;
     }
 
 

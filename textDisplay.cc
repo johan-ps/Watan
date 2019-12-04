@@ -63,6 +63,7 @@ void TextDisplay::notify(int location, char type, std::string player) {
     } else if (type == 'g') {
         goals.at(location) = player;
     } else if (type == 'r') {
+        std::cerr << "reach here" << std::endl;
         gooseTile = location;
     }
 }
