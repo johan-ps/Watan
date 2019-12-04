@@ -140,9 +140,9 @@ void Turn::endTurn() {
         // CHECK THAT GOOSETILE UPDATES
 
         // Current player places GEESE
-        int tileToBePlaced = -1;
+        //int tileToBePlaced = -1;
         //gm->gameBoard->placeGeese(tileToBePlaced)
-        gm->gameState->gooseTile = tileToBePlaced;
+        //gm->gameState->gooseTile = tileToBePlaced;
         std::cout << "Choose where to place the GEESE." << std::endl;
         std::string tileToBePlaced;
         while (true) {
@@ -154,8 +154,12 @@ void Turn::endTurn() {
                     if (gooseTile < 0 || gooseTile > 18 || gooseTile == gm->gameState->gooseTile) {
                         throw InvalidLocationException{};
                     }
-                    gm->gameBoard->placeGeese(gooseTile);
+                    //gm->gameBoard->placeGeese(gooseTile);
                     gm->gameState->gooseTile = gooseTile;
+                    Tile *requestTile = gm->gameBoard->getTileByLocation(gooseTile);
+                    requestTile->setGeese(gm->gameState->geese);
+                    gm->gameState->geese->setCurrentGeeseTile(requestTile);
+                    std::cout << "got here" << std::endl;
                     gm->td->notify(gooseTile, 'r');
                     break;
                 } catch (std::invalid_argument) {

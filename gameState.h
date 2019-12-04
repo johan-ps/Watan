@@ -12,7 +12,7 @@ class Geese;
 
 struct GameState {
     int curTurn = 0;
-    int gooseTile = 5;
+    int gooseTile;
     std::vector<std::unique_ptr<Player>> players;
     std::vector<int> values;
     std::vector<Resource> resourceTypes;

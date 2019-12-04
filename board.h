@@ -46,7 +46,7 @@ public:
 
     bool placeGeese(int tileNum);
     void setGeese(Geese *incomingFlock);
-    //Tile *getTileByLocation(int loc);
+    Tile *getTileByLocation(int loc);
     void initResources(std::vector<Resource> resources);
     void initCriteria(std::vector<Criterion*> criteriaOwned);
     void initGoals(std::vector<Goal*> goalsOwned);
