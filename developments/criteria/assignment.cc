@@ -45,6 +45,8 @@ void Assignment::improve(Player* player, bool init) {
         upgradeCost = { 0, 0, 2, 3, 0};
     } else if (currentVal == 2){
         upgradeCost = { 3, 2, 2, 2, 1};
+    } else if(currentVal == 3){
+        upgradeCost = {5, 5, 5, 5, 5};
     } else {
         throw CriteriaCannotBeImprovedException{getLocationVal()};
     }

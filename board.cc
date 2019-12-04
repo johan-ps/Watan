@@ -136,8 +136,10 @@ std::vector<std::string> Board::getCriteria() {
             char criteriaType = 'A';
             if (n->getCriteriaVal() == 2) {
                 criteriaType = 'M';
-            } else {
+            } else if(n->getCriteriaVal() == 3){
                 criteriaType = 'E';
+            }else {
+                criteriaType = 'T';
             }
             std::string playerAssignment = n->getOwner()->getColour().substr(0, 1) + criteriaType;
             std::cout << "Criteria: <" << n->getLocationVal() << "> has owner: " << playerAssignment << std::endl;
