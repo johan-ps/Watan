@@ -44,7 +44,7 @@ void Student::steal(Player *victim, int amount) {
     //       instead of x random resources
 
     victim->remove(stolen, amount);
-    recieve(stolen, amount); // MAYBE CONSIDER EXCEPTIONS?
+    recieve(stolen, amount);
 
     std::cout << "Student " << getColour() << " steals " << stolen.getNameToUpper();
     std::cout << " from student " << victim->getColour() << "." << std::endl;

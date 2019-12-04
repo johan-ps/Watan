@@ -22,12 +22,6 @@ void Dice::roll() {
         rollVal += rand() % 6 + 1;
     }
 
-    // Special cases to deal with, such as Geese
-    // if (rollVal == 7){
-    //     return;
-    // }
-
-
     board->notify(rollVal);
 }
 

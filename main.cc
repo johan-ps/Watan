@@ -33,11 +33,9 @@ int main(int argc, char *argv[]) {
     
     //bool restartGame = true;
 
-    // END OF GAME NOT FULLY DONE; NEED TO PROB REFACTOR
     //while (restartGame){
         mng.startGame();
 
-        // NEED TO FREE MEMORY AND STUFF
     //}
 
     //mng.getGameBoard().drawBoard();
