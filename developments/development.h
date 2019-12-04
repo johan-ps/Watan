@@ -17,13 +17,13 @@ class Development {
 
     public:
         Development(int locationVal, const std::vector<int> cost);
-        virtual ~Development() = 0;
         const std::vector<int> getCost();
         int getLocationVal();
         int getCriteriaVal();
         void setCriteriaVal(int);
         bool isSet();
         Player *getOwner();
+        virtual ~Development() = 0;
 };
 
 #endif
