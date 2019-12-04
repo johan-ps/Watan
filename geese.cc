@@ -46,3 +46,8 @@ void Geese::setCurrentGeeseTile(Tile *newGeeseTile){
     currentGeeseTile = newGeeseTile;
     //currentGeeseTile->setGeese(this);
 }
+
+
+
+
+
