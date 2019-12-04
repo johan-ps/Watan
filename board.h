@@ -44,9 +44,9 @@ public:
     void achieveGoal(int loc, Player *player, bool init = false);
     void initValues(std::vector<int> values);
 
-    void placeGeese(int tileNum);
+    bool placeGeese(int tileNum);
     void setGeese(Geese *incomingFlock);
-    Tile *getTileByLocation(int loc);
+    //Tile *getTileByLocation(int loc);
     void initResources(std::vector<Resource> resources);
     void initCriteria(std::vector<Criterion*> criteriaOwned);
     void initGoals(std::vector<Goal*> goalsOwned);

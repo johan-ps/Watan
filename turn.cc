@@ -129,7 +129,7 @@ void Turn::endTurn() {
     // Check roll value for special cases, such as Geese
     if (gm->dice->getRollVal() == 7){
 
-        // Geese eats all players resources that have 10 or more
+        // Geese eats half  of all players' resources that have 10 or more
         for (auto &player: gm->gameState->players){
                 if (player->getResourceCount() >= 10){
                     gm->gameState->geese->eatResources(player.get());
@@ -139,20 +139,25 @@ void Turn::endTurn() {
         // CHECK THAT GOOSETILE UPDATES
 
         // Current player places GEESE
-        std::cout << "Choose where to place the GEESE." << std::endl;
-        std::cout << "> ";
-        int tileToBePlaced;
-        std::cin >> tileToBePlaced;
-        gm->gameBoard->placeGeese(tileToBePlaced);
+        int tileToBePlaced = -1;
+        do {
+            std::cout << "Choose where to place the GEESE." << std::endl;
+            std::cout << "> ";
+            std::cin >> tileToBePlaced;
+
+        } while (gm->gameBoard->placeGeese(tileToBePlaced));
         gm->gameState->gooseTile = tileToBePlaced;
 
         std::vector<Player *> studentVictims;
 
-        Tile *geeseTile = gm->gameBoard->getTileByLocation(gm->gameState->gooseTile); // NOTE: Might be easier to just have Geese have a pointer to it's currently owned tile
+        std::cout << "ABOUT TO RETRIEVE GEESE_TILE" << std::endl;
+        Tile *geeseTile = gm->gameState->geese->getTile();
         
         // If Geese was placed on tile successfully
         if (geeseTile){
-            for (auto criterionPair: geeseTile->getInfo().criteria){ // Does this call getInfo() each iteration??
+            // Figure out who the owners are of the criteria under attack
+            auto criteria = geeseTile->getInfo().criteria;
+            for (auto criterionPair: criteria){
                 Criterion *criterion = criterionPair.second;
                 if (criterion->isSet()){
                     Player *victim = criterion->getOwner();
@@ -175,7 +180,7 @@ void Turn::endTurn() {
 
         }
         else {
-            std::cout << "Invalid Geese Tile" << std::endl; // REFACTOR USING EXCEPTIONS
+            std::cout << "ERROR: Geese tile is not currently set" << std::endl; // REFACTOR USING EXCEPTIONS
         }
     }
 

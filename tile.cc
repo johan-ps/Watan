@@ -10,7 +10,12 @@ Tile::Tile(int location, int value, Resource resource, int col, int row):
 
 
 bool Tile::isOverrun(){
-    return geese; // HOPEFULLY PTR GETS CASTED TO A BOOL PROPERLY
+    if (geese){
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 
 TileInfo Tile::getInfo() {
@@ -165,6 +170,10 @@ void Tile::addGoal(Goal *goal, std::string dir) {
 
 void Tile::setGeese(Geese *incomingFlock){
     geese = incomingFlock;
+}
+
+void Tile::removeGeese(){
+    geese = nullptr;
 }
 
 

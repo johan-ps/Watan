@@ -57,6 +57,7 @@ class Tile : public Subject, public Observer {
         void addCriterion(Criterion *criterion, std::string dir);
         void addGoal(Goal *goal, std::string dir);
         void setGeese(Geese *incomingFlock);
+        void removeGeese();
 
         void notify();// override;
         void printTile();
