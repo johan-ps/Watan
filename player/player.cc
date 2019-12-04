@@ -18,6 +18,15 @@ int Player::getCompleted(){
     return criteriaCompleted;
 }
 
+int Player::getResourceCount(){
+    int resourceCount = 0;
+    for (auto resource: resources){
+        resourceCount += resource;
+    }
+
+    return resourceCount;
+}
+
 std::vector<Criterion*> Player::getCriterion() {
     return criteria;
 }

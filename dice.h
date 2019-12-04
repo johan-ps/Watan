@@ -19,6 +19,7 @@ class Dice {
         void setLoadVal(int rollChoice);
         void setFair();
         void setSeed(int seed);
+        int getRollVal();
         ~Dice();
 };
 

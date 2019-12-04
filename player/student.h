@@ -7,11 +7,13 @@
 class Development;
 
 class Student : public Player {
+    Resource findResource(int resourceNum);
+
     public:
     Student(std::string colour, std::vector<int> resources = {0, 0, 0, 0, 0});
     Student(std::string colour, std::vector<Criterion*>, std::vector<Goal*>, std::vector<int> resources = {0, 0, 0, 0, 0});
     
-    void steal(Player *victim) override;
+    void steal(Player *victim, int amount = 1) override;
     void trade(Player *otherPlayer, Resource gained, Resource lost) override;
     void recieve(Resource type, int amount) override;
     void remove(Resource type, int amount) override;
@@ -19,6 +21,9 @@ class Student : public Player {
     void printCompletions() override;
     void purchaseCriteria(std::vector<int> cost, Criterion *newCriterion, bool improving, bool init = false) override;
     void purchaseGoal(std::vector<int> cost, Goal *newGoal, bool init = false) override;
+
+
+    Resource getRandomResource() override;
     ~Student();
 };
 

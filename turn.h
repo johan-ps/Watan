@@ -14,6 +14,8 @@ class Turn {
     Player *whoseTurn;
     GameManager *gm;
 
+    void commenceSteal(std::vector<Player *> studentVictims);
+
     public:
         Turn(GameManager *gm);
         void startTurn(Player *playerTurn);

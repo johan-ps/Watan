@@ -21,6 +21,13 @@ void Dice::roll() {
         rollVal += rand() % 6 + 1;
         rollVal += rand() % 6 + 1;
     }
+
+    // Special cases to deal with, such as Geese
+    // if (rollVal == 7){
+    //     return;
+    // }
+
+
     board->notify(rollVal);
 }
 
@@ -41,6 +48,10 @@ void Dice::setFair() {
 void Dice::setSeed(int seed) {
     isSeed = true;
     srand(seed);
+}
+
+int Dice::getRollVal(){
+    return rollVal;
 }
 
 Dice::~Dice() {}

@@ -8,6 +8,7 @@
 
 #include "observer.h"
 #include "subject.h"
+#include "geese.h"
 #include <vector>
 #include <string>
 #include <map>
@@ -31,27 +32,36 @@ class Tile : public Subject, public Observer {
     Resource resource;
     int col;
     int row;
+    Geese *geese;
     TileInfo *tileInfo;
     
     std::map<std::string, Criterion*> criteria;
     std::map<std::string, Goal*> goals;
     std::map<std::string, Tile*> neighbours;
-    //Geese geese;
-    //bool isOverrun;
+
 
     public:
-    Tile(int location, int value, Resource resource, int col, int row);
-    void notify();// override;
-    void printTile();
-    void addNeighbour(Tile *tile, std::string dir);
-    void addCriterion(Criterion *criterion, std::string dir);
-    void addGoal(Goal *goal, std::string dir);
-    bool checkAdjCriteria(int locationVal);
-    bool checkAdjAchievements(int locationVal, std::string colour);
-    bool checkAdjGoal(int locationVal, std::string colour);
-    bool checkAdjTile(double spot, bool isTileA, std::string colour);
-    TileInfo getInfo();
-    ~Tile();
+        Tile(int location, int value, Resource resource, int col, int row);
+
+        // Getters
+        bool isOverrun();
+        TileInfo getInfo();
+        bool checkAdjCriteria(int locationVal);
+        bool checkAdjAchievements(int locationVal, std::string colour);
+        bool checkAdjGoal(int locationVal, std::string colour);
+        bool checkAdjTile(double spot, bool isTileA, std::string colour);
+        
+
+        // Setters
+        void addNeighbour(Tile *tile, std::string dir);
+        void addCriterion(Criterion *criterion, std::string dir);
+        void addGoal(Goal *goal, std::string dir);
+        void setGeese(Geese *incomingFlock);
+
+        void notify();// override;
+        void printTile();
+
+        ~Tile();
 };
 
 #endif
