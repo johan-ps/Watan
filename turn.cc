@@ -81,6 +81,7 @@ void Turn::startTurn(Player *playerTurn){
         } else {
             if (std::cin.eof()) {
                 gm->fileManager->writeToFile(*(gm->gameState));
+                std::cin.clear();
                 break;
             } else if (std::cin.fail()) {
                 std::cout << "here" << std::endl;
