@@ -30,7 +30,7 @@ void Geese::eatResources(Player* victim){
         if (lostResources.at(resourceType) == 0){
             continue;
         }
-        Resource resourceLost{resourceType};
+        Resource resourceLost{static_cast<unsigned int>(resourceType)};
         std::cout << lostResources[resourceType] << " " << resourceLost.getNameToUpper() << std::endl;
     }
 
